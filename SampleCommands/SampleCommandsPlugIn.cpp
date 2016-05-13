@@ -1,16 +1,14 @@
-// SampleCommandsPlugIn.cpp : defines the initialization routines for the plug-in.
-//
-
 #include "StdAfx.h"
 #include "C:\Program Files\Rhino 6.0 SDK\Inc\rhinoSdkPlugInDeclare.h"
 #include "SampleCommandsPlugIn.h"
+#include "resource.h"
 
 // The plug-in object must be constructed before any plug-in classes derived
 // from CRhinoCommand. The #pragma init_seg(lib) ensures that this happens.
-#pragma warning( push )
-#pragma warning( disable : 4073 )
-#pragma init_seg( lib )
-#pragma warning( pop )
+#pragma warning(push)
+#pragma warning(disable : 4073)
+#pragma init_seg(lib)
+#pragma warning(pop)
 
 // Rhino plug-in declaration
 RHINO_PLUG_IN_DECLARE
@@ -50,6 +48,7 @@ CSampleCommandsPlugIn& SampleCommandsPlugIn()
 }
 
 CSampleCommandsPlugIn::CSampleCommandsPlugIn()
+  : m_hCursor(0)
 {
   // Description:
   //   CSampleCommandsPlugIn constructor. The constructor is called when the
@@ -71,7 +70,11 @@ CSampleCommandsPlugIn::~CSampleCommandsPlugIn()
   //   not do too much here. Be sure to clean up any memory you have allocated
   //   with onmalloc(), onrealloc(), oncalloc(), or onstrdup().
 
-  // TODO: Add destruction code here
+  if (0 != m_hCursor)
+  {
+    DestroyCursor(m_hCursor);
+    m_hCursor = 0;
+  }
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -326,4 +329,19 @@ bool CSampleCommandsPlugIn::DeleteStringTableItem(const wchar_t* str)
 void CSampleCommandsPlugIn::ClearStringTable()
 {
   m_string_table.Destroy();
+}
+
+HCURSOR CSampleCommandsPlugIn::SampleCursor()
+{
+  // By default, MFC uses the resource handle of the main application to load
+  // the resource template. If you have an exported function in a DLL, such as
+  // one that launches a dialog box in the DLL, this template is actually stored
+  // in the DLL module. You need to switch the module state for the correct handle
+  // to be used. You can do this by adding the following code to the beginning of 
+  // the function. This swaps the current module state with the state returned from
+  // AfxGetStaticModuleState until the end of the current scope.
+  AFX_MANAGE_STATE(AfxGetStaticModuleState());
+  if (0 == m_hCursor)
+    m_hCursor = (HCURSOR)::LoadImage(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDC_SAMPLE_CURSOR), IMAGE_CURSOR, 0, 0, LR_DEFAULTSIZE);
+  return m_hCursor;
 }

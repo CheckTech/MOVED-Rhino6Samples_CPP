@@ -585,6 +585,12 @@
     <ClCompile Include="cmdSampleViewportDecoration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cmdSampleObjectCursor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmdSamplePointCursor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SampleCommandsApp.h">
@@ -620,6 +626,9 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="res\SampleCommands.rc2">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\SampleCursor.cur">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

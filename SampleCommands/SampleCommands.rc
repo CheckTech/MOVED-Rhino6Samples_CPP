@@ -108,6 +108,14 @@ END
 
 IDB_SAMPLE_BITMAP       BITMAP                  "res\\SampleBitmap.bmp"
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Cursor
+//
+
+IDC_SAMPLE_CURSOR       CURSOR                  "res\\SampleCursor.cur"
+
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 

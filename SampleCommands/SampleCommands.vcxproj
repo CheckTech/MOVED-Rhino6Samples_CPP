@@ -130,6 +130,7 @@
     <ClCompile Include="cmdSampleMoveGrips.cpp" />
     <ClCompile Include="cmdSampleNewFloatingViewport.cpp" />
     <ClCompile Include="cmdSampleNurbsCircle.cpp" />
+    <ClCompile Include="cmdSampleObjectCursor.cpp" />
     <ClCompile Include="cmdSampleObjectUserData.cpp" />
     <ClCompile Include="cmdSampleOffsetCurve.cpp" />
     <ClCompile Include="cmdSampleOpenIges.cpp" />
@@ -145,6 +146,7 @@
     <ClCompile Include="cmdSamplePipe.cpp" />
     <ClCompile Include="cmdSamplePlaceCameraTarget.cpp" />
     <ClCompile Include="cmdSamplePlanarFaceLoops.cpp" />
+    <ClCompile Include="cmdSamplePointCursor.cpp" />
     <ClCompile Include="cmdSamplePointOnFace.cpp" />
     <ClCompile Include="cmdSamplePointsDeviation.cpp" />
     <ClCompile Include="cmdSamplePolyline.cpp" />
@@ -223,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\SampleCommands.rc2" />
+    <None Include="res\SampleCursor.cur" />
     <None Include="SampleCommands.def" />
   </ItemGroup>
   <ItemGroup>

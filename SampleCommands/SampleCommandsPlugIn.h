@@ -32,6 +32,9 @@ public:
   bool DeleteStringTableItem(const wchar_t*);
   void ClearStringTable();
 
+  // Used by SampleObjectCursor and SamplePointCursor
+  HCURSOR SampleCursor();
+
 private:
   ON_wString m_plugin_version;
 
@@ -40,6 +43,9 @@ private:
   // Used by SampleDocumentUserData
   ON_ClassArray<ON_wString> m_string_table;
   CSampleCommandsEventWatcher m_watcher;
+
+  // Used by SampleObjectCursor and SamplePointCursor
+  HCURSOR m_hCursor;
 };
 
 CSampleCommandsPlugIn& SampleCommandsPlugIn();
