@@ -166,3 +166,164 @@ BOOL CSampleCommandsPlugIn::OnDisplayPlugInHelp(HWND hWnd) const
   return CRhinoUtilityPlugIn::OnDisplayPlugInHelp(hWnd);
 }
 
+/////////////////////////////////////////////////////////////////////////////
+// Document user data overrides
+
+BOOL CSampleCommandsPlugIn::CallWriteDocument(const CRhinoFileWriteOptions& options)
+{
+  // If the user is exporting selected geometry, return FALSE
+  if (options.SelectedObjectFilter())
+    return FALSE;
+
+  // Only write document data if there is something to write
+  return (m_string_table.Count() > 0) ? TRUE : FALSE;
+}
+
+BOOL CSampleCommandsPlugIn::WriteDocument(CRhinoDoc& doc, ON_BinaryArchive& archive, const CRhinoFileWriteOptions& options)
+{
+  UNREFERENCED_PARAMETER(doc);
+
+  // Write plug-in document data.  See rhinoSdkPlugIn.h details.
+
+  // If the user is exporting selected geometry, just return
+  if (options.SelectedObjectFilter())
+    return TRUE;
+
+  // Write the major and minor version of document as document data
+  if (!archive.Write3dmChunkVersion(1, 0))
+    return FALSE;
+
+  // Write the number of string we intend to write as document data
+  if (!archive.WriteInt(m_string_table.Count()))
+    return FALSE;
+
+  // Write our string table as document data
+  for (int i = 0; i < m_string_table.Count(); i++)
+  {
+    if (!archive.WriteString(m_string_table[i]))
+      return FALSE;
+  }
+
+  return TRUE;
+}
+
+BOOL CSampleCommandsPlugIn::ReadDocument(CRhinoDoc& doc, ON_BinaryArchive& archive, const CRhinoFileReadOptions& options)
+{
+  UNREFERENCED_PARAMETER(doc);
+
+  // Read plug-in document data.  See rhinoSdkPlugIn.h details.
+
+  // If our document data is found in a 3DM file, we are 
+  // required to read it. But, we don't necessarily want
+  // to use it.
+
+  BOOL bKeepData = FALSE;
+  BOOL bNewMode = options.Mode(CRhinoFileReadOptions::NewMode);
+  BOOL bOpenMode = options.Mode(CRhinoFileReadOptions::OpenMode);
+
+  // If the user is creating a new model, or opening an existing
+  // model, we'll want to keep the document data that we read.
+  // Otherwise, we'll read the data, but not use it.  This way,
+  // we won't overwrite out data if the user is importing geometry,
+  // from another 3DM file.
+  if (bNewMode || bOpenMode)
+    bKeepData = TRUE;
+
+  if (bKeepData)
+    m_string_table.Empty();
+
+  // Read the major and minor version of the document data
+  int major = 0, minor = 0;
+  if (!archive.Read3dmChunkVersion(&major, &minor))
+    return FALSE;
+
+  // At this point, if we've changed the format of
+  // our document data, we'll want to compare the
+  // major and minor revision numbers and read our
+  // data accordingly.
+  if (1 != major && 0 != minor)
+    return FALSE;
+
+  // Read the number of string we intend to read as document data
+  int count = 0;
+  if (!archive.ReadInt(&count))
+    return FALSE;
+
+  // Read our string table as document data
+  ON_wString str;
+  for (int i = 0; i < count; i++)
+  {
+    if (!archive.ReadString(str))
+      return FALSE;
+
+    // Only append the string if we are
+    // supposed to
+    if (bKeepData)
+      m_string_table.Append(str);
+  }
+
+  return TRUE;
+}
+
+int CSampleCommandsPlugIn::StringTableCount() const
+{
+  return m_string_table.Count();
+}
+
+ON_wString CSampleCommandsPlugIn::GetStringTableItem(int index)
+{
+  ON_wString str;
+  if (index >= 0 && index < StringTableCount())
+    str = m_string_table[index];
+  return str;
+}
+
+int CSampleCommandsPlugIn::FindStringTableItem(const wchar_t* str)
+{
+  if (0 == str || 0 == str[0])
+    return -1;
+
+  for (int i = 0; i < m_string_table.Count(); i++)
+  {
+    ON_wString item = m_string_table[i];
+    if (0 == item.CompareNoCase(str))
+      return i;
+  }
+
+  return -1;
+}
+
+int CSampleCommandsPlugIn::AddStringTableItem(const wchar_t* str)
+{
+  if (0 == str || 0 == str[0])
+    return -1;
+
+  int index = FindStringTableItem(str);
+  if (index < 0)
+  {
+    m_string_table.Append(str);
+    return StringTableCount();
+  }
+
+  return -1;
+}
+
+bool CSampleCommandsPlugIn::DeleteStringTableItem(const wchar_t* str)
+{
+  if (0 == str || 0 == str[0])
+    return false;
+
+  int index = FindStringTableItem(str);
+  if (index > 0 && index < StringTableCount())
+  {
+    m_string_table.Remove(index);
+    return true;
+  }
+
+  return false;
+}
+
+void CSampleCommandsPlugIn::ClearStringTable()
+{
+  m_string_table.Destroy();
+}

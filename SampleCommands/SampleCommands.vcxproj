@@ -58,6 +58,7 @@
     <ClCompile Include="cmdSampleDimTextHeight.cpp" />
     <ClCompile Include="cmdSampleDisableAllClippingPlanes.cpp" />
     <ClCompile Include="cmdSampleDisplayPrecision.cpp" />
+    <ClCompile Include="cmdSampleDocumentUserData.cpp" />
     <ClCompile Include="cmdSampleDrawString.cpp" />
     <ClCompile Include="cmdSampleDumpBlockTree.cpp" />
     <ClCompile Include="cmdSampleDumpEdgeCurves.cpp" />
@@ -87,6 +88,7 @@
     <ClCompile Include="cmdSampleGradeLine.cpp" />
     <ClCompile Include="cmdSampleGumball.cpp" />
     <ClCompile Include="cmdSampleHatch.cpp" />
+    <ClCompile Include="cmdSampleHelloRhino.cpp" />
     <ClCompile Include="cmdSampleHistory.cpp" />
     <ClCompile Include="cmdSampleHistoryDivide.cpp" />
     <ClCompile Include="cmdSampleIdleProcessor.cpp" />
@@ -186,6 +188,7 @@
     <ClCompile Include="SampleAttributeUserData.cpp" />
     <ClCompile Include="SampleClippingPlaneUserData.cpp" />
     <ClCompile Include="SampleCommandsApp.cpp" />
+    <ClCompile Include="SampleCommandsEventWatcher.cpp" />
     <ClCompile Include="SampleCommandsPlugIn.cpp" />
     <ClCompile Include="SampleObjectUserData.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -199,6 +202,7 @@
     <ClInclude Include="SampleAttributeUserData.h" />
     <ClInclude Include="SampleClippingPlaneUserData.h" />
     <ClInclude Include="SampleCommandsApp.h" />
+    <ClInclude Include="SampleCommandsEventWatcher.h" />
     <ClInclude Include="SampleCommandsPlugIn.h" />
     <ClInclude Include="SampleObjectUserData.h" />
     <ClInclude Include="stdafx.h" />

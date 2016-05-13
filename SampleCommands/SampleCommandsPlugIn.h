@@ -1,11 +1,6 @@
-// SampleCommandsPlugIn.h : main header file for the SampleCommands plug-in.
-//
-
 #pragma once
 
-// CSampleCommandsPlugIn
-// See SampleCommandsPlugIn.cpp for the implementation of this class
-//
+#include "SampleCommandsEventWatcher.h"
 
 class CSampleCommandsPlugIn : public CRhinoUtilityPlugIn
 {
@@ -24,10 +19,27 @@ public:
   BOOL AddToPlugInHelpMenu() const;
   BOOL OnDisplayPlugInHelp(HWND hWnd) const;
 
+  // Document user data overrides
+  BOOL CallWriteDocument(const CRhinoFileWriteOptions&);
+  BOOL WriteDocument(CRhinoDoc&, ON_BinaryArchive&, const CRhinoFileWriteOptions&);
+  BOOL ReadDocument(CRhinoDoc&, ON_BinaryArchive&, const CRhinoFileReadOptions&);
+
+  // Used by SampleDocumentUserData
+  int StringTableCount() const;
+  ON_wString GetStringTableItem(int);
+  int FindStringTableItem(const wchar_t*);
+  int AddStringTableItem(const wchar_t*);
+  bool DeleteStringTableItem(const wchar_t*);
+  void ClearStringTable();
+
 private:
   ON_wString m_plugin_version;
 
   // TODO: Add additional class information here
+
+  // Used by SampleDocumentUserData
+  ON_ClassArray<ON_wString> m_string_table;
+  CSampleCommandsEventWatcher m_watcher;
 };
 
 CSampleCommandsPlugIn& SampleCommandsPlugIn();
