@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "SampleCommandsApp.h"
+#include "SampleEventWatcherApp.h"
 
 //
 //	Note!
@@ -30,43 +30,43 @@
 //		details.
 //
 
-// CSampleCommandsApp
+// CSampleEventWatcherApp
 
-BEGIN_MESSAGE_MAP(CSampleCommandsApp, CWinApp)
+BEGIN_MESSAGE_MAP(CSampleEventWatcherApp, CWinApp)
 END_MESSAGE_MAP()
 
-// CSampleCommandsApp construction
+// CSampleEventWatcherApp construction
 
-CSampleCommandsApp::CSampleCommandsApp()
+CSampleEventWatcherApp::CSampleEventWatcherApp()
 {
   // CRITICAL: DO NOT CALL RHINO SDK FUNCTIONS HERE!
   //   Only standard MFC DLL instance construction belongs here. 
   //   All other significant initialization should take place in
-  //   CSampleCommandsPlugIn::OnLoadPlugIn().
+  //   CSampleEventWatcherPlugIn::OnLoadPlugIn().
 }
 
-// The one and only CSampleCommandsApp object
-CSampleCommandsApp theApp;
+// The one and only CSampleEventWatcherApp object
+CSampleEventWatcherApp theApp;
 
-// CSampleCommandsApp initialization
+// CSampleEventWatcherApp initialization
 
-BOOL CSampleCommandsApp::InitInstance()
+BOOL CSampleEventWatcherApp::InitInstance()
 {
   // CRITICAL: DO NOT CALL RHINO SDK FUNCTIONS HERE!
   //   Only standard MFC DLL instance initialization belongs here. 
   //   All other significant initialization should take place in
-  //   CSampleCommandsPlugIn::OnLoadPlugIn().
+  //   CSampleEventWatcherPlugIn::OnLoadPlugIn().
 
   CWinApp::InitInstance();
 
   return TRUE;
 }
 
-int CSampleCommandsApp::ExitInstance()
+int CSampleEventWatcherApp::ExitInstance()
 {
   // CRITICAL: DO NOT CALL RHINO SDK FUNCTIONS HERE!
   //   Only standard MFC DLL instance clean up belongs here. 
   //   All other significant cleanup should take place in either
-  //   CSampleCommandsPlugIn::OnSaveAllSettings() or CSampleCommandsPlugIn::OnUnloadPlugIn().
+  //   CSampleEventWatcherPlugIn::OnSaveAllSettings() or CSampleEventWatcherPlugIn::OnUnloadPlugIn().
   return CWinApp::ExitInstance();
 }
