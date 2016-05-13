@@ -7,6 +7,9 @@
 //
 // Generated from the TEXTINCLUDE 2 resource.
 //
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
 #include "afxres.h"
 #include "verrsrc.h"
 
@@ -96,6 +99,14 @@ BEGIN
         VALUE "Translation", 0x0, 1033
     END
 END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_SAMPLE_BITMAP       BITMAP                  "res\\SampleBitmap.bmp"
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////

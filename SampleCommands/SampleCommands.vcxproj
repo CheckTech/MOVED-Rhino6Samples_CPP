@@ -34,6 +34,7 @@
     <ClCompile Include="cmdSampleBrepBoxWithMesh.cpp" />
     <ClCompile Include="cmdSampleBrepFaceUserData.cpp" />
     <ClCompile Include="cmdSampleCageEdit.cpp" />
+    <ClCompile Include="cmdSampleCameraTracker.cpp" />
     <ClCompile Include="cmdSampleCaptureFrameBuffer.cpp" />
     <ClCompile Include="cmdSampleCircle.cpp" />
     <ClCompile Include="cmdSampleClassifyCurve.cpp" />
@@ -59,7 +60,11 @@
     <ClCompile Include="cmdSampleDisableAllClippingPlanes.cpp" />
     <ClCompile Include="cmdSampleDisplayPrecision.cpp" />
     <ClCompile Include="cmdSampleDocumentUserData.cpp" />
+    <ClCompile Include="cmdSampleDrawArrowhead.cpp" />
+    <ClCompile Include="cmdSampleDrawBitmap.cpp" />
+    <ClCompile Include="cmdSampleDrawColorMesh.cpp" />
     <ClCompile Include="cmdSampleDrawString.cpp" />
+    <ClCompile Include="cmdSampleDrawWireframeMesh.cpp" />
     <ClCompile Include="cmdSampleDumpBlockTree.cpp" />
     <ClCompile Include="cmdSampleDumpEdgeCurves.cpp" />
     <ClCompile Include="cmdSampleDumpMaterialUserData.cpp" />
@@ -81,14 +86,17 @@
     <ClCompile Include="cmdSampleExtrudeTapered.cpp" />
     <ClCompile Include="cmdSampleExtrusionBox.cpp" />
     <ClCompile Include="cmdSampleFaceWithHole.cpp" />
+    <ClCompile Include="cmdSampleFalseColor.cpp" />
     <ClCompile Include="cmdSampleFindCrvsOnSrf.cpp" />
     <ClCompile Include="cmdSampleGetFaceTriangles.cpp" />
     <ClCompile Include="cmdSampleGetPointOnMesh.cpp" />
     <ClCompile Include="cmdSampleGoldenRectangle.cpp" />
     <ClCompile Include="cmdSampleGradeLine.cpp" />
+    <ClCompile Include="cmdSampleGrayscale.cpp" />
     <ClCompile Include="cmdSampleGumball.cpp" />
     <ClCompile Include="cmdSampleHatch.cpp" />
     <ClCompile Include="cmdSampleHelloRhino.cpp" />
+    <ClCompile Include="cmdSampleHightlightCurve.cpp" />
     <ClCompile Include="cmdSampleHistory.cpp" />
     <ClCompile Include="cmdSampleHistoryDivide.cpp" />
     <ClCompile Include="cmdSampleIdleProcessor.cpp" />
@@ -109,6 +117,7 @@
     <ClCompile Include="cmdSampleMeshBooleanIntersection.cpp" />
     <ClCompile Include="cmdSampleMeshBoundary.cpp" />
     <ClCompile Include="cmdSampleMeshDir.cpp" />
+    <ClCompile Include="cmdSampleMeshFaceColor.cpp" />
     <ClCompile Include="cmdSampleMeshLine.cpp" />
     <ClCompile Include="cmdSampleMeshOutline.cpp" />
     <ClCompile Include="cmdSampleMeshPolysrf.cpp" />
@@ -129,6 +138,7 @@
     <ClCompile Include="cmdSampleOrientOnSrf.cpp" />
     <ClCompile Include="cmdSamplePan.cpp" />
     <ClCompile Include="cmdSamplePatch.cpp" />
+    <ClCompile Include="cmdSamplePerspectiveColors.cpp" />
     <ClCompile Include="cmdSamplePhantomObject.cpp" />
     <ClCompile Include="cmdSamplePickColor.cpp" />
     <ClCompile Include="cmdSamplePickTextDot.cpp" />
@@ -157,6 +167,7 @@
     <ClCompile Include="cmdSampleSelectVisibleMeshFaces.cpp" />
     <ClCompile Include="cmdSampleSelFilter.cpp" />
     <ClCompile Include="cmdSampleShortPath.cpp" />
+    <ClCompile Include="cmdSampleShowMyStuff.cpp" />
     <ClCompile Include="cmdSampleSphere.cpp" />
     <ClCompile Include="cmdSampleSplitBrep.cpp" />
     <ClCompile Include="cmdSampleSplitCurve.cpp" />
@@ -170,6 +181,7 @@
     <ClCompile Include="cmdSampleSwapHatch.cpp" />
     <ClCompile Include="cmdSampleSweep2Point.cpp" />
     <ClCompile Include="cmdSampleSyncRenderColors.cpp" />
+    <ClCompile Include="cmdSampleSyncViews.cpp" />
     <ClCompile Include="cmdSampleTexture.cpp" />
     <ClCompile Include="cmdSampleTextureMapping.cpp" />
     <ClCompile Include="cmdSampleToggleLayer.cpp" />
@@ -183,6 +195,7 @@
     <ClCompile Include="cmdSampleUVMesh.cpp" />
     <ClCompile Include="cmdSampleViewCaptureToFile.cpp" />
     <ClCompile Include="cmdSampleViewLock.cpp" />
+    <ClCompile Include="cmdSampleViewportDecoration.cpp" />
     <ClCompile Include="cmdSampleVolume.cpp" />
     <ClCompile Include="cmdSampleZoomWindow.cpp" />
     <ClCompile Include="SampleAttributeUserData.cpp" />
@@ -206,6 +219,7 @@
     <ClInclude Include="SampleCommandsPlugIn.h" />
     <ClInclude Include="SampleObjectUserData.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\SampleCommands.rc2" />
@@ -213,6 +227,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SampleCommands.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\SampleBitmap.bmp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <Keyword>MFCDLLProj</Keyword>
