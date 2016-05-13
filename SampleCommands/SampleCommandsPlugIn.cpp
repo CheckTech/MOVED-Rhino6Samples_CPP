@@ -29,13 +29,13 @@ RHINO_PLUG_IN_VERSION(__DATE__ "  " __TIME__)
 
 // Rhino plug-in developer declarations
 RHINO_PLUG_IN_DEVELOPER_ORGANIZATION(L"Robert McNeel & Associates");
-RHINO_PLUG_IN_DEVELOPER_ADDRESS(L"3670 Woodland Park Avenue North\015\012Seattle WA 98103");
+RHINO_PLUG_IN_DEVELOPER_ADDRESS(L"3670 Woodland Park Avenue North\r\nSeattle WA 98103");
 RHINO_PLUG_IN_DEVELOPER_COUNTRY(L"United States");
 RHINO_PLUG_IN_DEVELOPER_PHONE(L"206-545-6877");
 RHINO_PLUG_IN_DEVELOPER_FAX(L"206-545-7321");
-RHINO_PLUG_IN_DEVELOPER_EMAIL(L"tech@mcneel.com");
+RHINO_PLUG_IN_DEVELOPER_EMAIL(L"devsupport@mcneel.com");
 RHINO_PLUG_IN_DEVELOPER_WEBSITE(L"http://www.rhino3d.com");
-RHINO_PLUG_IN_UPDATE_URL(L"https://github.com/mcneel/");
+RHINO_PLUG_IN_UPDATE_URL(L"https://github.com/mcneel/Rhino6Samples_CPP");
 
 // The one and only CSampleCommandsPlugIn object
 static CSampleCommandsPlugIn thePlugIn;
