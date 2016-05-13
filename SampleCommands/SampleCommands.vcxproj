@@ -39,6 +39,7 @@
     <ClCompile Include="cmdSampleCircle.cpp" />
     <ClCompile Include="cmdSampleClassifyCurve.cpp" />
     <ClCompile Include="cmdSampleClosestAxisPoint.cpp" />
+    <ClCompile Include="cmdSampleColorPicker.cpp" />
     <ClCompile Include="cmdSampleCone.cpp" />
     <ClCompile Include="cmdSampleConvertQuadsToTriangles.cpp" />
     <ClCompile Include="cmdSampleCurvature.cpp" />
