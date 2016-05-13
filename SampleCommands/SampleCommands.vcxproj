@@ -22,7 +22,9 @@
     <ClCompile Include="cmdSampleAddNurbsCircle.cpp" />
     <ClCompile Include="cmdSampleAddSearchPath.cpp" />
     <ClCompile Include="cmdSampleAdjacentBrepFace.cpp" />
+    <ClCompile Include="cmdSampleAnalysisMode.cpp" />
     <ClCompile Include="cmdSampleAnnotateCurveEndPoints.cpp" />
+    <ClCompile Include="cmdSampleAttributeUserData.cpp" />
     <ClCompile Include="cmdSampleAutomateGrasshopper.cpp" />
     <ClCompile Include="cmdSampleBend.cpp" />
     <ClCompile Include="cmdSampleBlendCurve.cpp" />
@@ -177,6 +179,7 @@
     <ClCompile Include="cmdSampleViewLock.cpp" />
     <ClCompile Include="cmdSampleVolume.cpp" />
     <ClCompile Include="cmdSampleZoomWindow.cpp" />
+    <ClCompile Include="SampleAttributeUserData.cpp" />
     <ClCompile Include="SampleCommandsApp.cpp" />
     <ClCompile Include="SampleCommandsPlugIn.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -187,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SampleAttributeUserData.h" />
     <ClInclude Include="SampleCommandsApp.h" />
     <ClInclude Include="SampleCommandsPlugIn.h" />
     <ClInclude Include="stdafx.h" />
