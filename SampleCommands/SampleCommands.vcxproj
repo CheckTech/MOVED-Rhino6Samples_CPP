@@ -32,6 +32,7 @@
     <ClCompile Include="cmdSampleBooleanUnion.cpp" />
     <ClCompile Include="cmdSampleBoundingBox.cpp" />
     <ClCompile Include="cmdSampleBrepBoxWithMesh.cpp" />
+    <ClCompile Include="cmdSampleBrepFaceUserData.cpp" />
     <ClCompile Include="cmdSampleCageEdit.cpp" />
     <ClCompile Include="cmdSampleCaptureFrameBuffer.cpp" />
     <ClCompile Include="cmdSampleCircle.cpp" />
@@ -55,6 +56,7 @@
     <ClCompile Include="cmdSampleDimLinearOverride.cpp" />
     <ClCompile Include="cmdSampleDimStyleTextHeight.cpp" />
     <ClCompile Include="cmdSampleDimTextHeight.cpp" />
+    <ClCompile Include="cmdSampleDisableAllClippingPlanes.cpp" />
     <ClCompile Include="cmdSampleDisplayPrecision.cpp" />
     <ClCompile Include="cmdSampleDrawString.cpp" />
     <ClCompile Include="cmdSampleDumpBlockTree.cpp" />
@@ -64,6 +66,7 @@
     <ClCompile Include="cmdSampleDupBorder.cpp" />
     <ClCompile Include="cmdSampleDupMeshBorder.cpp" />
     <ClCompile Include="cmdSampleElevation.cpp" />
+    <ClCompile Include="cmdSampleEnableAllClippingPlanes.cpp" />
     <ClCompile Include="cmdSampleEvaluateCurve.cpp" />
     <ClCompile Include="cmdSampleExplodeBrep.cpp" />
     <ClCompile Include="cmdSampleExplodePointCloud.cpp" />
@@ -116,6 +119,7 @@
     <ClCompile Include="cmdSampleMoveGrips.cpp" />
     <ClCompile Include="cmdSampleNewFloatingViewport.cpp" />
     <ClCompile Include="cmdSampleNurbsCircle.cpp" />
+    <ClCompile Include="cmdSampleObjectUserData.cpp" />
     <ClCompile Include="cmdSampleOffsetCurve.cpp" />
     <ClCompile Include="cmdSampleOpenIges.cpp" />
     <ClCompile Include="cmdSampleOrientOnCrv.cpp" />
@@ -180,8 +184,10 @@
     <ClCompile Include="cmdSampleVolume.cpp" />
     <ClCompile Include="cmdSampleZoomWindow.cpp" />
     <ClCompile Include="SampleAttributeUserData.cpp" />
+    <ClCompile Include="SampleClippingPlaneUserData.cpp" />
     <ClCompile Include="SampleCommandsApp.cpp" />
     <ClCompile Include="SampleCommandsPlugIn.cpp" />
+    <ClCompile Include="SampleObjectUserData.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugRhino|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -191,8 +197,10 @@
   <ItemGroup>
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SampleAttributeUserData.h" />
+    <ClInclude Include="SampleClippingPlaneUserData.h" />
     <ClInclude Include="SampleCommandsApp.h" />
     <ClInclude Include="SampleCommandsPlugIn.h" />
+    <ClInclude Include="SampleObjectUserData.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
