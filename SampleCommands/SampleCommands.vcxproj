@@ -46,6 +46,7 @@
     <ClCompile Include="cmdSampleCurveAreaCentroid.cpp" />
     <ClCompile Include="cmdSampleCurveLinetype.cpp" />
     <ClCompile Include="cmdSampleCurveTorsion.cpp" />
+    <ClCompile Include="cmdSampleCustomGrips.cpp" />
     <ClCompile Include="cmdSampleCustomMeshObjects.cpp" />
     <ClCompile Include="cmdSampleCustomRenderMesh.cpp" />
     <ClCompile Include="cmdSampleCylinder.cpp" />
@@ -207,6 +208,7 @@
     <ClCompile Include="SampleCommandsEventWatcher.cpp" />
     <ClCompile Include="SampleCommandsPlugIn.cpp" />
     <ClCompile Include="SampleObjectUserData.cpp" />
+    <ClCompile Include="SampleRectangleObject.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugRhino|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -221,6 +223,7 @@
     <ClInclude Include="SampleCommandsEventWatcher.h" />
     <ClInclude Include="SampleCommandsPlugIn.h" />
     <ClInclude Include="SampleObjectUserData.h" />
+    <ClInclude Include="SampleRectangleObject.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
