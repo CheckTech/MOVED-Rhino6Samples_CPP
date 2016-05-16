@@ -6,10 +6,10 @@
 
 #include "resource.h"		// main symbols
 
-class CSampleImportPointsApp : public CWinApp
+class CSampleImportGeomviewApp : public CWinApp
 {
 public:
-  CSampleImportPointsApp();
+  CSampleImportGeomviewApp();
 
   // Overrides
 public:
