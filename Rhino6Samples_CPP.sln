@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleImportGeomview", "Sam
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleExportMesh", "SampleExportMesh\SampleExportMesh.vcxproj", "{D6CD6128-BFBB-447A-A791-456041EA91CF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleDigitizer", "SampleDigitizer\SampleDigitizer.vcxproj", "{BBA91EAD-30DF-4CCE-8E61-1B196B78BE8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -50,6 +52,12 @@ Global
 		{D6CD6128-BFBB-447A-A791-456041EA91CF}.DebugRhino|x64.Build.0 = DebugRhino|x64
 		{D6CD6128-BFBB-447A-A791-456041EA91CF}.Release|x64.ActiveCfg = Release|x64
 		{D6CD6128-BFBB-447A-A791-456041EA91CF}.Release|x64.Build.0 = Release|x64
+		{BBA91EAD-30DF-4CCE-8E61-1B196B78BE8D}.Debug|x64.ActiveCfg = Debug|x64
+		{BBA91EAD-30DF-4CCE-8E61-1B196B78BE8D}.Debug|x64.Build.0 = Debug|x64
+		{BBA91EAD-30DF-4CCE-8E61-1B196B78BE8D}.DebugRhino|x64.ActiveCfg = DebugRhino|x64
+		{BBA91EAD-30DF-4CCE-8E61-1B196B78BE8D}.DebugRhino|x64.Build.0 = DebugRhino|x64
+		{BBA91EAD-30DF-4CCE-8E61-1B196B78BE8D}.Release|x64.ActiveCfg = Release|x64
+		{BBA91EAD-30DF-4CCE-8E61-1B196B78BE8D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
