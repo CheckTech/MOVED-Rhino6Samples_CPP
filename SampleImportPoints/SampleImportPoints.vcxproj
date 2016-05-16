@@ -15,7 +15,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cmdSampleImportPoints.cpp" />
     <ClCompile Include="SampleImportPointsApp.cpp" />
     <ClCompile Include="SampleImportPointsPlugIn.cpp" />
     <ClCompile Include="stdafx.cpp">

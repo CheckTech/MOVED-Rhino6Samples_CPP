@@ -15,18 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SampleImportPointsApp.cpp">
+    <ClCompile Include="SampleExportMeshApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SampleImportPointsPlugIn.cpp">
+    <ClCompile Include="SampleExportMeshPlugIn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SampleImportPointsApp.h">
+    <ClInclude Include="SampleExportMeshApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
@@ -35,7 +35,7 @@
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SampleImportPointsPlugIn.h">
+    <ClInclude Include="SampleExportMeshPlugIn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
@@ -43,15 +43,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SampleImportPoints.def">
+    <None Include="SampleExportMesh.def">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="res\SampleImportPoints.rc2">
+    <None Include="res\SampleExportMesh.rc2">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SampleImportPoints.rc">
+    <ResourceCompile Include="SampleExportMesh.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

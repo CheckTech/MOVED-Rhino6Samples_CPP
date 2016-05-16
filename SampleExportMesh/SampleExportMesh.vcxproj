@@ -15,8 +15,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SampleImportGeomviewApp.cpp" />
-    <ClCompile Include="SampleImportGeomviewPlugIn.cpp" />
+    <ClCompile Include="SampleExportMeshApp.cpp" />
+    <ClCompile Include="SampleExportMeshPlugIn.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugRhino|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -25,21 +25,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="SampleImportGeomviewApp.h" />
-    <ClInclude Include="SampleImportGeomviewPlugIn.h" />
+    <ClInclude Include="SampleExportMeshApp.h" />
+    <ClInclude Include="SampleExportMeshPlugIn.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\SampleImportGeomview.rc2" />
-    <None Include="SampleImportGeomview.def" />
+    <None Include="res\SampleExportMesh.rc2" />
+    <None Include="SampleExportMesh.def" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="SampleImportGeomview.rc" />
+    <ResourceCompile Include="SampleExportMesh.rc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <Keyword>MFCDLLProj</Keyword>
-    <ProjectGuid>{FE725F68-0E5C-44D0-A3E0-C2AF42DF09DA}</ProjectGuid>
+    <ProjectGuid>{D6CD6128-BFBB-447A-A791-456041EA91CF}</ProjectGuid>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugRhino|x64'" Label="Configuration">
