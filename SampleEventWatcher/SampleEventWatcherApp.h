@@ -6,10 +6,10 @@
 
 #include "resource.h"		// main symbols
 
-class CSampleCommandsApp : public CWinApp
+class CSampleEventWatcherApp : public CWinApp
 {
 public:
-  CSampleCommandsApp();
+  CSampleEventWatcherApp();
 
   // Overrides
 public:
