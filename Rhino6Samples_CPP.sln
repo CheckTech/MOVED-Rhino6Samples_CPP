@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleSerialize", "SampleSe
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleMarker", "SampleMarker\SampleMarker.vcxproj", "{A71676AB-7A9B-4AED-98A7-4E7FAD6A8A9D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleLocalization", "SampleLocalization\SampleLocalization.vcxproj", "{71F7EB35-7C2D-4646-802C-066BB942A22C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -74,6 +76,12 @@ Global
 		{A71676AB-7A9B-4AED-98A7-4E7FAD6A8A9D}.DebugRhino|x64.Build.0 = DebugRhino|x64
 		{A71676AB-7A9B-4AED-98A7-4E7FAD6A8A9D}.Release|x64.ActiveCfg = Release|x64
 		{A71676AB-7A9B-4AED-98A7-4E7FAD6A8A9D}.Release|x64.Build.0 = Release|x64
+		{71F7EB35-7C2D-4646-802C-066BB942A22C}.Debug|x64.ActiveCfg = Debug|x64
+		{71F7EB35-7C2D-4646-802C-066BB942A22C}.Debug|x64.Build.0 = Debug|x64
+		{71F7EB35-7C2D-4646-802C-066BB942A22C}.DebugRhino|x64.ActiveCfg = DebugRhino|x64
+		{71F7EB35-7C2D-4646-802C-066BB942A22C}.DebugRhino|x64.Build.0 = DebugRhino|x64
+		{71F7EB35-7C2D-4646-802C-066BB942A22C}.Release|x64.ActiveCfg = Release|x64
+		{71F7EB35-7C2D-4646-802C-066BB942A22C}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
