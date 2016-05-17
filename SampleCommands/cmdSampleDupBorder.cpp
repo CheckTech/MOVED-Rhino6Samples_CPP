@@ -69,7 +69,7 @@ CRhinoCommand::result CCommandSampleDupBorder::RunCommand(const CRhinoCommandCon
     }
   }
 
-  double tol = 2.1 * RhinoApp().ActiveDoc()->AbsoluteTolerance();
+  double tol = 2.1 * context.m_doc.AbsoluteTolerance();
   ON_SimpleArray<ON_Curve*> output_array;
 
   // Join the curves
