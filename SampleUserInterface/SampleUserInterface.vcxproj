@@ -24,6 +24,7 @@
     <ClCompile Include="cmdSampleModelessDialog.cpp" />
     <ClCompile Include="cmdSampleOptionsDialog.cpp" />
     <ClCompile Include="cmdSampleSelectFiles.cpp" />
+    <ClCompile Include="cmdSampleThumbnailPreview.cpp" />
     <ClCompile Include="SampleAnimatorDialog.cpp" />
     <ClCompile Include="SampleBlockViewDialog.cpp" />
     <ClCompile Include="SampleBlockWalkDialog.cpp" />
@@ -32,6 +33,8 @@
     <ClCompile Include="SampleModelessDialog.cpp" />
     <ClCompile Include="SampleOptionsListCtrlDlg.cpp" />
     <ClCompile Include="SamplePickObjectsDialog.cpp" />
+    <ClCompile Include="SampleThumbnailPreviewDialog.cpp" />
+    <ClCompile Include="SampleThumbnailPreviewStatic.cpp" />
     <ClCompile Include="SampleUserInterfaceApp.cpp" />
     <ClCompile Include="SampleUserInterfacePlugIn.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -50,6 +53,8 @@
     <ClInclude Include="SampleModelessDialog.h" />
     <ClInclude Include="SampleOptionsListCtrlDlg.h" />
     <ClInclude Include="SamplePickObjectsDialog.h" />
+    <ClInclude Include="SampleThumbnailPreviewDialog.h" />
+    <ClInclude Include="SampleThumbnailPreviewStatic.h" />
     <ClInclude Include="SampleUserInterfaceApp.h" />
     <ClInclude Include="SampleUserInterfacePlugIn.h" />
     <ClInclude Include="stdafx.h" />
