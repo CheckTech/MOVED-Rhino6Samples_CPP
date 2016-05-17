@@ -5,6 +5,11 @@
 #define IDC_LISTBOX                     6000
 #define IDD_BLOCKVIEW_DIALOG            6000
 #define IDC_SLIDER                      6001
+#define IDD_BLOCKWALK_DIALOG            8000
+#define IDC_BLOCK_TREE                  8001
+#define IDC_BLOCK_PREVIEW               8002
+#define IDC_COMBO_VIEW                  8003
+#define IDC_COMBO_DISPLAY               8004
 #define IDC_PICK                        9002
 #define IDD_MODAL_DIALOG                9002
 #define IDC_MESSAGE                     9003

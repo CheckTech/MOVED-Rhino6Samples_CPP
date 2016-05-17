@@ -18,6 +18,7 @@
     <ClCompile Include="cmdPickObjects.cpp" />
     <ClCompile Include="cmdSampleAnimator.cpp" />
     <ClCompile Include="cmdSampleBlockView.cpp" />
+    <ClCompile Include="cmdSampleBlockWalk.cpp" />
     <ClCompile Include="cmdSampleCirclePreview.cpp" />
     <ClCompile Include="cmdSampleModalDialog.cpp" />
     <ClCompile Include="cmdSampleModelessDialog.cpp" />
@@ -25,6 +26,7 @@
     <ClCompile Include="cmdSampleSelectFiles.cpp" />
     <ClCompile Include="SampleAnimatorDialog.cpp" />
     <ClCompile Include="SampleBlockViewDialog.cpp" />
+    <ClCompile Include="SampleBlockWalkDialog.cpp" />
     <ClCompile Include="SampleCirclePreviewDialog.cpp" />
     <ClCompile Include="SampleModalDialog.cpp" />
     <ClCompile Include="SampleModelessDialog.cpp" />
@@ -42,6 +44,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SampleAnimatorDialog.h" />
     <ClInclude Include="SampleBlockViewDialog.h" />
+    <ClInclude Include="SampleBlockWalkDialog.h" />
     <ClInclude Include="SampleCirclePreviewDialog.h" />
     <ClInclude Include="SampleModalDialog.h" />
     <ClInclude Include="SampleModelessDialog.h" />
