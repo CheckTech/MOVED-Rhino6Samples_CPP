@@ -76,6 +76,15 @@
     <ClCompile Include="SampleTabbedDockBarDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cmdSampleScrollTabbedDockBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleDialogScrollHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleScrollTabbedDockBarDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SampleAnimatorDialog.h">
@@ -126,6 +135,12 @@
     <ClInclude Include="SampleTabbedDockBarDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SampleDialogScrollHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleScrollTabbedDockBarDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SampleUserInterface.def">
@@ -156,6 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\SampleTabbedDockBar.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\SampleScrollTabbedDockBar.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

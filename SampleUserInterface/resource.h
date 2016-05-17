@@ -6,7 +6,10 @@
 #define IDC_PREVIEW_EDIT                1001
 #define IDC_PREVIEW_BUTTON              1002
 #define IDI_DOCKBAR_ICON                1002
+#define IDD_SCROLL_DOCKBAR_DIALOG       1002
 #define IDC_PREVIEW_STATIC              1003
+#define IDI_ICON1                       1003
+#define IDI_SCROLL_DOCKBAR_ICON         1003
 #define IDC_LISTBOX                     6000
 #define IDD_BLOCKVIEW_DIALOG            6000
 #define IDC_SLIDER                      6001

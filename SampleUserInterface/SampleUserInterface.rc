@@ -222,6 +222,14 @@ BEGIN
     PUSHBUTTON      "Click Me!",IDC_CLICKME_BUTTON,7,7,186,14
 END
 
+IDD_SCROLL_DOCKBAR_DIALOG DIALOGEX 0, 0, 200, 521
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VSCROLL | WS_HSCROLL | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Click Me!",1002,7,7,175,14
+    PUSHBUTTON      "Click Me Too!",1003,7,490,175,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -315,6 +323,14 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 213
     END
+
+    IDD_SCROLL_DOCKBAR_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 182
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 504
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -327,6 +343,8 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_DOCKBAR_ICON        ICON                    "res\\SampleTabbedDockBar.ico"
+
+IDI_SCROLL_DOCKBAR_ICON ICON                    "res\\SampleScrollTabbedDockBar.ico"
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////

@@ -2,6 +2,7 @@
 #include "C:\Program Files\Rhino 6.0 SDK\Inc\rhinoSdkPlugInDeclare.h"
 #include "SampleUserInterfacePlugIn.h"
 #include "SampleTabbedDockBarDialog.h"
+#include "SampleScrollTabbedDockBarDialog.h"
 
 // The plug-in object must be constructed before any plug-in classes derived
 // from CRhinoCommand. The #pragma init_seg(lib) ensures that this happens.
@@ -129,6 +130,8 @@ BOOL CSampleUserInterfacePlugIn::OnLoadPlugIn()
   // Register tabbed dockbar
   CSampleTabbedDockBarDialog::Register(RUNTIME_CLASS(CSampleTabbedDockBarDialog), CSampleTabbedDockBarDialog::IDD, AfxGetStaticModuleState());
 
+  // Register scroll tabbed dockbar
+  CSampleScrollTabbedDockBarDialog::Register(RUNTIME_CLASS(CSampleScrollTabbedDockBarDialog), CSampleScrollTabbedDockBarDialog::IDD, AfxGetStaticModuleState());
 
   return CRhinoUtilityPlugIn::OnLoadPlugIn();
 }

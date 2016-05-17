@@ -23,6 +23,7 @@
     <ClCompile Include="cmdSampleModalDialog.cpp" />
     <ClCompile Include="cmdSampleModelessDialog.cpp" />
     <ClCompile Include="cmdSampleOptionsDialog.cpp" />
+    <ClCompile Include="cmdSampleScrollTabbedDockBar.cpp" />
     <ClCompile Include="cmdSampleSelectFiles.cpp" />
     <ClCompile Include="cmdSampleTabbedDockBar.cpp" />
     <ClCompile Include="cmdSampleThumbnailPreview.cpp" />
@@ -30,10 +31,12 @@
     <ClCompile Include="SampleBlockViewDialog.cpp" />
     <ClCompile Include="SampleBlockWalkDialog.cpp" />
     <ClCompile Include="SampleCirclePreviewDialog.cpp" />
+    <ClCompile Include="SampleDialogScrollHelper.cpp" />
     <ClCompile Include="SampleModalDialog.cpp" />
     <ClCompile Include="SampleModelessDialog.cpp" />
     <ClCompile Include="SampleOptionsListCtrlDlg.cpp" />
     <ClCompile Include="SamplePickObjectsDialog.cpp" />
+    <ClCompile Include="SampleScrollTabbedDockBarDialog.cpp" />
     <ClCompile Include="SampleTabbedDockBarDialog.cpp" />
     <ClCompile Include="SampleThumbnailPreviewDialog.cpp" />
     <ClCompile Include="SampleThumbnailPreviewStatic.cpp" />
@@ -51,10 +54,12 @@
     <ClInclude Include="SampleBlockViewDialog.h" />
     <ClInclude Include="SampleBlockWalkDialog.h" />
     <ClInclude Include="SampleCirclePreviewDialog.h" />
+    <ClInclude Include="SampleDialogScrollHelper.h" />
     <ClInclude Include="SampleModalDialog.h" />
     <ClInclude Include="SampleModelessDialog.h" />
     <ClInclude Include="SampleOptionsListCtrlDlg.h" />
     <ClInclude Include="SamplePickObjectsDialog.h" />
+    <ClInclude Include="SampleScrollTabbedDockBarDialog.h" />
     <ClInclude Include="SampleTabbedDockBarDialog.h" />
     <ClInclude Include="SampleThumbnailPreviewDialog.h" />
     <ClInclude Include="SampleThumbnailPreviewStatic.h" />
@@ -71,6 +76,7 @@
     <ResourceCompile Include="SampleUserInterface.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\SampleScrollTabbedDockBar.ico" />
     <Image Include="res\SampleTabbedDockBar.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

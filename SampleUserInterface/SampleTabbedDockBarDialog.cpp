@@ -25,7 +25,7 @@ END_MESSAGE_MAP()
 
 const wchar_t* CSampleTabbedDockBarDialog::Caption() const
 {
-  return L"Sample";
+  return L"SampleTab";
 }
 
 ON_UUID CSampleTabbedDockBarDialog::TabId() const
@@ -48,6 +48,7 @@ ON_UUID CSampleTabbedDockBarDialog::PlugInId() const
 
 HICON CSampleTabbedDockBarDialog::Icon(const CSize& sizeInPixels) const
 {
+  AFX_MANAGE_STATE(AfxGetStaticModuleState());
   return CRhinoDpi::LoadIcon(AfxGetInstanceHandle(), IDI_DOCKBAR_ICON, sizeInPixels.cx, sizeInPixels.cy);
 }
 
