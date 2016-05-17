@@ -85,6 +85,9 @@
     <ClCompile Include="SampleScrollTabbedDockBarDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SampleLayerContextMenuExtension.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SampleAnimatorDialog.h">
@@ -139,6 +142,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SampleScrollTabbedDockBarDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleLayerContextMenuExtension.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

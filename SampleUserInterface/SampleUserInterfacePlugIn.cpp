@@ -49,6 +49,8 @@ CSampleUserInterfacePlugIn& SampleUserInterfacePlugIn()
 }
 
 CSampleUserInterfacePlugIn::CSampleUserInterfacePlugIn()
+  : m_dialog(0)
+  , m_extension_menu(0)
 {
   // Description:
   //   CSampleUserInterfacePlugIn constructor. The constructor is called when the
@@ -71,6 +73,15 @@ CSampleUserInterfacePlugIn::~CSampleUserInterfacePlugIn()
   //   with onmalloc(), onrealloc(), oncalloc(), or onstrdup().
 
   // TODO: Add destruction code here
+
+  // Note, m_dialog is not deleted here, as the modeless
+  // dialog will delete itself.
+
+  if (nullptr != m_extension_menu)
+  {
+    delete m_extension_menu;
+    m_extension_menu = 0;
+  }
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -132,6 +143,9 @@ BOOL CSampleUserInterfacePlugIn::OnLoadPlugIn()
 
   // Register scroll tabbed dockbar
   CSampleScrollTabbedDockBarDialog::Register(RUNTIME_CLASS(CSampleScrollTabbedDockBarDialog), CSampleScrollTabbedDockBarDialog::IDD, AfxGetStaticModuleState());
+
+  // Extend the Layer panel's context menu
+  m_extension_menu = new CSampleLayerContextMenuExtension(*this);
 
   return CRhinoUtilityPlugIn::OnLoadPlugIn();
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SampleModelessDialog.h"
+#include "SampleLayerContextMenuExtension.h"
 
 class CSampleUserInterfacePlugIn : public CRhinoUtilityPlugIn
 {
@@ -35,6 +36,7 @@ private:
   // TODO: Add additional class information here
 
   CSampleModelessDialog* m_dialog;
+  CSampleLayerContextMenuExtension* m_extension_menu;
 };
 
 CSampleUserInterfacePlugIn& SampleUserInterfacePlugIn();
