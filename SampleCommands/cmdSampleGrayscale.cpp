@@ -196,7 +196,7 @@ CRhinoCommand::result CCommandSampleGrayscale::RunCommand(const CRhinoCommandCon
 
         if (bEnable && !bIsEnabled)
         {
-          m_conduit.Enable();
+          m_conduit.Enable(context.m_doc.RuntimeSerialNumber());
           context.m_doc.Regen();
         }
         else if (!bEnable && bIsEnabled)

@@ -29,6 +29,8 @@ static class CCommandSampleOptionsDialog theSampleOptionsDialogCommand;
 
 CRhinoCommand::result CCommandSampleOptionsDialog::RunCommand(const CRhinoCommandContext& context)
 {
+  UNREFERENCED_PARAMETER(context);
+
   CSampleOptionsListCtrlDlg dlg;
   INT_PTR rc = dlg.DoModal();
 

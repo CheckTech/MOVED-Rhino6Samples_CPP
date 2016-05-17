@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SampleAnimatorDialog.h" />
     <ClInclude Include="SampleBlockViewDialog.h" />
     <ClInclude Include="SampleCirclePreviewDialog.h" />
     <ClInclude Include="SampleModalDialog.h" />

@@ -170,7 +170,7 @@ CRhinoCommand::result CCommandSampleMeshFaceColor::RunCommand(const CRhinoComman
     return CRhinoCommand::failure;
 
   CSampleMeshFaceColorConduit conduit(mesh_obj->RuntimeSerialNumber());
-  conduit.Enable();
+  conduit.Enable(context.m_doc.RuntimeSerialNumber());
   context.m_doc.Regen();
 
   CRhinoGetString gs;

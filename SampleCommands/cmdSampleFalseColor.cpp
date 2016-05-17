@@ -97,7 +97,7 @@ CRhinoCommand::result CCommandSampleFalseColor::RunCommand(const CRhinoCommandCo
 
   CSampleFalseColorConduit conduit;
   conduit.SetFalseColorMesh(mesh);
-  conduit.Enable();
+  conduit.Enable(context.m_doc.RuntimeSerialNumber());
   context.m_doc.Regen();
 
   CRhinoGetString gs;

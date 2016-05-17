@@ -87,7 +87,7 @@ CRhinoCommand::result CCommandSampleDrawWireframeMesh::RunCommand(const CRhinoCo
     return CRhinoCommand::failure;
 
   CSampleDrawWireframeMesh conduit(mesh_obj->RuntimeSerialNumber());
-  conduit.Enable();
+  conduit.Enable(context.m_doc.RuntimeSerialNumber());
   context.m_doc.Regen();
 
   CRhinoGetString gs;

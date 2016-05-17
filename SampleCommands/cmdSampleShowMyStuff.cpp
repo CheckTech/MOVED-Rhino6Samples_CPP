@@ -111,7 +111,7 @@ CRhinoCommand::result CCommandSampleShowMyStuff::RunCommand(const CRhinoCommandC
 
   CSampleShowMyStuffConduit conduit;
   conduit.SetDisplayObjects(viewport_id, object_ids);
-  conduit.Enable();
+  conduit.Enable(context.m_doc.RuntimeSerialNumber());
 
   context.m_doc.Redraw(CRhinoView::regenerate_display_hint);
 

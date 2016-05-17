@@ -110,7 +110,7 @@ CRhinoCommand::result CCommandSampleDrawBitmap::RunCommand(const CRhinoCommandCo
       {
         if (!bEnable)
         {
-          m_conduit.Enable();
+          m_conduit.Enable(context.m_doc.RuntimeSerialNumber());
           context.m_doc.Regen();
         }
       }
@@ -127,7 +127,7 @@ CRhinoCommand::result CCommandSampleDrawBitmap::RunCommand(const CRhinoCommandCo
         if (bEnable)
           m_conduit.Disable();
         else
-          m_conduit.Enable();
+          m_conduit.Enable(context.m_doc.RuntimeSerialNumber());
         context.m_doc.Regen();
       }
 

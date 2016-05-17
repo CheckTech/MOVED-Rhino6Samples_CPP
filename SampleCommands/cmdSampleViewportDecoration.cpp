@@ -175,7 +175,7 @@ CRhinoCommand::result CCommandSampleViewportDecoration::RunCommand(const CRhinoC
       {
         m_watcher.SetActiveView(view);
         m_watcher.Enable(TRUE);
-        m_conduit.Enable();
+        m_conduit.Enable(context.m_doc.RuntimeSerialNumber());
       }
       else
       {

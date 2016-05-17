@@ -28,6 +28,8 @@ static class CCommandSampleSelectFiles theSampleSelectFilesCommand;
 
 CRhinoCommand::result CCommandSampleSelectFiles::RunCommand(const CRhinoCommandContext& context)
 {
+  UNREFERENCED_PARAMETER(context);
+
   CString strTitle = L"Open";
   CString strFilter = L"Rhino 3D Models (*.3dm)|*.3dm|All Files (*.*)|*.*||";
   CString strDefPath = L"";

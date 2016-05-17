@@ -215,7 +215,7 @@ CRhinoCommand::result CCommandSampleSyncViews::RunCommand(const CRhinoCommandCon
     pPrimaryView->Redraw();
     pSecondaryView->Redraw();
 
-    m_conduit.Enable();
+    m_conduit.Enable(context.m_doc.RuntimeSerialNumber());
   }
 
   return CRhinoCommand::success;

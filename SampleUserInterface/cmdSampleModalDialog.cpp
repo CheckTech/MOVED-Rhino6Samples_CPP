@@ -29,7 +29,10 @@ static class CCommandSampleModalDialog theSampleModalDialogCommand;
 
 CRhinoCommand::result CCommandSampleModalDialog::RunCommand(const CRhinoCommandContext& context)
 {
-  CSampleModalDialog dialog;
+  UNREFERENCED_PARAMETER(context);
+
+  CWnd* pParentWnd = CWnd::FromHandle(RhinoApp().MainWnd());
+  CSampleModalDialog dialog(pParentWnd);
   dialog.DoModal();
 
   return CRhinoCommand::success;

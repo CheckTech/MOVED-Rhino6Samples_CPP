@@ -136,7 +136,7 @@ CRhinoCommand::result CCommandSamplePerspectiveColors::RunCommand(const CRhinoCo
   if (m_conduit.IsEnabled())
     m_conduit.Disable();
   else
-    m_conduit.Enable();
+    m_conduit.Enable(context.m_doc.RuntimeSerialNumber());
 
   context.m_doc.Regen();
 

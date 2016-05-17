@@ -169,7 +169,7 @@ CRhinoCommand::result CCommandSampleGumball::RunCommand(const CRhinoCommandConte
   {
     dc.SetBaseGumball(gb);
     dc.EnableGumballDraw(true);
-    dc.Enable();
+    dc.Enable(context.m_doc.RuntimeSerialNumber());
     context.m_doc.Redraw();
 
     CSampleGumballGetXform gp(&dc);

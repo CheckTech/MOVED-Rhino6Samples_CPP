@@ -221,7 +221,7 @@ void CCameraTrackingConduit::StartTracking(const CRhinoView* pView)
     const ON_Viewport& vp = pView->Viewport().VP();
     CreateHUD(pView->DisplayPipeline());
     Bind(vp);
-    Enable();
+    Enable(pView->DocumentRuntimeSerialNumber());
   }
 }
 

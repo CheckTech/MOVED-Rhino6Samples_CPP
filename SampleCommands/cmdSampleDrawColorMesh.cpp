@@ -105,7 +105,7 @@ CRhinoCommand::result CCommandSampleDrawColorMesh::RunCommand(const CRhinoComman
     return failure;
 
   CConduitDrawColorMesh conduit(pMesh);
-  conduit.Enable();
+  conduit.Enable(context.m_doc.RuntimeSerialNumber());
   context.m_doc.Regen();
 
   CRhinoGetPoint gp;

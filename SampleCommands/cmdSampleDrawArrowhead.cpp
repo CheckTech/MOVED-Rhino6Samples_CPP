@@ -144,7 +144,7 @@ CRhinoCommand::result CCommandSampleDrawArrowhead::RunCommand(const CRhinoComman
     return CRhinoCommand::nothing;
 
   CSampleDrawArrowheadConduit conduit(plane, line, 1.0);
-  conduit.Enable();
+  conduit.Enable(context.m_doc.RuntimeSerialNumber());
   context.m_doc.Redraw();
 
   CRhinoGetString gs;

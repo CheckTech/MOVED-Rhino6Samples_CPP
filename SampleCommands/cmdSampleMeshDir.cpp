@@ -193,7 +193,7 @@ CRhinoCommand::result CCommandSampleMeshDir::RunCommand(const CRhinoCommandConte
       conduit.m_mesh_list.AppendNew().SetMesh(mesh);
   }
 
-  conduit.Enable();
+  conduit.Enable(context.m_doc.RuntimeSerialNumber());
 
   CRhinoGetOption gs;
   gs.SetCommandPrompt(L"Press Enter when done");

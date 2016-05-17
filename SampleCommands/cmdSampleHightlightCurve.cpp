@@ -77,7 +77,7 @@ CRhinoCommand::result CCommandSampleHighlightCurve::RunCommand(const CRhinoComma
 
   CSampleHighlightCurveConduit conduit;
   conduit.m_runtime_object_serial_number = obj->RuntimeSerialNumber();
-  conduit.Enable();
+  conduit.Enable(context.m_doc.RuntimeSerialNumber());
   context.m_doc.Redraw();
 
   CRhinoGetString gs;
