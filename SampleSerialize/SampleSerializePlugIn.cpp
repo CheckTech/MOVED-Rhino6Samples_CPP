@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "C:\Program Files\Rhino 6.0 SDK\Inc\rhinoSdkPlugInDeclare.h"
-#include "SampleDigitizerPlugIn.h"
+#include "SampleSerializePlugIn.h"
 
 // The plug-in object must be constructed before any plug-in classes derived
 // from CRhinoCommand. The #pragma init_seg(lib) ensures that this happens.
@@ -14,11 +14,11 @@ RHINO_PLUG_IN_DECLARE
 
 // Rhino plug-in name
 // Provide a short, friendly name for this plug-in.
-RHINO_PLUG_IN_NAME(L"SampleDigitizer");
+RHINO_PLUG_IN_NAME(L"SampleSerialize");
 
 // Rhino plug-in id
 // Provide a unique uuid for this plug-in
-RHINO_PLUG_IN_ID(L"2CC3617C-5BC1-462A-99C7-3416403B4429");
+RHINO_PLUG_IN_ID(L"9FF95264-C2CB-4899-B8A6-C701927370BA");
 
 // Rhino plug-in version
 // Provide a version number string for this plug-in
@@ -34,40 +34,37 @@ RHINO_PLUG_IN_DEVELOPER_EMAIL(L"devsupport@mcneel.com");
 RHINO_PLUG_IN_DEVELOPER_WEBSITE(L"http://www.rhino3d.com");
 RHINO_PLUG_IN_UPDATE_URL(L"https://github.com/mcneel/Rhino6Samples_CPP");
 
-// The one and only CSampleDigitizerPlugIn object
-static CSampleDigitizerPlugIn thePlugIn;
+// The one and only CSampleSerializePlugIn object
+static CSampleSerializePlugIn thePlugIn;
 
 /////////////////////////////////////////////////////////////////////////////
-// CSampleDigitizerPlugIn definition
+// CSampleSerializePlugIn definition
 
-CSampleDigitizerPlugIn& SampleDigitizerPlugIn()
+CSampleSerializePlugIn& SampleSerializePlugIn()
 {
-  // Return a reference to the one and only CSampleDigitizerPlugIn object
+  // Return a reference to the one and only CSampleSerializePlugIn object
   return thePlugIn;
 }
 
-CSampleDigitizerPlugIn::CSampleDigitizerPlugIn()
-  : m_hThread(0)
-  , m_dwThreadID(0)
-  , m_bDigitizerConnected(false)
+CSampleSerializePlugIn::CSampleSerializePlugIn()
 {
   // Description:
-  //   CSampleDigitizerPlugIn constructor. The constructor is called when the
+  //   CSampleSerializePlugIn constructor. The constructor is called when the
   //   plug-in is loaded and "thePlugIn" is constructed. Once the plug-in
-  //   is loaded, CSampleDigitizerPlugIn::OnLoadPlugIn() is called. The
+  //   is loaded, CSampleSerializePlugIn::OnLoadPlugIn() is called. The
   //   constructor should be simple and solid. Do anything that might fail in
-  //   CSampleDigitizerPlugIn::OnLoadPlugIn().
+  //   CSampleSerializePlugIn::OnLoadPlugIn().
 
   // TODO: Add construction code here
   m_plugin_version = RhinoPlugInVersion();
 }
 
-CSampleDigitizerPlugIn::~CSampleDigitizerPlugIn()
+CSampleSerializePlugIn::~CSampleSerializePlugIn()
 {
   // Description:
-  //   CSampleDigitizerPlugIn destructor. The destructor is called to destroy
+  //   CSampleSerializePlugIn destructor. The destructor is called to destroy
   //   "thePlugIn" when the plug-in is unloaded. Immediately before the
-  //   DLL is unloaded, CSampleDigitizerPlugIn::OnUnloadPlugin() is called. Do
+  //   DLL is unloaded, CSampleSerializePlugIn::OnUnloadPlugin() is called. Do
   //   not do too much here. Be sure to clean up any memory you have allocated
   //   with onmalloc(), onrealloc(), oncalloc(), or onstrdup().
 
@@ -77,7 +74,7 @@ CSampleDigitizerPlugIn::~CSampleDigitizerPlugIn()
 /////////////////////////////////////////////////////////////////////////////
 // Required overrides
 
-const wchar_t* CSampleDigitizerPlugIn::PlugInName() const
+const wchar_t* CSampleSerializePlugIn::PlugInName() const
 {
   // Description:
   //   Plug-in name display string.  This name is displayed by Rhino when
@@ -88,7 +85,7 @@ const wchar_t* CSampleDigitizerPlugIn::PlugInName() const
   return RhinoPlugInName();
 }
 
-const wchar_t* CSampleDigitizerPlugIn::PlugInVersion() const
+const wchar_t* CSampleSerializePlugIn::PlugInVersion() const
 {
   // Description:
   //   Plug-in version display string. This name is displayed by Rhino
@@ -99,18 +96,18 @@ const wchar_t* CSampleDigitizerPlugIn::PlugInVersion() const
   return m_plugin_version;
 }
 
-GUID CSampleDigitizerPlugIn::PlugInID() const
+GUID CSampleSerializePlugIn::PlugInID() const
 {
   // Description:
   //   Plug-in unique identifier. The identifier is used by Rhino to
   //   manage the plug-ins.
 
   // TODO: Return a unique identifier for the plug-in.
-  // {2CC3617C-5BC1-462A-99C7-3416403B4429}
+  // {9FF95264-C2CB-4899-B8A6-C701927370BA}
   return ON_UuidFromString(RhinoPlugInId());
 }
 
-BOOL CSampleDigitizerPlugIn::OnLoadPlugIn()
+BOOL CSampleSerializePlugIn::OnLoadPlugIn()
 {
   // Description:
   //   Called after the plug-in is loaded and the constructor has been
@@ -126,13 +123,15 @@ BOOL CSampleDigitizerPlugIn::OnLoadPlugIn()
   //    override this function and do it here.  It is not necessary to call
   //    CPlugIn::OnLoadPlugIn() from your derived class.
 
-  // NOTE: DO NOT enable your digitizer here!
-
   // TODO: Add plug-in initialization code here.
-  return CRhinoDigitizerPlugIn::OnLoadPlugIn();
+
+  m_plugin_watcher.Register();
+  m_plugin_watcher.Enable(TRUE);
+
+  return CRhinoUtilityPlugIn::OnLoadPlugIn();
 }
 
-void CSampleDigitizerPlugIn::OnUnloadPlugIn()
+void CSampleSerializePlugIn::OnUnloadPlugIn()
 {
   // Description:
   //    Called one time when plug-in is about to be unloaded. By this time,
@@ -143,15 +142,13 @@ void CSampleDigitizerPlugIn::OnUnloadPlugIn()
 
   // TODO: Add plug-in cleanup code here.
 
-  EnableDigitizer(false);
-
-  CRhinoDigitizerPlugIn::OnUnloadPlugIn();
+  CRhinoUtilityPlugIn::OnUnloadPlugIn();
 }
 
 /////////////////////////////////////////////////////////////////////////////
 // Online help overrides
 
-BOOL CSampleDigitizerPlugIn::AddToPlugInHelpMenu() const
+BOOL CSampleSerializePlugIn::AddToPlugInHelpMenu() const
 {
   // Description:
   //   Return true to have your plug-in name added to the Rhino help menu.
@@ -160,134 +157,57 @@ BOOL CSampleDigitizerPlugIn::AddToPlugInHelpMenu() const
   return FALSE;
 }
 
-BOOL CSampleDigitizerPlugIn::OnDisplayPlugInHelp(HWND hWnd) const
+BOOL CSampleSerializePlugIn::OnDisplayPlugInHelp(HWND hWnd) const
 {
   // Description:
   //   Called when the user requests help about your plug-in.
   //   It should display a standard Windows Help file (.hlp or .chm).
 
   // TODO: Add support for online help here.
-  return CRhinoDigitizerPlugIn::OnDisplayPlugInHelp(hWnd);
+  return CRhinoUtilityPlugIn::OnDisplayPlugInHelp(hWnd);
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// Digitizer overrides
+// Document user data overrides
 
-static DWORD WINAPI ThreadProc(LPVOID pVoid)
+BOOL CSampleSerializePlugIn::CallWriteDocument(const CRhinoFileWriteOptions& options)
 {
-  UNREFERENCED_PARAMETER(pVoid);
-
-  // Do whatever you need to do to query the digitizer here
-  // so you can call CRhinoPlugIn::SendPoint().
-
-  /*
-  CSampleDigitizerPlugIn* pPlugIn = (CSampleDigitizerPlugIn*)pVoid;
-  ASSERT(pPlugIn);
-
-  ON_3dPoint pt;
-  while (1)
-  {
-    DWORD dwResult = WaitForSingleObject( ... );
-    if( WAIT_OBJECT_0 == dwResult )
-    {
-    ON_3dPoint = ?
-    UINT uFlags = ?
-    pPlugIn->SendPoint( pt, nFlags );
-    }
-  }
-  */
-
-  // Should never get here
-  return 0;
+  // Don't save document data if only selected objects are saved
+  return options.SelectedObjectFilter() ? FALSE : TRUE;
 }
 
-bool CSampleDigitizerPlugIn::EnableDigitizer(bool bEnable)
+BOOL CSampleSerializePlugIn::WriteDocument(CRhinoDoc& doc, ON_BinaryArchive& archive, const CRhinoFileWriteOptions& options)
 {
-  UNREFERENCED_PARAMETER(bEnable);
+  UNREFERENCED_PARAMETER(doc);
+  UNREFERENCED_PARAMETER(options);
 
-  // Description:
-  //   Called by Rhino to enable/disable input from the digitizer.
-  //   If bEnable is true and EnableDigitizer() returns false,
-  //   then Rhino will not calibrate the digitizer.
+  // Our serialization data class handles all writing
+  bool rc = m_plugin_data.Write(archive);
+  return rc ? TRUE : FALSE;
+}
 
-  /*
+BOOL CSampleSerializePlugIn::ReadDocument(CRhinoDoc& doc, ON_BinaryArchive& archive, const CRhinoFileReadOptions& options)
+{
+  UNREFERENCED_PARAMETER(doc);
 
-  // In case we need to access our resources...
-  AFX_MANAGE_STATE(AfxGetStaticModuleState());
-
-  // In case we need Rhino main window handle...
-  HWND hwndRhino = RhinoApp().MainWnd();
-
-  bool rc = false;
-
-  if (bEnable)
+  // If we are asked to read our document data, then we need to read our document data.
+  // But if Rhino is importing another 3dm file, we may or many not want this document's
+  // data. Or, we might want to merge this document's data with ours. In this example,
+  // if Rhino is importing another 3dm file, we will go ahead and read our data, just
+  // like we should. But we will just throw it away...
+  BOOL bImporting = options.Mode(CRhinoFileReadOptions::ImportMode) || options.Mode(CRhinoFileReadOptions::ImportReferenceMode);
+  if (bImporting)
   {
-    for (;; )
-    {
-      if (m_bDigitizerConnected)
-      {
-        ::RhinoApp().Print(L"Digitizer already connected.\n");
-        rc = true;
-        break;
-      }
-
-      ::RhinoApp().Print(L"Connecting to digitizer ...\n");
-
-      // Do whatever it takes to connnect to and initialize
-      // your digitizer here. If you need to call LoadLibrary()
-      // to load some communication DLL, do it here. Once you
-      // have connected and initialized your digitizer, you can
-      / /create the polling thread.
-
-      // Start up the polling thread
-      m_hThread = ::CreateThread(NULL, 0, ThreadProc, this, 0, &m_dwThreadID);
-      m_bDigitizerConnected = true;
-      rc = true;
-      break;
-    }
-  }
-  else
-  {
-    if (!m_bDigitizerConnected)
-      return true;
-
-    if (m_hThread)
-    {
-      ::TerminateThread(m_hThread, 0);
-      ::CloseHandle(m_hThread);
-      m_hThread = 0;
-    }
-
-    // Shut down communications with the digitizer here. If
-    // you need to call FreeLibrary to release a communications
-    // DLL, do it here.
-
-    m_dwThreadID = 0;
-    m_bDigitizerConnected = false;
-    rc = true;
+    CSampleSerializeData data;
+    bool rc = data.Read(archive);
+    return rc ? TRUE : FALSE;
   }
 
-  return rc;
-  */
-
-  return false;
+  bool rc = m_plugin_data.Read(archive);
+  return rc ? TRUE : FALSE;
 }
 
-ON::LengthUnitSystem CSampleDigitizerPlugIn::UnitSystem() const
+CSampleSerializeData& CSampleSerializePlugIn::Data()
 {
-  // TODO: Return the digitizer's unit system.
-  return ON::LengthUnitSystem::Millimeters;
+  return m_plugin_data;
 }
-
-double CSampleDigitizerPlugIn::PointTolerance() const
-{
-  // Description:
-  //   Precision of the digitizer in the unit system
-  //   returned by CSampleDigitizerPlugIn::UnitSystem().
-  //   If this number is too small, digitizer noise will
-  //   cause GetPoint() to jitter.
-
-  // TODO: Return the digitizer's point tolerance.
-  return 0.01;
-}
-
