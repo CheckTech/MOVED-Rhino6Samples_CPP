@@ -4,6 +4,7 @@
 //
 #define IDC_LISTBOX                     6000
 #define IDD_BLOCKVIEW_DIALOG            6000
+#define IDC_SLIDER                      6001
 #define IDC_PICK                        9002
 #define IDD_MODAL_DIALOG                9002
 #define IDC_MESSAGE                     9003
@@ -24,6 +25,8 @@
 #define IDC_BUTTON2                     19004
 #define IDC_BUTTON3                     19005
 #define IDD_OPTIONS_DIALOG              29002
+#define IDD_DIALOG                      29003
+#define IDD_ANIMATOR_DIALOG             29003
 #define IDC_FRAME                       29006
 
 // Next default values for new objects

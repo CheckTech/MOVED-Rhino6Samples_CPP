@@ -181,6 +181,16 @@ BEGIN
     CONTROL         "",IDC_PREVIEW,"Static",SS_OWNERDRAW | SS_NOTIFY | WS_BORDER,7,67,140,93
 END
 
+IDD_ANIMATOR_DIALOG DIALOGEX 0, 0, 230, 54
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Animator"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,57,33,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,123,33,50,14
+    CONTROL         "Slider1",IDC_SLIDER,"msctls_trackbar32",TBS_AUTOTICKS | TBS_TOP | WS_TABSTOP,7,7,216,21
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -240,6 +250,14 @@ BEGIN
         RIGHTMARGIN, 147
         TOPMARGIN, 7
         BOTTOMMARGIN, 177
+    END
+
+    IDD_ANIMATOR_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 223
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 47
     END
 END
 #endif    // APSTUDIO_INVOKED

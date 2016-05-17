@@ -16,12 +16,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cmdPickObjects.cpp" />
+    <ClCompile Include="cmdSampleAnimator.cpp" />
     <ClCompile Include="cmdSampleBlockView.cpp" />
     <ClCompile Include="cmdSampleCirclePreview.cpp" />
     <ClCompile Include="cmdSampleModalDialog.cpp" />
     <ClCompile Include="cmdSampleModelessDialog.cpp" />
     <ClCompile Include="cmdSampleOptionsDialog.cpp" />
     <ClCompile Include="cmdSampleSelectFiles.cpp" />
+    <ClCompile Include="SampleAnimatorDialog.cpp" />
     <ClCompile Include="SampleBlockViewDialog.cpp" />
     <ClCompile Include="SampleCirclePreviewDialog.cpp" />
     <ClCompile Include="SampleModalDialog.cpp" />
