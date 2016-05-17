@@ -70,6 +70,12 @@
     <ClCompile Include="SampleThumbnailPreviewStatic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cmdSampleTabbedDockBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleTabbedDockBarDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SampleAnimatorDialog.h">
@@ -117,6 +123,9 @@
     <ClInclude Include="SampleThumbnailPreviewStatic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SampleTabbedDockBarDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SampleUserInterface.def">
@@ -144,5 +153,10 @@
     <ResourceCompile Include="SampleUserInterface.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\SampleTabbedDockBar.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

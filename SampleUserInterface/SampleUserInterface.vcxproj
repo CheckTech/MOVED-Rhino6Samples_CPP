@@ -24,6 +24,7 @@
     <ClCompile Include="cmdSampleModelessDialog.cpp" />
     <ClCompile Include="cmdSampleOptionsDialog.cpp" />
     <ClCompile Include="cmdSampleSelectFiles.cpp" />
+    <ClCompile Include="cmdSampleTabbedDockBar.cpp" />
     <ClCompile Include="cmdSampleThumbnailPreview.cpp" />
     <ClCompile Include="SampleAnimatorDialog.cpp" />
     <ClCompile Include="SampleBlockViewDialog.cpp" />
@@ -33,6 +34,7 @@
     <ClCompile Include="SampleModelessDialog.cpp" />
     <ClCompile Include="SampleOptionsListCtrlDlg.cpp" />
     <ClCompile Include="SamplePickObjectsDialog.cpp" />
+    <ClCompile Include="SampleTabbedDockBarDialog.cpp" />
     <ClCompile Include="SampleThumbnailPreviewDialog.cpp" />
     <ClCompile Include="SampleThumbnailPreviewStatic.cpp" />
     <ClCompile Include="SampleUserInterfaceApp.cpp" />
@@ -53,6 +55,7 @@
     <ClInclude Include="SampleModelessDialog.h" />
     <ClInclude Include="SampleOptionsListCtrlDlg.h" />
     <ClInclude Include="SamplePickObjectsDialog.h" />
+    <ClInclude Include="SampleTabbedDockBarDialog.h" />
     <ClInclude Include="SampleThumbnailPreviewDialog.h" />
     <ClInclude Include="SampleThumbnailPreviewStatic.h" />
     <ClInclude Include="SampleUserInterfaceApp.h" />
@@ -66,6 +69,9 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SampleUserInterface.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\SampleTabbedDockBar.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <Keyword>MFCDLLProj</Keyword>

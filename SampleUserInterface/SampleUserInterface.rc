@@ -215,6 +215,13 @@ BEGIN
     PUSHBUTTON      "...",IDC_PREVIEW_BUTTON,192,7,16,14
 END
 
+IDD_DOCKBAR_DIALOG DIALOGEX 0, 0, 200, 220
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Click Me!",IDC_CLICKME_BUTTON,7,7,186,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -300,8 +307,26 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 144
     END
+
+    IDD_DOCKBAR_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 193
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 213
+    END
 END
 #endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_DOCKBAR_ICON        ICON                    "res\\SampleTabbedDockBar.ico"
 
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
