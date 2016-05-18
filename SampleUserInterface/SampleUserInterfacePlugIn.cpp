@@ -51,6 +51,7 @@ CSampleUserInterfacePlugIn& SampleUserInterfacePlugIn()
 CSampleUserInterfacePlugIn::CSampleUserInterfacePlugIn()
   : m_dialog(0)
   , m_extension_menu(0)
+  , m_bScriptMode(true)
 {
   // Description:
   //   CSampleUserInterfacePlugIn constructor. The constructor is called when the
@@ -147,6 +148,11 @@ BOOL CSampleUserInterfacePlugIn::OnLoadPlugIn()
   // Extend the Layer panel's context menu
   m_extension_menu = new CSampleLayerContextMenuExtension(*this);
 
+  // Show our sample menu on Rhino's main menu.
+  // Note, the proper way of doing this today is to embed a menu
+  // in a custom RUI using the toolbar workspace editor.
+  ShowSampleMenu();
+  
   return CRhinoUtilityPlugIn::OnLoadPlugIn();
 }
 
@@ -272,4 +278,136 @@ void CSampleUserInterfacePlugIn::SetDlgPointValue(int item, const ON_3dPoint& pt
 {
   if (IsDlgVisible())
     m_dialog->SetPointValue(item, pt);
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// Additional overrides
+
+void CSampleUserInterfacePlugIn::OnInitPlugInMenuPopups(WPARAM wParam, LPARAM lParam)
+{
+  UNREFERENCED_PARAMETER(lParam);
+
+  HMENU hMenu = (HMENU)wParam;
+  if (hMenu)
+  {
+    UINT uCheck = MF_BYCOMMAND;
+    if (m_bScriptMode)
+      uCheck |= MF_CHECKED;
+    else
+      uCheck |= MF_UNCHECKED;
+    ::CheckMenuItem(hMenu, ID_SAMPLEMENU_SCRIPTMODE, uCheck);
+  }
+}
+
+BOOL CSampleUserInterfacePlugIn::OnPlugInMenuCommand(WPARAM wParam)
+{
+  switch (wParam)
+  {
+  case ID_SAMPLEMENU_SAMPLEMENUCOMMAND1:
+  {
+    if (m_bScriptMode)
+      RhinoApp().RunScript(L"! _-SampleMenuCommand1");
+    else
+      RhinoApp().RunScript(L"! _SampleMenuCommand1");
+  }
+  break;
+
+  case ID_SAMPLEMENU_SAMPLEMENUCOMMAND2:
+  {
+    if (m_bScriptMode)
+      RhinoApp().RunScript(L"! _-SampleMenuCommand2");
+    else
+      RhinoApp().RunScript(L"! _SampleMenuCommand2");
+  }
+  break;
+
+  case ID_MORE_SAMPLEMENUCOMMAND3:
+  {
+    if (m_bScriptMode)
+      RhinoApp().RunScript(L"! _-SampleMenuCommand3");
+    else
+      RhinoApp().RunScript(L"! _SampleMenuCommand3");
+  }
+  break;
+
+  case ID_MORE_SAMPLEMENUCOMMAND4:
+  {
+    if (m_bScriptMode)
+      RhinoApp().RunScript(L"! _-SampleMenuCommand4");
+    else
+      RhinoApp().RunScript(L"! _SampleMenuCommand4");
+  }
+  break;
+
+  case ID_SAMPLEMENU_SCRIPTMODE:
+  {
+    if (m_bScriptMode)
+      m_bScriptMode = false;
+    else
+      m_bScriptMode = true;
+  }
+  break;
+
+  default:
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+BOOL CSampleUserInterfacePlugIn::IsSampleMenuVisible() const
+{
+  return (0 != m_menu.GetSafeHmenu());
+}
+
+BOOL CSampleUserInterfacePlugIn::ShowSampleMenu()
+{
+  // Required to access our plug-in's resources
+  AFX_MANAGE_STATE(AfxGetStaticModuleState());
+
+  BOOL rc = (0 == m_menu.GetSafeHmenu());
+
+  if (rc)
+    rc = m_menu.LoadMenu(IDR_SAMPLE_MENU);
+
+  if (rc)
+  {
+    // Insert the menu into Rhino's menu bar.
+    // NOTE, this version gets a submenu from a main menu by index,
+    // and uses the title in the main menu.
+    InsertPlugInMenuToRhinoMenu(m_menu.GetSafeHmenu(), 0);
+  }
+
+  return rc;
+}
+
+BOOL CSampleUserInterfacePlugIn::HideSampleMenu()
+{
+  HMENU hSubMenu = 0;
+
+  BOOL rc = (0 != m_menu.GetSafeHmenu());
+
+  if (rc)
+  {
+    // Since we used CRhinoPlugIn::InsertPlugInMenuToRhinoMenu to
+    // insert a submenu, we need to retrieve the handle of the submenu
+    // before we can remove it.
+
+    MENUITEMINFO mi;
+    memset(&mi, 0, sizeof(mi));
+    mi.cbSize = sizeof(mi);
+    mi.fMask = MIIM_SUBMENU;
+    rc = ::GetMenuItemInfo(m_menu.GetSafeHmenu(), 0, TRUE, &mi);
+
+    if (rc)
+      hSubMenu = mi.hSubMenu;
+  }
+
+  if (rc)
+    rc = RemovePlugInMenuFromRhino(hSubMenu);
+
+  if (rc)
+    m_menu.DestroyMenu();
+
+  return FALSE;
 }

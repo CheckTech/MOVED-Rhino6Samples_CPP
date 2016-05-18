@@ -20,6 +20,10 @@ public:
   BOOL AddToPlugInHelpMenu() const;
   BOOL OnDisplayPlugInHelp(HWND hWnd) const;
 
+  // Additional overrides
+  void OnInitPlugInMenuPopups(WPARAM wParam, LPARAM lParam);
+  BOOL OnPlugInMenuCommand(WPARAM wParam);
+
   // Modeless dialog helpers
   bool IsDlgCreated();
   bool IsDlgVisible();
@@ -30,6 +34,11 @@ public:
   void ZeroDlg();
   void SetDlgPointValue(int item, const ON_3dPoint& pt);
 
+  // Plug-in specific menu helpers
+  BOOL IsSampleMenuVisible() const;
+  BOOL ShowSampleMenu();
+  BOOL HideSampleMenu();
+
 private:
   ON_wString m_plugin_version;
 
@@ -37,6 +46,8 @@ private:
 
   CSampleModelessDialog* m_dialog;
   CSampleLayerContextMenuExtension* m_extension_menu;
+  CMenu m_menu;
+  bool m_bScriptMode;
 };
 
 CSampleUserInterfacePlugIn& SampleUserInterfacePlugIn();

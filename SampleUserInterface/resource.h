@@ -8,7 +8,6 @@
 #define IDI_DOCKBAR_ICON                1002
 #define IDD_SCROLL_DOCKBAR_DIALOG       1002
 #define IDC_PREVIEW_STATIC              1003
-#define IDI_ICON1                       1003
 #define IDI_SCROLL_DOCKBAR_ICON         1003
 #define IDC_LISTBOX                     6000
 #define IDD_BLOCKVIEW_DIALOG            6000
@@ -30,6 +29,7 @@
 #define IDC_CENTER_Z                    10004
 #define IDC_SEP1                        10005
 #define IDC_SEP2                        10006
+#define IDR_SAMPLE_MENU                 13002
 #define IDC_EDIT1                       19000
 #define IDD_MODELESS_DIALOG             19000
 #define IDC_EDIT2                       19001
@@ -42,6 +42,11 @@
 #define IDC_FRAME                       29006
 #define IDC_CLICKME_BUTTON              30000
 #define IDD_DOCKBAR_DIALOG              30000
+#define ID_SAMPLEMENU_SAMPLEMENUCOMMAND1 32771
+#define ID_SAMPLEMENU_SAMPLEMENUCOMMAND2 32772
+#define ID_SAMPLEMENU_SCRIPTMODE        32773
+#define ID_MORE_SAMPLEMENUCOMMAND3      32775
+#define ID_MORE_SAMPLEMENUCOMMAND4      32776
 
 // Next default values for new objects
 // 
