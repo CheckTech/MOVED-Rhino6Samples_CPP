@@ -15,8 +15,13 @@
 #define IDD_BLOCKWALK_DIALOG            8000
 #define IDC_BLOCK_TREE                  8001
 #define IDC_BLOCK_PREVIEW               8002
+#define IDC_S_HYPERLINK                 8002
+#define IDD_PAGE_DIALOG                 8002
+#define IDD_OBJPROPS_DIALOG             8002
 #define IDC_COMBO_VIEW                  8003
+#define IDC_E_HYPERLINK                 8003
 #define IDC_COMBO_DISPLAY               8004
+#define IDC_B_HYPERLINK                 8004
 #define IDC_PICK                        9002
 #define IDD_MODAL_DIALOG                9002
 #define IDC_MESSAGE                     9003
@@ -31,6 +36,7 @@
 #define IDC_SEP2                        10006
 #define IDD_OPTIONS_PAGE                12000
 #define IDD_DOCPROPS_PAGE               12001
+#define IDI_OBJPROPS_ICON               13000
 #define IDR_SAMPLE_MENU                 13002
 #define IDC_EDIT1                       19000
 #define IDD_MODELESS_DIALOG             19000
@@ -54,7 +60,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        13000
+#define _APS_NEXT_RESOURCE_VALUE        13001
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         13000
 #define _APS_NEXT_SYMED_VALUE           13000

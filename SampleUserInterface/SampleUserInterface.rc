@@ -246,6 +246,15 @@ BEGIN
     PUSHBUTTON      "Pick me!",IDC_BUTTON1,12,16,50,14
 END
 
+IDD_OBJPROPS_DIALOG DIALOGEX 0, 0, 200, 100
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Hyperlink",IDC_S_HYPERLINK,2,7,191,8
+    EDITTEXT        IDC_E_HYPERLINK,7,17,186,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Go...",IDC_B_HYPERLINK,7,32,50,14
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -365,6 +374,14 @@ BEGIN
         VERTGUIDE, 252
         HORZGUIDE, 6
     END
+
+    IDD_OBJPROPS_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 193
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 93
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -379,6 +396,8 @@ END
 IDI_DOCKBAR_ICON        ICON                    "res\\SampleTabbedDockBar.ico"
 
 IDI_SCROLL_DOCKBAR_ICON ICON                    "res\\SampleScrollTabbedDockBar.ico"
+
+IDI_OBJPROPS_ICON       ICON                    "res\\SampleObjectPropertiesPage.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////

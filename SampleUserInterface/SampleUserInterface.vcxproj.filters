@@ -100,6 +100,9 @@
     <ClCompile Include="SampleOptionsPage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SampleObjectPropertiesPageDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SampleAnimatorDialog.h">
@@ -165,6 +168,9 @@
     <ClInclude Include="SampleDocumentPropertiesPage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SampleObjectPropertiesPageDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="SampleUserInterface.def">
@@ -198,6 +204,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\SampleScrollTabbedDockBar.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\SampleObjectPropertiesPage.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

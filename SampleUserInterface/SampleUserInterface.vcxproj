@@ -38,6 +38,7 @@
     <ClCompile Include="SampleLayerContextMenuExtension.cpp" />
     <ClCompile Include="SampleModalDialog.cpp" />
     <ClCompile Include="SampleModelessDialog.cpp" />
+    <ClCompile Include="SampleObjectPropertiesPageDialog.cpp" />
     <ClCompile Include="SampleOptionsListCtrlDlg.cpp" />
     <ClCompile Include="SampleOptionsPage.cpp" />
     <ClCompile Include="SamplePickObjectsDialog.cpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="SampleLayerContextMenuExtension.h" />
     <ClInclude Include="SampleModalDialog.h" />
     <ClInclude Include="SampleModelessDialog.h" />
+    <ClInclude Include="SampleObjectPropertiesPageDialog.h" />
     <ClInclude Include="SampleOptionsListCtrlDlg.h" />
     <ClInclude Include="SampleOptionsPage.h" />
     <ClInclude Include="SamplePickObjectsDialog.h" />
@@ -84,6 +86,7 @@
     <ResourceCompile Include="SampleUserInterface.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\SampleObjectPropertiesPage.ico" />
     <Image Include="res\SampleScrollTabbedDockBar.ico" />
     <Image Include="res\SampleTabbedDockBar.ico" />
   </ItemGroup>

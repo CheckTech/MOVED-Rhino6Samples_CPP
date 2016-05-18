@@ -22,8 +22,9 @@ public:
 
   // Additional overrides
   CRhinoPlugIn::plugin_load_time PlugInLoadTime();
-  void AddPagesToOptionsDialog(HWND hWnd, ON_SimpleArray<CRhinoOptionsDialogPage*>& pages);
-  void AddPagesToDocumentPropertiesDialog(CRhinoDoc& doc, HWND hWnd, ON_SimpleArray<CRhinoOptionsDialogPage*>& pages);
+  void AddPagesToOptionsDialog(HWND hWnd, ON_SimpleArray<class CRhinoOptionsDialogPage*>& pages);
+  void AddPagesToDocumentPropertiesDialog(CRhinoDoc& doc, HWND hWnd, ON_SimpleArray<class CRhinoOptionsDialogPage*>& pages);
+  void AddPagesToObjectPropertiesDialog(ON_SimpleArray<class CRhinoPropertiesDialogPage*>& pages);
   void OnInitPlugInMenuPopups(WPARAM wParam, LPARAM lParam);
   BOOL OnPlugInMenuCommand(WPARAM wParam);
 
