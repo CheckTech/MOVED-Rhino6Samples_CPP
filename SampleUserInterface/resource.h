@@ -9,6 +9,8 @@
 #define IDD_SCROLL_DOCKBAR_DIALOG       1002
 #define IDC_PREVIEW_STATIC              1003
 #define IDI_SCROLL_DOCKBAR_ICON         1003
+#define IDD_DIALOG1                     2000
+#define IDD_RHINO_DOCKBAR_DIALOG        2000
 #define IDC_LISTBOX                     6000
 #define IDD_BLOCKVIEW_DIALOG            6000
 #define IDC_SLIDER                      6001
@@ -16,7 +18,6 @@
 #define IDC_BLOCK_TREE                  8001
 #define IDC_BLOCK_PREVIEW               8002
 #define IDC_S_HYPERLINK                 8002
-#define IDD_PAGE_DIALOG                 8002
 #define IDD_OBJPROPS_DIALOG             8002
 #define IDC_COMBO_VIEW                  8003
 #define IDC_E_HYPERLINK                 8003

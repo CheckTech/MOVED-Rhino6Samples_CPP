@@ -20,6 +20,7 @@
     <ClCompile Include="cmdSampleBlockView.cpp" />
     <ClCompile Include="cmdSampleBlockWalk.cpp" />
     <ClCompile Include="cmdSampleCirclePreview.cpp" />
+    <ClCompile Include="cmdSampleDockbar.cpp" />
     <ClCompile Include="cmdSampleMenu.cpp" />
     <ClCompile Include="cmdSampleMenuToggle.cpp" />
     <ClCompile Include="cmdSampleModalDialog.cpp" />
@@ -42,6 +43,8 @@
     <ClCompile Include="SampleOptionsListCtrlDlg.cpp" />
     <ClCompile Include="SampleOptionsPage.cpp" />
     <ClCompile Include="SamplePickObjectsDialog.cpp" />
+    <ClCompile Include="SampleRhinoDockbar.cpp" />
+    <ClCompile Include="SampleRhinoDockbarDialog.cpp" />
     <ClCompile Include="SampleScrollTabbedDockBarDialog.cpp" />
     <ClCompile Include="SampleTabbedDockBarDialog.cpp" />
     <ClCompile Include="SampleThumbnailPreviewDialog.cpp" />
@@ -69,6 +72,8 @@
     <ClInclude Include="SampleOptionsListCtrlDlg.h" />
     <ClInclude Include="SampleOptionsPage.h" />
     <ClInclude Include="SamplePickObjectsDialog.h" />
+    <ClInclude Include="SampleRhinoDockbar.h" />
+    <ClInclude Include="SampleRhinoDockbarDialog.h" />
     <ClInclude Include="SampleScrollTabbedDockBarDialog.h" />
     <ClInclude Include="SampleTabbedDockBarDialog.h" />
     <ClInclude Include="SampleThumbnailPreviewDialog.h" />

@@ -6,6 +6,7 @@
 #include "SampleOptionsPage.h"
 #include "SampleDocumentPropertiesPage.h"
 #include "SampleObjectPropertiesPageDialog.h"
+#include "SampleRhinoDockbar.h"
 
 // The plug-in object must be constructed before any plug-in classes derived
 // from CRhinoCommand. The #pragma init_seg(lib) ensures that this happens.
@@ -147,6 +148,17 @@ BOOL CSampleUserInterfacePlugIn::OnLoadPlugIn()
 
   // Register scroll tabbed dockbar
   CSampleScrollTabbedDockBarDialog::Register(RUNTIME_CLASS(CSampleScrollTabbedDockBarDialog), CSampleScrollTabbedDockBarDialog::IDD, AfxGetStaticModuleState());
+
+  // Ask Rhino's DockBarManager to create our dockbar
+  CRhinoUiDockBar* pDockbar = RhinoUiDockBarManager().CreateRhinoDockBar(
+    RUNTIME_CLASS(CSampleRhinoDockbar),
+    PlugInID(),
+    false,
+    AFX_IDW_DOCKBAR_FLOAT,
+    CBRS_ALIGN_ANY,
+    NULL,
+    CBRS_TOOLTIPS | CBRS_SIZE_DYNAMIC | CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_LEFT
+  );
 
   // Extend the Layer panel's context menu
   m_extension_menu = new CSampleLayerContextMenuExtension(*this);

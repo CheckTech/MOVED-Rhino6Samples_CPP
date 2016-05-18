@@ -103,6 +103,15 @@
     <ClCompile Include="SampleObjectPropertiesPageDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cmdSampleDockbar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleRhinoDockbar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleRhinoDockbarDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SampleAnimatorDialog.h">
@@ -169,6 +178,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SampleObjectPropertiesPageDialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleRhinoDockbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleRhinoDockbarDialog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
