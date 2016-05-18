@@ -21,6 +21,9 @@ public:
   BOOL OnDisplayPlugInHelp(HWND hWnd) const;
 
   // Additional overrides
+  CRhinoPlugIn::plugin_load_time PlugInLoadTime();
+  void AddPagesToOptionsDialog(HWND hWnd, ON_SimpleArray<CRhinoOptionsDialogPage*>& pages);
+  void AddPagesToDocumentPropertiesDialog(CRhinoDoc& doc, HWND hWnd, ON_SimpleArray<CRhinoOptionsDialogPage*>& pages);
   void OnInitPlugInMenuPopups(WPARAM wParam, LPARAM lParam);
   BOOL OnPlugInMenuCommand(WPARAM wParam);
 

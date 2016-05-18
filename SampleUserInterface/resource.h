@@ -29,6 +29,8 @@
 #define IDC_CENTER_Z                    10004
 #define IDC_SEP1                        10005
 #define IDC_SEP2                        10006
+#define IDD_OPTIONS_PAGE                12000
+#define IDD_DOCPROPS_PAGE               12001
 #define IDR_SAMPLE_MENU                 13002
 #define IDC_EDIT1                       19000
 #define IDD_MODELESS_DIALOG             19000

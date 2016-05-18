@@ -34,10 +34,12 @@
     <ClCompile Include="SampleBlockWalkDialog.cpp" />
     <ClCompile Include="SampleCirclePreviewDialog.cpp" />
     <ClCompile Include="SampleDialogScrollHelper.cpp" />
+    <ClCompile Include="SampleDocumentPropertiesPage.cpp" />
     <ClCompile Include="SampleLayerContextMenuExtension.cpp" />
     <ClCompile Include="SampleModalDialog.cpp" />
     <ClCompile Include="SampleModelessDialog.cpp" />
     <ClCompile Include="SampleOptionsListCtrlDlg.cpp" />
+    <ClCompile Include="SampleOptionsPage.cpp" />
     <ClCompile Include="SamplePickObjectsDialog.cpp" />
     <ClCompile Include="SampleScrollTabbedDockBarDialog.cpp" />
     <ClCompile Include="SampleTabbedDockBarDialog.cpp" />
@@ -58,10 +60,12 @@
     <ClInclude Include="SampleBlockWalkDialog.h" />
     <ClInclude Include="SampleCirclePreviewDialog.h" />
     <ClInclude Include="SampleDialogScrollHelper.h" />
+    <ClInclude Include="SampleDocumentPropertiesPage.h" />
     <ClInclude Include="SampleLayerContextMenuExtension.h" />
     <ClInclude Include="SampleModalDialog.h" />
     <ClInclude Include="SampleModelessDialog.h" />
     <ClInclude Include="SampleOptionsListCtrlDlg.h" />
+    <ClInclude Include="SampleOptionsPage.h" />
     <ClInclude Include="SamplePickObjectsDialog.h" />
     <ClInclude Include="SampleScrollTabbedDockBarDialog.h" />
     <ClInclude Include="SampleTabbedDockBarDialog.h" />

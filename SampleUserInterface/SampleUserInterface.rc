@@ -226,8 +226,24 @@ IDD_SCROLL_DOCKBAR_DIALOG DIALOGEX 0, 0, 200, 521
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VSCROLL | WS_HSCROLL | WS_SYSMENU
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    PUSHBUTTON      "Click Me!",1002,7,7,175,14
-    PUSHBUTTON      "Click Me Too!",1003,7,490,175,14
+    PUSHBUTTON      "Click Me!",IDC_BUTTON1,7,7,175,14
+    PUSHBUTTON      "Click Me Too!",IDC_BUTTON2,7,490,175,14
+END
+
+IDD_DOCPROPS_PAGE DIALOGEX 0, 0, 261, 260
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Sample Document Properties",IDC_SEP1,6,6,246,8
+    PUSHBUTTON      "Pick me!",IDC_BUTTON1,12,16,50,14
+END
+
+IDD_OPTIONS_PAGE DIALOGEX 0, 0, 261, 260
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Sample Rhino Options",IDC_SEP1,6,6,246,8
+    PUSHBUTTON      "Pick me!",IDC_BUTTON1,12,16,50,14
 END
 
 
@@ -331,6 +347,24 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 504
     END
+
+    IDD_DOCPROPS_PAGE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 260
+        VERTGUIDE, 6
+        VERTGUIDE, 12
+        VERTGUIDE, 252
+        HORZGUIDE, 6
+    END
+
+    IDD_OPTIONS_PAGE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 260
+        VERTGUIDE, 6
+        VERTGUIDE, 12
+        VERTGUIDE, 252
+        HORZGUIDE, 6
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -366,6 +400,22 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "Script Mode",                 ID_SAMPLEMENU_SCRIPTMODE
     END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_OPTIONS_PAGE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DOCPROPS_PAGE AFX_DIALOG_LAYOUT
+BEGIN
+    0
 END
 
 #endif    // English (United States) resources

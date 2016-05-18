@@ -3,6 +3,8 @@
 #include "SampleUserInterfacePlugIn.h"
 #include "SampleTabbedDockBarDialog.h"
 #include "SampleScrollTabbedDockBarDialog.h"
+#include "SampleOptionsPage.h"
+#include "SampleDocumentPropertiesPage.h"
 
 // The plug-in object must be constructed before any plug-in classes derived
 // from CRhinoCommand. The #pragma init_seg(lib) ensures that this happens.
@@ -282,6 +284,32 @@ void CSampleUserInterfacePlugIn::SetDlgPointValue(int item, const ON_3dPoint& pt
 
 /////////////////////////////////////////////////////////////////////////////
 // Additional overrides
+
+CRhinoPlugIn::plugin_load_time CSampleUserInterfacePlugIn::PlugInLoadTime()
+{
+  return CRhinoPlugIn::load_plugin_when_needed_or_optionsdlg;
+}
+
+void CSampleUserInterfacePlugIn::AddPagesToOptionsDialog(HWND hWnd, ON_SimpleArray<CRhinoOptionsDialogPage*>& pages)
+{
+  AFX_MANAGE_STATE(AfxGetStaticModuleState());
+
+  CSampleOptionsPage* pPage = new CSampleOptionsPage(CWnd::FromHandle(hWnd));
+  if (pPage)
+    pages.Append(pPage);
+}
+
+void CSampleUserInterfacePlugIn::AddPagesToDocumentPropertiesDialog(CRhinoDoc& doc, HWND hWnd, ON_SimpleArray<CRhinoOptionsDialogPage*>& pages)
+{
+  AFX_MANAGE_STATE(AfxGetStaticModuleState());
+  
+  UNREFERENCED_PARAMETER(doc);
+
+  CSampleDocumentPropertiesPage* pPage = new CSampleDocumentPropertiesPage(CWnd::FromHandle(hWnd));
+  if (pPage)
+    pages.Append(pPage);
+}
+
 
 void CSampleUserInterfacePlugIn::OnInitPlugInMenuPopups(WPARAM wParam, LPARAM lParam)
 {
