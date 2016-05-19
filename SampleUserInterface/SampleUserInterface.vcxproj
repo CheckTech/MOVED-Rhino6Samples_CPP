@@ -25,6 +25,7 @@
     <ClCompile Include="cmdSampleMenuToggle.cpp" />
     <ClCompile Include="cmdSampleModalDialog.cpp" />
     <ClCompile Include="cmdSampleModelessDialog.cpp" />
+    <ClCompile Include="cmdSampleObjectManager.cpp" />
     <ClCompile Include="cmdSampleOptionsDialog.cpp" />
     <ClCompile Include="cmdSampleScrollTabbedDockBar.cpp" />
     <ClCompile Include="cmdSampleSelectFiles.cpp" />
@@ -39,6 +40,7 @@
     <ClCompile Include="SampleLayerContextMenuExtension.cpp" />
     <ClCompile Include="SampleModalDialog.cpp" />
     <ClCompile Include="SampleModelessDialog.cpp" />
+    <ClCompile Include="SampleObjectManagerDialog.cpp" />
     <ClCompile Include="SampleObjectPropertiesPageDialog.cpp" />
     <ClCompile Include="SampleOptionsListCtrlDlg.cpp" />
     <ClCompile Include="SampleOptionsPage.cpp" />
@@ -68,6 +70,7 @@
     <ClInclude Include="SampleLayerContextMenuExtension.h" />
     <ClInclude Include="SampleModalDialog.h" />
     <ClInclude Include="SampleModelessDialog.h" />
+    <ClInclude Include="SampleObjectManagerDialog.h" />
     <ClInclude Include="SampleObjectPropertiesPageDialog.h" />
     <ClInclude Include="SampleOptionsListCtrlDlg.h" />
     <ClInclude Include="SampleOptionsPage.h" />
@@ -91,6 +94,7 @@
     <ResourceCompile Include="SampleUserInterface.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\SampleObjectManager.ico" />
     <Image Include="res\SampleObjectPropertiesPage.ico" />
     <Image Include="res\SampleScrollTabbedDockBar.ico" />
     <Image Include="res\SampleTabbedDockBar.ico" />

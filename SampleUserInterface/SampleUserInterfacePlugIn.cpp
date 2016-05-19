@@ -7,6 +7,7 @@
 #include "SampleDocumentPropertiesPage.h"
 #include "SampleObjectPropertiesPageDialog.h"
 #include "SampleRhinoDockbar.h"
+#include "SampleObjectManagerDialog.h"
 
 // The plug-in object must be constructed before any plug-in classes derived
 // from CRhinoCommand. The #pragma init_seg(lib) ensures that this happens.
@@ -149,7 +150,10 @@ BOOL CSampleUserInterfacePlugIn::OnLoadPlugIn()
   // Register scroll tabbed dockbar
   CSampleScrollTabbedDockBarDialog::Register(RUNTIME_CLASS(CSampleScrollTabbedDockBarDialog), CSampleScrollTabbedDockBarDialog::IDD, AfxGetStaticModuleState());
 
-  // Ask Rhino's DockBarManager to create our dockbar
+  // Register object manager panel
+  CSampleObjectManagerDialog::CRhinoTabbedDockBarDialog::Register(RUNTIME_CLASS(CSampleObjectManagerDialog), CSampleObjectManagerDialog::IDD, AfxGetStaticModuleState() );
+
+  // Create our old-school dockbar
   RhinoUiDockBarManager().CreateRhinoDockBar(
     RUNTIME_CLASS(CSampleRhinoDockbar),
     PlugInID(),
