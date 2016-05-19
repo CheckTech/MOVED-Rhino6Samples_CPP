@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleLocalization", "Sampl
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleUserInterface", "SampleUserInterface\SampleUserInterface.vcxproj", "{0FD7F8DB-DCE7-4273-9858-B90DF4FF40EF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleCustomUndo", "SampleCustomUndo\SampleCustomUndo.vcxproj", "{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -165,6 +167,19 @@ Global
 		{0FD7F8DB-DCE7-4273-9858-B90DF4FF40EF}.Release|x64.ActiveCfg = Release|x64
 		{0FD7F8DB-DCE7-4273-9858-B90DF4FF40EF}.Release|x64.Build.0 = Release|x64
 		{0FD7F8DB-DCE7-4273-9858-B90DF4FF40EF}.Release|x86.ActiveCfg = Release|x64
+		{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}.Debug|x64.ActiveCfg = Debug|x64
+		{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}.Debug|x64.Build.0 = Debug|x64
+		{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}.Debug|x86.ActiveCfg = Debug|x64
+		{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}.DebugRhino|x64.ActiveCfg = DebugRhino|x64
+		{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}.DebugRhino|x64.Build.0 = DebugRhino|x64
+		{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}.DebugRhino|x86.ActiveCfg = DebugRhino|x64
+		{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}.PseudoDebug|x64.ActiveCfg = Debug|x64
+		{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}.PseudoDebug|x64.Build.0 = Debug|x64
+		{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}.PseudoDebug|x86.ActiveCfg = Release|x64
+		{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}.PseudoDebug|x86.Build.0 = Release|x64
+		{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}.Release|x64.ActiveCfg = Release|x64
+		{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}.Release|x64.Build.0 = Release|x64
+		{1A7AD606-4B4C-495D-9489-A0EC2792B8EB}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
