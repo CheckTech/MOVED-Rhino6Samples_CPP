@@ -133,6 +133,7 @@
     <ClCompile Include="cmdSampleNewFloatingViewport.cpp" />
     <ClCompile Include="cmdSampleNurbsCircle.cpp" />
     <ClCompile Include="cmdSampleObjectCursor.cpp" />
+    <ClCompile Include="cmdSampleObjectEventWatcher.cpp" />
     <ClCompile Include="cmdSampleObjectUserData.cpp" />
     <ClCompile Include="cmdSampleOffsetCurve.cpp" />
     <ClCompile Include="cmdSampleOpenIges.cpp" />

@@ -150,7 +150,7 @@ BOOL CSampleUserInterfacePlugIn::OnLoadPlugIn()
   CSampleScrollTabbedDockBarDialog::Register(RUNTIME_CLASS(CSampleScrollTabbedDockBarDialog), CSampleScrollTabbedDockBarDialog::IDD, AfxGetStaticModuleState());
 
   // Ask Rhino's DockBarManager to create our dockbar
-  CRhinoUiDockBar* pDockbar = RhinoUiDockBarManager().CreateRhinoDockBar(
+  RhinoUiDockBarManager().CreateRhinoDockBar(
     RUNTIME_CLASS(CSampleRhinoDockbar),
     PlugInID(),
     false,
