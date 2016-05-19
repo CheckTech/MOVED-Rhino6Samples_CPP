@@ -27,6 +27,7 @@
     <ClCompile Include="cmdSampleModelessDialog.cpp" />
     <ClCompile Include="cmdSampleObjectManager.cpp" />
     <ClCompile Include="cmdSampleOptionsDialog.cpp" />
+    <ClCompile Include="cmdSampleOptionsListCtrl.cpp" />
     <ClCompile Include="cmdSampleScrollTabbedDockBar.cpp" />
     <ClCompile Include="cmdSampleSelectFiles.cpp" />
     <ClCompile Include="cmdSampleTabbedDockBar.cpp" />
@@ -43,6 +44,7 @@
     <ClCompile Include="SampleObjectManagerDialog.cpp" />
     <ClCompile Include="SampleObjectPropertiesPageDialog.cpp" />
     <ClCompile Include="SampleOptionsListCtrlDlg.cpp" />
+    <ClCompile Include="SampleOptionsListCtrlPageDialog.cpp" />
     <ClCompile Include="SampleOptionsPage.cpp" />
     <ClCompile Include="SamplePickObjectsDialog.cpp" />
     <ClCompile Include="SampleRhinoDockbar.cpp" />
@@ -73,6 +75,7 @@
     <ClInclude Include="SampleObjectManagerDialog.h" />
     <ClInclude Include="SampleObjectPropertiesPageDialog.h" />
     <ClInclude Include="SampleOptionsListCtrlDlg.h" />
+    <ClInclude Include="SampleOptionsListCtrlPageDialog.h" />
     <ClInclude Include="SampleOptionsPage.h" />
     <ClInclude Include="SamplePickObjectsDialog.h" />
     <ClInclude Include="SampleRhinoDockbar.h" />
@@ -96,6 +99,7 @@
   <ItemGroup>
     <Image Include="res\SampleObjectManager.ico" />
     <Image Include="res\SampleObjectPropertiesPage.ico" />
+    <Image Include="res\SampleOptionsListCtrl.ico" />
     <Image Include="res\SampleScrollTabbedDockBar.ico" />
     <Image Include="res\SampleTabbedDockBar.ico" />
   </ItemGroup>

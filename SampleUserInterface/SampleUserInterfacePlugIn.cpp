@@ -8,6 +8,7 @@
 #include "SampleObjectPropertiesPageDialog.h"
 #include "SampleRhinoDockbar.h"
 #include "SampleObjectManagerDialog.h"
+#include "SampleOptionsListCtrlPageDialog.h"
 
 // The plug-in object must be constructed before any plug-in classes derived
 // from CRhinoCommand. The #pragma init_seg(lib) ensures that this happens.
@@ -151,7 +152,11 @@ BOOL CSampleUserInterfacePlugIn::OnLoadPlugIn()
   CSampleScrollTabbedDockBarDialog::Register(RUNTIME_CLASS(CSampleScrollTabbedDockBarDialog), CSampleScrollTabbedDockBarDialog::IDD, AfxGetStaticModuleState());
 
   // Register object manager panel
-  CSampleObjectManagerDialog::CRhinoTabbedDockBarDialog::Register(RUNTIME_CLASS(CSampleObjectManagerDialog), CSampleObjectManagerDialog::IDD, AfxGetStaticModuleState() );
+  CSampleObjectManagerDialog::CRhinoTabbedDockBarDialog::Register(RUNTIME_CLASS(CSampleObjectManagerDialog), CSampleObjectManagerDialog::IDD, AfxGetStaticModuleState());
+
+  // Register list control panel
+  CSampleOptionsListCtrlPageDialog::Register(RUNTIME_CLASS(CSampleOptionsListCtrlPageDialog), CSampleOptionsListCtrlPageDialog::IDD, AfxGetStaticModuleState());
+
 
   // Create our old-school dockbar
   RhinoUiDockBarManager().CreateRhinoDockBar(
@@ -171,7 +176,7 @@ BOOL CSampleUserInterfacePlugIn::OnLoadPlugIn()
   // Note, the proper way of doing this today is to embed a menu
   // in a custom RUI using the toolbar workspace editor.
   ShowSampleMenu();
-  
+
   return CRhinoUtilityPlugIn::OnLoadPlugIn();
 }
 
@@ -319,7 +324,7 @@ void CSampleUserInterfacePlugIn::AddPagesToOptionsDialog(HWND hWnd, ON_SimpleArr
 void CSampleUserInterfacePlugIn::AddPagesToDocumentPropertiesDialog(CRhinoDoc& doc, HWND hWnd, ON_SimpleArray<class CRhinoOptionsDialogPage*>& pages)
 {
   AFX_MANAGE_STATE(AfxGetStaticModuleState());
-  
+
   UNREFERENCED_PARAMETER(doc);
 
   CSampleDocumentPropertiesPage* pPage = new CSampleDocumentPropertiesPage(CWnd::FromHandle(hWnd));

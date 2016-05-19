@@ -271,6 +271,12 @@ BEGIN
     LTEXT           "0 objects selected",IDC_LABEL,7,7,172,8
 END
 
+IDD_LISTCTRL_DIALOG DIALOGEX 0, 0, 221, 170
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -414,6 +420,14 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 226
     END
+
+    IDD_LISTCTRL_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 214
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 163
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -432,6 +446,8 @@ IDI_SCROLL_DOCKBAR_ICON ICON                    "res\\SampleScrollTabbedDockBar.
 IDI_OBJPROPS_ICON       ICON                    "res\\SampleObjectPropertiesPage.ico"
 
 IDI_OBJECT_MANAGER_ICON ICON                    "res\\SampleObjectManager.ico"
+
+IDI_LISTCTRL_ICON       ICON                    "res\\SampleOptionsListCtrl.ico"
 
 
 /////////////////////////////////////////////////////////////////////////////
