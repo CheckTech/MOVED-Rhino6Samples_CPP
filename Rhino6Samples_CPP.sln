@@ -32,6 +32,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleAutomationClient", "S
 		{EC5823AC-9513-4D9A-8181-D65744423FE4} = {EC5823AC-9513-4D9A-8181-D65744423FE4}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleSharedUserData1", "SampleSharedUserData1\SampleSharedUserData1.vcxproj", "{8E416487-0251-4D48-84F0-C3876B2FFCAD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{995DF447-BC77-4EED-A8D4-FF43433F8D1E} = {995DF447-BC77-4EED-A8D4-FF43433F8D1E}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleSharedUserData2", "SampleSharedUserData2\SampleSharedUserData2.vcxproj", "{EB107F20-8EA3-407E-987A-55CD1DCEECD2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{995DF447-BC77-4EED-A8D4-FF43433F8D1E} = {995DF447-BC77-4EED-A8D4-FF43433F8D1E}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleSharedUserDataCoreLib", "SampleSharedUserDataCoreLib\SampleSharedUserDataCoreLib.vcxproj", "{995DF447-BC77-4EED-A8D4-FF43433F8D1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -117,6 +129,24 @@ Global
 		{BD73956A-3999-4DBC-9218-F92E37E4FC12}.DebugRhino|x64.Build.0 = DebugRhino|x64
 		{BD73956A-3999-4DBC-9218-F92E37E4FC12}.Release|x64.ActiveCfg = Release|x64
 		{BD73956A-3999-4DBC-9218-F92E37E4FC12}.Release|x64.Build.0 = Release|x64
+		{8E416487-0251-4D48-84F0-C3876B2FFCAD}.Debug|x64.ActiveCfg = Debug|x64
+		{8E416487-0251-4D48-84F0-C3876B2FFCAD}.Debug|x64.Build.0 = Debug|x64
+		{8E416487-0251-4D48-84F0-C3876B2FFCAD}.DebugRhino|x64.ActiveCfg = DebugRhino|x64
+		{8E416487-0251-4D48-84F0-C3876B2FFCAD}.DebugRhino|x64.Build.0 = DebugRhino|x64
+		{8E416487-0251-4D48-84F0-C3876B2FFCAD}.Release|x64.ActiveCfg = Release|x64
+		{8E416487-0251-4D48-84F0-C3876B2FFCAD}.Release|x64.Build.0 = Release|x64
+		{EB107F20-8EA3-407E-987A-55CD1DCEECD2}.Debug|x64.ActiveCfg = Debug|x64
+		{EB107F20-8EA3-407E-987A-55CD1DCEECD2}.Debug|x64.Build.0 = Debug|x64
+		{EB107F20-8EA3-407E-987A-55CD1DCEECD2}.DebugRhino|x64.ActiveCfg = DebugRhino|x64
+		{EB107F20-8EA3-407E-987A-55CD1DCEECD2}.DebugRhino|x64.Build.0 = DebugRhino|x64
+		{EB107F20-8EA3-407E-987A-55CD1DCEECD2}.Release|x64.ActiveCfg = Release|x64
+		{EB107F20-8EA3-407E-987A-55CD1DCEECD2}.Release|x64.Build.0 = Release|x64
+		{995DF447-BC77-4EED-A8D4-FF43433F8D1E}.Debug|x64.ActiveCfg = Debug|x64
+		{995DF447-BC77-4EED-A8D4-FF43433F8D1E}.Debug|x64.Build.0 = Debug|x64
+		{995DF447-BC77-4EED-A8D4-FF43433F8D1E}.DebugRhino|x64.ActiveCfg = DebugRhino|x64
+		{995DF447-BC77-4EED-A8D4-FF43433F8D1E}.DebugRhino|x64.Build.0 = DebugRhino|x64
+		{995DF447-BC77-4EED-A8D4-FF43433F8D1E}.Release|x64.ActiveCfg = Release|x64
+		{995DF447-BC77-4EED-A8D4-FF43433F8D1E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
