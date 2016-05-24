@@ -51,6 +51,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleSkinHandler", "Sample
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleSkin", "SampleSkin\SampleSkin.vcxproj", "{B0312430-A5D6-4C50-92B8-B05E0656FEA4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleSpaceGizmo", "SampleSpaceGizmo\SampleSpaceGizmo.vcxproj", "{77575B79-42FD-4456-9933-81784BD9A4A6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB} = {8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleSpaceBallLib", "SampleSpaceBallLib\SampleSpaceBallLib.vcxproj", "{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -297,6 +304,32 @@ Global
 		{B0312430-A5D6-4C50-92B8-B05E0656FEA4}.Release|x64.ActiveCfg = Release|x64
 		{B0312430-A5D6-4C50-92B8-B05E0656FEA4}.Release|x64.Build.0 = Release|x64
 		{B0312430-A5D6-4C50-92B8-B05E0656FEA4}.Release|x86.ActiveCfg = Release|x64
+		{77575B79-42FD-4456-9933-81784BD9A4A6}.Debug|x64.ActiveCfg = Debug|x64
+		{77575B79-42FD-4456-9933-81784BD9A4A6}.Debug|x64.Build.0 = Debug|x64
+		{77575B79-42FD-4456-9933-81784BD9A4A6}.Debug|x86.ActiveCfg = Debug|x64
+		{77575B79-42FD-4456-9933-81784BD9A4A6}.DebugRhino|x64.ActiveCfg = DebugRhino|x64
+		{77575B79-42FD-4456-9933-81784BD9A4A6}.DebugRhino|x64.Build.0 = DebugRhino|x64
+		{77575B79-42FD-4456-9933-81784BD9A4A6}.DebugRhino|x86.ActiveCfg = DebugRhino|x64
+		{77575B79-42FD-4456-9933-81784BD9A4A6}.PseudoDebug|x64.ActiveCfg = Debug|x64
+		{77575B79-42FD-4456-9933-81784BD9A4A6}.PseudoDebug|x64.Build.0 = Debug|x64
+		{77575B79-42FD-4456-9933-81784BD9A4A6}.PseudoDebug|x86.ActiveCfg = Release|x64
+		{77575B79-42FD-4456-9933-81784BD9A4A6}.PseudoDebug|x86.Build.0 = Release|x64
+		{77575B79-42FD-4456-9933-81784BD9A4A6}.Release|x64.ActiveCfg = Release|x64
+		{77575B79-42FD-4456-9933-81784BD9A4A6}.Release|x64.Build.0 = Release|x64
+		{77575B79-42FD-4456-9933-81784BD9A4A6}.Release|x86.ActiveCfg = Release|x64
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}.Debug|x64.ActiveCfg = Debug|x64
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}.Debug|x64.Build.0 = Debug|x64
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}.Debug|x86.ActiveCfg = Debug|x64
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}.DebugRhino|x64.ActiveCfg = DebugRhino|x64
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}.DebugRhino|x64.Build.0 = DebugRhino|x64
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}.DebugRhino|x86.ActiveCfg = DebugRhino|x64
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}.PseudoDebug|x64.ActiveCfg = Debug|x64
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}.PseudoDebug|x64.Build.0 = Debug|x64
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}.PseudoDebug|x86.ActiveCfg = DebugRhino|x64
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}.PseudoDebug|x86.Build.0 = DebugRhino|x64
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}.Release|x64.ActiveCfg = Release|x64
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}.Release|x64.Build.0 = Release|x64
+		{8C7A0630-6197-48C8-9D13-21CAEDA0A9FB}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
