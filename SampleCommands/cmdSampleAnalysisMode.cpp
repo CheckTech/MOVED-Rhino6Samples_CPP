@@ -258,7 +258,7 @@ CRhinoCommand::result CCommandZAnalysisOn::RunCommand(const CRhinoCommandContext
   if (CRhinoCommand::success != go.CommandResult())
     return go.CommandResult();
 
-  ON_MeshParameters mp = context.m_doc.Properties().MeshParameters(ON_MeshParameters::render_mesh_quality);
+  ON_MeshParameters mp = context.m_doc.Properties().MeshParameters(ON_MeshParameters::MESH_STYLE::render_mesh_quality);
   context.m_doc.Properties().SetAnalysisMeshSettings(mp);
 
   int count = 0;

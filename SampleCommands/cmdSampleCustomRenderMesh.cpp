@@ -30,7 +30,7 @@ static class CCommandSampleCustomRenderMesh theSampleCustomRenderMeshCommand;
 
 CRhinoCommand::result CCommandSampleCustomRenderMesh::RunCommand(const CRhinoCommandContext& context)
 {
-  ON_MeshParameters mp = context.m_doc.Properties().MeshParameters(ON_MeshParameters::render_mesh_custom);
+  ON_MeshParameters mp = context.m_doc.Properties().MeshParameters(ON_MeshParameters::MESH_STYLE::render_mesh_custom);
   double relative_tolerance = mp.m_relative_tolerance;
 
   CRhinoGetNumber gn;
@@ -56,7 +56,7 @@ CRhinoCommand::result CCommandSampleCustomRenderMesh::RunCommand(const CRhinoCom
   }
 
   context.m_doc.Properties().SetCustomRenderMeshParameters(mp);
-  context.m_doc.Properties().SetRenderMeshStyle(ON_MeshParameters::render_mesh_custom);
+  context.m_doc.Properties().SetRenderMeshStyle(ON_MeshParameters::MESH_STYLE::render_mesh_custom);
   context.m_doc.Regen();
 
   return CRhinoCommand::success;
