@@ -31,6 +31,7 @@
     <ClCompile Include="cmdSampleBooleanDifference.cpp" />
     <ClCompile Include="cmdSampleBooleanUnion.cpp" />
     <ClCompile Include="cmdSampleBoundingBox.cpp" />
+    <ClCompile Include="cmdSampleBoundingBoxAll.cpp" />
     <ClCompile Include="cmdSampleBrepBoxWithMesh.cpp" />
     <ClCompile Include="cmdSampleBrepFaceUserData.cpp" />
     <ClCompile Include="cmdSampleCageEdit.cpp" />
@@ -90,6 +91,7 @@
     <ClCompile Include="cmdSampleExtrusionBox.cpp" />
     <ClCompile Include="cmdSampleFaceWithHole.cpp" />
     <ClCompile Include="cmdSampleFalseColor.cpp" />
+    <ClCompile Include="cmdSampleFindCrvOnSrf.cpp" />
     <ClCompile Include="cmdSampleFindCrvsOnSrf.cpp" />
     <ClCompile Include="cmdSampleGetFaceTriangles.cpp" />
     <ClCompile Include="cmdSampleGetPointOnMesh.cpp" />
@@ -99,6 +101,7 @@
     <ClCompile Include="cmdSampleGumball.cpp" />
     <ClCompile Include="cmdSampleHatch.cpp" />
     <ClCompile Include="cmdSampleHelloRhino.cpp" />
+    <ClCompile Include="cmdSampleHideObjectsOnLayer.cpp" />
     <ClCompile Include="cmdSampleHightlightCurve.cpp" />
     <ClCompile Include="cmdSampleHistory.cpp" />
     <ClCompile Include="cmdSampleHistoryDivide.cpp" />
@@ -121,6 +124,7 @@
     <ClCompile Include="cmdSampleMeshBoundary.cpp" />
     <ClCompile Include="cmdSampleMeshDir.cpp" />
     <ClCompile Include="cmdSampleMeshFaceColor.cpp" />
+    <ClCompile Include="cmdSampleMeshFacePicker.cpp" />
     <ClCompile Include="cmdSampleMeshLine.cpp" />
     <ClCompile Include="cmdSampleMeshOutline.cpp" />
     <ClCompile Include="cmdSampleMeshPolysrf.cpp" />
@@ -128,11 +132,13 @@
     <ClCompile Include="cmdSampleMeshVolume.cpp" />
     <ClCompile Include="cmdSampleMirror.cpp" />
     <ClCompile Include="cmdSampleModifyBumpIntensity.cpp" />
+    <ClCompile Include="cmdSampleMouseCallback.cpp" />
     <ClCompile Include="cmdSampleMove.cpp" />
     <ClCompile Include="cmdSampleMoveCPlane.cpp" />
     <ClCompile Include="cmdSampleMoveGrips.cpp" />
     <ClCompile Include="cmdSampleNewFloatingViewport.cpp" />
     <ClCompile Include="cmdSampleNurbsCircle.cpp" />
+    <ClCompile Include="cmdSampleNurbsCurveLength.cpp" />
     <ClCompile Include="cmdSampleObjectCursor.cpp" />
     <ClCompile Include="cmdSampleObjectEventWatcher.cpp" />
     <ClCompile Include="cmdSampleObjectUserData.cpp" />
@@ -158,10 +164,13 @@
     <ClCompile Include="cmdSamplePrintGripLocations.cpp" />
     <ClCompile Include="cmdSamplePrintMaterialTextures.cpp" />
     <ClCompile Include="cmdSamplePtFromCrvStart.cpp" />
+    <ClCompile Include="cmdSamplePullCurveToMesh.cpp" />
     <ClCompile Include="cmdSamplePurgeGroups.cpp" />
     <ClCompile Include="cmdSampleQueryDiameterDimension.cpp" />
     <ClCompile Include="cmdSampleRayShooter.cpp" />
     <ClCompile Include="cmdSampleReduceMesh.cpp" />
+    <ClCompile Include="cmdSampleResetLayers.cpp" />
+    <ClCompile Include="cmdSampleRotate.cpp" />
     <ClCompile Include="cmdSampleRotateCenter.cpp" />
     <ClCompile Include="cmdSampleRotateView.cpp" />
     <ClCompile Include="cmdSampleSave3DS.cpp" />
