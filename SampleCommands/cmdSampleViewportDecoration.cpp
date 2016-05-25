@@ -34,11 +34,11 @@ void CSampleViewportDecorationEventWatcher::SetActiveView(CRhinoView* active_vie
 void CSampleViewportDecorationEventWatcher::OnSetActiveView(CRhinoView* new_active_view)
 {
   // Regenerate the old active view (to remove decoration)
-  if (m_old_active_view)
+  if (0 != m_old_active_view)
     m_old_active_view->Redraw(CRhinoView::regenerate_display_hint);
 
   // Regenerate the new active view (to draw decoration)
-  if (new_active_view)
+  if (0 != new_active_view)
     new_active_view->Redraw(CRhinoView::regenerate_display_hint);
 
   m_old_active_view = new_active_view;
@@ -47,26 +47,53 @@ void CSampleViewportDecorationEventWatcher::OnSetActiveView(CRhinoView* new_acti
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 
+// Font enumeration callback
+int CALLBACK EnumFontFamiliesExCallback(ENUMLOGFONTEX *lpelfe, NEWTEXTMETRICEX *lpntme, int FontType, LPARAM lParam)
+{
+  UNREFERENCED_PARAMETER(lpntme);
+  UNREFERENCED_PARAMETER(FontType);
+
+  if (0 != lpelfe && 0 != lParam)
+  {
+    ON_wString str(lpelfe->elfFullName);
+    ON_ClassArray<ON_wString>* pFontFaces = (ON_ClassArray<ON_wString>*)lParam;
+    pFontFaces->Append(str);
+  }
+  return 1;
+}
+
 class CSampleViewportDecorationConduit : public CRhinoDisplayConduit
 {
 public:
   CSampleViewportDecorationConduit();
   ~CSampleViewportDecorationConduit() {}
-  bool ExecConduit(
-    CRhinoDisplayPipeline& dp, // pipeline executing this conduit
-    UINT nChannelID,           // current channel within the pipeline
-    bool& bTerminationFlag     // channel termination flag
-  );
+
+  // CRhinoDisplayConduit override
+  bool ExecConduit(CRhinoDisplayPipeline& dp, UINT nChannelID, bool& bTerminate);
+
+private:
+  const wchar_t* m_default_font_face;
+  ON_ClassArray<ON_wString> m_font_faces;
 };
 
 CSampleViewportDecorationConduit::CSampleViewportDecorationConduit()
   : CRhinoDisplayConduit(CSupportChannels::SC_DRAWFOREGROUND)
+  , m_default_font_face(L"Arial")
 {
+  // Find some font faces to draw with
+  LOGFONT lf;
+  memset(&lf, 0, sizeof(lf));
+  wcscpy_s(lf.lfFaceName, LF_FACESIZE, m_default_font_face);
+  lf.lfCharSet = ANSI_CHARSET;
+
+  HDC hDC = ::GetDC(0);
+  EnumFontFamiliesEx(hDC, &lf, (FONTENUMPROC)EnumFontFamiliesExCallback, (LPARAM)&m_font_faces, 0);
+  ReleaseDC(0, hDC);
 }
 
-bool CSampleViewportDecorationConduit::ExecConduit(CRhinoDisplayPipeline& dp, UINT nChannelID, bool& bTerminationFlag)
+bool CSampleViewportDecorationConduit::ExecConduit(CRhinoDisplayPipeline& dp, UINT nChannelID, bool& bTerminate)
 {
-  UNREFERENCED_PARAMETER(bTerminationFlag);
+  UNREFERENCED_PARAMETER(bTerminate);
 
   // Get the active view
   CRhinoView* view = RhinoApp().ActiveView();
@@ -74,40 +101,47 @@ bool CSampleViewportDecorationConduit::ExecConduit(CRhinoDisplayPipeline& dp, UI
     return true;
 
   // Get the viewport that we are currently drawing in
-  const CRhinoViewport* vp = dp.GetRhinoVP();
-  if (0 == vp)
-    return true;
-
-  // Compare ids
-  if (view->ActiveViewportID() != vp->ViewportId())
+  CRhinoViewport* vp = dp.GetRhinoVP();
+  if (nullptr == vp || view->ActiveViewportID() != vp->ViewportId())
     return true;
 
   if (nChannelID == CSupportChannels::SC_DRAWFOREGROUND)
   {
+    // String to draw
+    const wchar_t* str = L"Hello Rhino!";
+    const ON_Color color(0, 0, 0);
+
+    // Determine rect of text string
+    const bool bMiddle = false;
+    const int height = 12;
+    CRect rect;
+    dp.MeasureString(rect, str, ON_2dPoint(0, 0), bMiddle, height, m_default_font_face);
+
     // Use the screen port to determine text location
     int vp_left, vp_right, vp_top, vp_bottom;
     vp->VP().GetScreenPort(&vp_left, &vp_right, &vp_bottom, &vp_top);
     int vp_width = vp_right - vp_left;
     int vp_height = vp_bottom - vp_top;
 
-    // Determine rect of text string
-    const int height = 12;
-    const wchar_t* font = L"Arial";
-
-    ON_wString str(L"Hello Rhino!");
-    CRect rect;
-    CRhinoDisplayPipeline::MeasureString(rect, str, ON_2dPoint(0, 0), false, height, font);
-
     // Make sure text will fit on string
-    const int x_gap = 4;
-    const int y_gap = 4;
+    const int x_gap = 6;
+    const int y_gap = 6;
     if (rect.Width() + (2 * x_gap) < vp_width || rect.Height() + (2 * y_gap) < vp_height)
     {
       // Cook up text location (lower right corner of viewport)
       ON_2dPoint point(vp_right - rect.Width() - x_gap, vp_bottom - y_gap);
 
       // Draw text
-      dp.DrawString(str, RGB(255, 255, 255), point, false, height, font);
+      if (0 == m_font_faces.Count())
+        dp.DrawString(str, color, point, bMiddle, height, m_default_font_face);
+      else
+      {
+        for (int i = 0; i < m_font_faces.Count(); i++)
+        {
+          dp.DrawString(str, color, point, bMiddle, height, m_font_faces[i]);
+          point.y -= 20.0;
+        }
+      }
     }
   }
 
@@ -175,7 +209,7 @@ CRhinoCommand::result CCommandSampleViewportDecoration::RunCommand(const CRhinoC
       {
         m_watcher.SetActiveView(view);
         m_watcher.Enable(TRUE);
-        m_conduit.Enable(context.m_doc.RuntimeSerialNumber());
+        m_conduit.Enable();
       }
       else
       {
