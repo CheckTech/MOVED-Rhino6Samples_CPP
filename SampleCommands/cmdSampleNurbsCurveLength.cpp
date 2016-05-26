@@ -30,6 +30,8 @@ static class CCommandSampleNurbsCurveLength theSampleNurbsCurveLengthCommand;
 
 CRhinoCommand::result CCommandSampleNurbsCurveLength::RunCommand(const CRhinoCommandContext& context)
 {
+  UNREFERENCED_PARAMETER(context);
+
   ON_3dPointArray points;
   points.Append(ON_3dPoint(0.0, 0.0, 0.0));
   points.Append(ON_3dPoint(5.0, 0.0, 0.0));
