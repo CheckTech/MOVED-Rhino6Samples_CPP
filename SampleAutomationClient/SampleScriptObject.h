@@ -1,6 +1,6 @@
 // Machine generated IDispatch wrapper class(es) created with Add Class from Typelib Wizard
 
-#import "D:\\dev\\github\\mcneel\\Rhino6Samples_CPP\\SampleAutomation\\x64\\Debug\\SampleAutomation.tlb" no_namespace
+#import "C:\\dev\\github\\mcneel\\Rhino6Samples_CPP\\SampleAutomation\\x64\\Debug\\SampleAutomation.tlb" no_namespace
 // CSampleScriptObject wrapper class
 
 class CSampleScriptObject : public COleDispatchDriver
