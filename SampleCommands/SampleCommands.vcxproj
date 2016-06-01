@@ -107,6 +107,7 @@
     <ClCompile Include="cmdSampleHistory.cpp" />
     <ClCompile Include="cmdSampleHistoryDivide.cpp" />
     <ClCompile Include="cmdSampleIdleProcessor.cpp" />
+    <ClCompile Include="cmdSampleImportEarthAnchor.cpp" />
     <ClCompile Include="cmdSampleInsert.cpp" />
     <ClCompile Include="cmdSampleIntepCrvOnSrf.cpp" />
     <ClCompile Include="cmdSampleInterpCurve.cpp" />
