@@ -77,6 +77,7 @@
     <ClCompile Include="cmdSampleElevation.cpp" />
     <ClCompile Include="cmdSampleEnableAllClippingPlanes.cpp" />
     <ClCompile Include="cmdSampleEnumFonts.cpp" />
+    <ClCompile Include="cmdSampleEscapeKey.cpp" />
     <ClCompile Include="cmdSampleEvaluateCurve.cpp" />
     <ClCompile Include="cmdSampleExplodeBrep.cpp" />
     <ClCompile Include="cmdSampleExplodePointCloud.cpp" />
