@@ -58,6 +58,7 @@
     <ClCompile Include="cmdSampleDimLinear.cpp" />
     <ClCompile Include="cmdSampleDimLinear2.cpp" />
     <ClCompile Include="cmdSampleDimLinearOverride.cpp" />
+    <ClCompile Include="cmdSampleDimRadius.cpp" />
     <ClCompile Include="cmdSampleDimStyleTextHeight.cpp" />
     <ClCompile Include="cmdSampleDimTextHeight.cpp" />
     <ClCompile Include="cmdSampleDisableAllClippingPlanes.cpp" />
