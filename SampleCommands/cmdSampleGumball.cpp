@@ -15,7 +15,7 @@ public:
 
   void OnMouseDown(CRhinoViewport& vp, UINT flags, const ON_3dPoint& pt, const CPoint* p);
   void OnMouseMove(CRhinoViewport& vp, UINT flags, const ON_3dPoint& pt, const CPoint* p);
-  void DynamicDraw(HDC hdc, CRhinoViewport& vp, const ON_3dPoint& pt);
+  void DynamicDraw(CRhinoDisplayPipeline& dp, const ON_3dPoint& pt);
 
   BOOL CalculateTransform(CRhinoViewport& vp, const ON_3dPoint& pt, ON_Xform& xform);
 
@@ -81,7 +81,7 @@ void CSampleGumballGetXform::OnMouseMove(CRhinoViewport& vp, UINT flags, const O
     CRhinoGetXform::OnMouseMove(vp, flags, pt, p);
 }
 
-void CSampleGumballGetXform::DynamicDraw(HDC, CRhinoViewport&, const ON_3dPoint&)
+void CSampleGumballGetXform::DynamicDraw(CRhinoDisplayPipeline&, const ON_3dPoint&)
 {
   // Disable default drawing by not calling the base class implementation.
   // All aspects of gumball display are handled by CRhinoGumballDisplayConduit

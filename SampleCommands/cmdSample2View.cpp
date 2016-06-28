@@ -11,16 +11,16 @@ class CCommandSample2View : public CRhinoCommand
 public:
   CCommandSample2View() {}
   ~CCommandSample2View() {}
-  UUID CommandUUID()
+  UUID CommandUUID() override
   {
     // {541D4662-584-47FC-817D-CE1439767139}
     static const GUID Sample2ViewCommand_UUID =
     { 0x541D4662, 0x584, 0x47FC, { 0x81, 0x7D, 0xCE, 0x14, 0x39, 0x76, 0x71, 0x39 } };
     return Sample2ViewCommand_UUID;
   }
-  const wchar_t* EnglishCommandName() { return L"Sample2View"; }
+  const wchar_t* EnglishCommandName() override { return L"Sample2View"; }
   const wchar_t* LocalCommandName() { return L"Sample2View"; }
-  CRhinoCommand::result RunCommand(const CRhinoCommandContext&);
+  CRhinoCommand::result RunCommand(const CRhinoCommandContext&) override;
 };
 
 // The one and only CCommandSample2View object
