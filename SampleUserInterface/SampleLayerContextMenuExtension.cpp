@@ -34,9 +34,23 @@ void CSampleLayerContextMenuExtension::ExtendContextMenu(CRhinoContextMenuContex
 
 void CSampleLayerContextMenuExtension::OnCommand(CRhinoContextMenuContext& context, int iAddItemID, UINT nID, CRhinoContextMenu& context_menu)
 {
-  UNREFERENCED_PARAMETER(context);
   UNREFERENCED_PARAMETER(nID);
   UNREFERENCED_PARAMETER(context_menu);
+
+  if (nullptr != context.m_doc)
+  {
+    // Get selected layers...
+    for (int i = 0; i < context.m_uuids.Count(); i++)
+    {
+      int layer_index = context.m_doc->m_layer_table.FindLayerFromId(context.m_uuids[i], true, false, -1);
+      if (layer_index >= 0 && layer_index < context.m_doc->m_layer_table.LayerCount())
+      {
+        ON_wString layer_path_name;
+        context.m_doc->m_layer_table.GetLayerPathName(layer_index, layer_path_name);
+        RhinoApp().Print(L"%s\n", (const wchar_t*)layer_path_name);
+      }
+    }
+  }
 
   if (iAddItemID == m_iAddItemID0)
     RhinoApp().Print(L"Sample Context Menu Item 1 selected.\n");
