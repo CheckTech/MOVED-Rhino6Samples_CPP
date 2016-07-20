@@ -470,3 +470,13 @@ BOOL CSampleUserInterfacePlugIn::HideSampleMenu()
 
   return FALSE;
 }
+
+bool CSampleUserInterfacePlugIn::ScriptMode() const
+{
+  return m_bScriptMode;
+}
+
+void CSampleUserInterfacePlugIn::SetScriptMode(bool bSet)
+{
+  m_bScriptMode = bSet;
+}

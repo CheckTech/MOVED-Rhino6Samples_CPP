@@ -12,7 +12,5 @@ public:
   void OnInitPopupMenu(CRhinoContextMenuContext& context, HWND hWnd, HMENU hMenuOriginal, HMENU hMenuRuntime, CRhinoContextMenu& context_menu);
 
 private:
-  int m_iAddItemID0;
-  int m_iAddItemID1;
-  int m_iAddItemID2;
+  CMenu m_menu;
 };

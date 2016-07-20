@@ -28,6 +28,9 @@ public:
   void OnInitPlugInMenuPopups(WPARAM wParam, LPARAM lParam);
   BOOL OnPlugInMenuCommand(WPARAM wParam);
 
+  bool ScriptMode() const;
+  void SetScriptMode(bool bSet);
+
   // Modeless dialog helpers
   bool IsDlgCreated();
   bool IsDlgVisible();

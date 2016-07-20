@@ -1,10 +1,11 @@
 #include "stdafx.h"
 #include "SampleLayerContextMenuExtension.h"
+#include "SampleUserInterfacePlugIn.h"
+#include "resource.h"
 
 CSampleLayerContextMenuExtension::CSampleLayerContextMenuExtension(CRhinoPlugIn& thePlugIn)
   : CRhinoContextMenuExtension(thePlugIn, *(thePlugIn.PlugInModuleState()), true)
 {
-  m_iAddItemID0 = m_iAddItemID1 = m_iAddItemID2 = -1;
 }
 
 CSampleLayerContextMenuExtension::~CSampleLayerContextMenuExtension()
@@ -14,28 +15,36 @@ CSampleLayerContextMenuExtension::~CSampleLayerContextMenuExtension()
 bool CSampleLayerContextMenuExtension::ShouldExtendContextMenu(CRhinoContextMenuContext& context)
 {
   // Extend the layer list's context menu
-  if (0 == ON_UuidCompare(context.m_uuid, CRhinoContextMenuExtension::UUIDLayerList()))
-    return true;
-  return false;
+  return (0 == ON_UuidCompare(context.m_uuid, CRhinoContextMenuExtension::UUIDLayerList()));
 }
 
 void CSampleLayerContextMenuExtension::ExtendContextMenu(CRhinoContextMenuContext& context, CRhinoContextMenu& context_menu)
 {
-  UNREFERENCED_PARAMETER(context_menu);
+  if (0 != ON_UuidCompare(context.m_uuid, CRhinoContextMenuExtension::UUIDLayerList()))
+    return;
 
-  m_iAddItemID0 = m_iAddItemID1 = m_iAddItemID2 = -1;
-  if (0 == ON_UuidCompare(context.m_uuid, CRhinoContextMenuExtension::UUIDLayerList()))
+  // Required to access our plug-in's resources
+  AFX_MANAGE_STATE(AfxGetStaticModuleState());
+
+  if (0 == m_menu.GetSafeHmenu())
+    m_menu.LoadMenu(IDR_SAMPLE_MENU);
+
+  if (0 != m_menu.GetSafeHmenu())
   {
-    m_iAddItemID0 = context_menu.AddItem(L"Sample Context Menu Item 1");
-    m_iAddItemID1 = context_menu.AddItem(L"Sample Context Menu Item 2");
-    m_iAddItemID2 = context_menu.AddItem(L"Sample Context Menu Item 3");
+    // A menu can have many sub-menus. We only want the first one...
+    CMenu* sub_menu = m_menu.GetSubMenu(0);
+    if (0 != sub_menu)
+      context_menu.AddItem(L"SampleMenu", sub_menu->GetSafeHmenu());
   }
 }
 
 void CSampleLayerContextMenuExtension::OnCommand(CRhinoContextMenuContext& context, int iAddItemID, UINT nID, CRhinoContextMenu& context_menu)
 {
-  UNREFERENCED_PARAMETER(nID);
+  UNREFERENCED_PARAMETER(iAddItemID);
   UNREFERENCED_PARAMETER(context_menu);
+
+  if (0 != ON_UuidCompare(context.m_uuid, CRhinoContextMenuExtension::UUIDLayerList()))
+    return;
 
   if (nullptr != context.m_doc)
   {
@@ -52,21 +61,21 @@ void CSampleLayerContextMenuExtension::OnCommand(CRhinoContextMenuContext& conte
     }
   }
 
-  if (iAddItemID == m_iAddItemID0)
-    RhinoApp().Print(L"Sample Context Menu Item 1 selected.\n");
-  else if (iAddItemID == m_iAddItemID1)
-    RhinoApp().Print(L"Sample Context Menu Item 2 selected.\n");
-  else if (iAddItemID == m_iAddItemID2)
-    RhinoApp().Print(L"Sample Context Menu Item 3 selected.\n");
+  SampleUserInterfacePlugIn().OnPlugInMenuCommand((WPARAM)nID);
 }
 
 void CSampleLayerContextMenuExtension::OnInitPopupMenu(CRhinoContextMenuContext& context, HWND hWnd, HMENU hMenuOriginal, HMENU hMenuRuntime, CRhinoContextMenu& context_menu)
 {
-  UNREFERENCED_PARAMETER(context);
   UNREFERENCED_PARAMETER(hWnd);
-  UNREFERENCED_PARAMETER(hMenuOriginal);
-  UNREFERENCED_PARAMETER(hMenuRuntime);
-  UNREFERENCED_PARAMETER(context_menu);
 
-  // TODO...
+  if (0 != ON_UuidCompare(context.m_uuid, CRhinoContextMenuExtension::UUIDLayerList()))
+    return;
+
+  if (0 != hMenuOriginal && 0 != hMenuRuntime)
+  {
+    UINT uCheck = (SampleUserInterfacePlugIn().ScriptMode()) ? MF_BYCOMMAND | MF_CHECKED : MF_BYCOMMAND | MF_UNCHECKED;
+    UINT uIDCheckItem = context_menu.RuntimePopupMenuItemID(hMenuOriginal, ID_SAMPLEMENU_SCRIPTMODE);
+    ::CheckMenuItem(hMenuRuntime, uIDCheckItem, uCheck);
+  }
+
 }
