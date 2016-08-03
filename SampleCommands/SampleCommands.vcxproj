@@ -144,6 +144,7 @@
     <ClCompile Include="cmdSampleNewFloatingViewport.cpp" />
     <ClCompile Include="cmdSampleNurbsCircle.cpp" />
     <ClCompile Include="cmdSampleNurbsCurveLength.cpp" />
+    <ClCompile Include="cmdSampleNurbsSquare.cpp" />
     <ClCompile Include="cmdSampleObjectCursor.cpp" />
     <ClCompile Include="cmdSampleObjectEventWatcher.cpp" />
     <ClCompile Include="cmdSampleObjectUserData.cpp" />
