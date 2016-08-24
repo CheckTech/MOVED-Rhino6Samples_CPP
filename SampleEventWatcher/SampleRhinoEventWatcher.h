@@ -53,7 +53,7 @@ class CSampleRhinoEventWatcher : public CRhinoEventWatcher
   void MaterialTableEvent(CRhinoEventWatcher::material_event type, const CRhinoMaterialTable& material_table, int material_index, const ON_Material* old_settings);
   void TextureMappingTableEvent(CRhinoEventWatcher::texture_mapping_event type, const CRhinoTextureMappingTable& texture_mapping_table, int texture_mapping_index, const ON_TextureMapping* old_settings);
   void GroupTableEvent(CRhinoEventWatcher::group_event type, const CRhinoGroupTable& group_table, int group_index, const ON_Group* old_settings);
-  void TextStyleTableEvent(CRhinoEventWatcher::text_style_event event, const CRhinoTextStyleTable& text_style_table, int text_style_index, const ON_TextStyle* old_settings);
+  //void TextStyleTableEvent(CRhinoEventWatcher::text_style_event event, const CRhinoTextStyleTable& text_style_table, int text_style_index, const ON_TextStyle* old_settings);
   void DimStyleTableEvent(CRhinoEventWatcher::dimstyle_event type, const CRhinoDimStyleTable& dimstyle_table, int dimstyle_index, const ON_DimStyle* old_settings);
   void HatchPatternTableEvent(CRhinoEventWatcher::hatchpattern_event type, const CRhinoHatchPatternTable& hatchpattern_table, int hatchpattern_index, const ON_HatchPattern* old_settings);
 

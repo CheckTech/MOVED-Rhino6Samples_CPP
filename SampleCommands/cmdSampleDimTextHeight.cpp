@@ -80,7 +80,7 @@ CRhinoCommand::result CCommandSampleDimTextHeight::RunCommand(const CRhinoComman
     return CRhinoCommand::failure;
 
   // Make a copy of of the dimension's dimstyle
-  ON_DimStyle dimstyle = annotation_object->Style();
+  ON_DimStyle dimstyle = annotation_object->DimStyle();
 
   // Prompt for a new text height value
   CRhinoGetNumber gn;
@@ -105,7 +105,7 @@ CRhinoCommand::result CCommandSampleDimTextHeight::RunCommand(const CRhinoComman
     if (dimstyle.IsChildDimstyle())
     {
       // This dimension already references a child dimstyle
-      int style_index = annotation_object->StyleIndex();
+      int style_index = annotation_object->DimStyleIndex();
       if (style_index >= 0)
       {
         // Copy everything from the dimension's dimstyle
@@ -136,7 +136,7 @@ CRhinoCommand::result CCommandSampleDimTextHeight::RunCommand(const CRhinoComman
         CRhinoAnnotationObject* new_object = annotation_object->Duplicate();
         if (0 != new_object)
         {
-          new_object->SetStyleIndex(style_index);
+          new_object->SetDimStyleIndex(style_index);
           new_object->UpdateText();
           context.m_doc.ReplaceObject(object_ref, new_object);
         }

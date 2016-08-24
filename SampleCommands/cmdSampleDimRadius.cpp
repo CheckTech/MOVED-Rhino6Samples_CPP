@@ -514,7 +514,7 @@ CRhinoCommand::result CCommandSampleDimRadius::RunCommand( const CRhinoCommandCo
     attributes.m_uuid = uuid;
     
     // If text mask, bring to front
-    if (dim_object->Style().DrawTextMask())
+    if (dim_object->DimStyle().DrawTextMask())
     {
       int display_order = GetFrontDisplayOrder(context.m_doc);
       attributes.m_display_order = display_order + 1;

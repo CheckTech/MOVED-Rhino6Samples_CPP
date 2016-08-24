@@ -178,10 +178,10 @@ void CSampleRhinoEventWatcher::GroupTableEvent(CRhinoEventWatcher::group_event, 
   RhinoApp().Print(L"** EVENT: Group Table **\n");
 }
 
-void CSampleRhinoEventWatcher::TextStyleTableEvent(CRhinoEventWatcher::text_style_event, const CRhinoTextStyleTable&, int, const ON_TextStyle*)
-{
-  RhinoApp().Print(L"** EVENT: Text Style Table **\n");
-}
+//void CSampleRhinoEventWatcher::TextStyleTableEvent(CRhinoEventWatcher::text_style_event, const CRhinoTextStyleTable&, int, const ON_TextStyle*)
+//{
+//  RhinoApp().Print(L"** EVENT: Text Style Table **\n");
+//}
 
 void CSampleRhinoEventWatcher::DimStyleTableEvent(CRhinoEventWatcher::dimstyle_event, const CRhinoDimStyleTable&, int, const ON_DimStyle*)
 {

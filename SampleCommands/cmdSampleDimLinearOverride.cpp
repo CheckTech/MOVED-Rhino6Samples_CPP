@@ -57,7 +57,7 @@ CRhinoCommand::result CCommandSampleDimLinearOverride::RunCommand(const CRhinoCo
   // Create a new linear dimension object
   CRhinoLinearDimension* dim_obj = new CRhinoLinearDimension();
   // Set the dimension style to the newly added style
-  dim_obj->SetStyleIndex(child_dimstyle_index);
+  dim_obj->SetDimStyleIndex(child_dimstyle_index);
 
   // Set some linear dimension points (example)
   dim_obj->SetPlane(ON_Plane::World_xy);
