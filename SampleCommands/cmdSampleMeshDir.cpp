@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "SampleDrawCallback.h"
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
@@ -70,13 +71,12 @@ void CMeshDir::SetMesh(const ON_Mesh* mesh)
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 
-class CMeshDirConduit : public CRhinoDisplayConduit
+class CMeshDirDrawCallback : public CSampleDrawCallback
 {
 public:
-  CMeshDirConduit();
-  bool ExecConduit(CRhinoDisplayPipeline& dp, UINT channel, bool& terminate);
+  CMeshDirDrawCallback();
+  void DrawForeground(CRhinoViewport& vp, CRhinoDoc& doc) override;
 
-public:
   ON_ClassArray<CMeshDir> m_mesh_list;
   ON_Color m_face_normal_color;
   ON_Color m_vertex_normal_color;
@@ -84,8 +84,7 @@ public:
   bool m_draw_vertex_normals;
 };
 
-CMeshDirConduit::CMeshDirConduit()
-  : CRhinoDisplayConduit(CSupportChannels::SC_DRAWFOREGROUND)
+CMeshDirDrawCallback::CMeshDirDrawCallback()
 {
   m_face_normal_color = RGB(0, 0, 0);
   m_vertex_normal_color = RGB(255, 255, 255);
@@ -93,40 +92,44 @@ CMeshDirConduit::CMeshDirConduit()
   m_draw_vertex_normals = true;
 }
 
-bool CMeshDirConduit::ExecConduit(CRhinoDisplayPipeline& dp, UINT channel, bool& terminate)
+void CMeshDirDrawCallback::DrawForeground(CRhinoViewport& vp, CRhinoDoc&)
 {
-  UNREFERENCED_PARAMETER(terminate);
+  CRhinoDisplayPipeline* dp = vp.DisplayPipeline();
+  if (nullptr == dp)
+    return;
 
-  if (channel == CSupportChannels::SC_DRAWFOREGROUND)
+  int mi, mcnt, fi, fcnt, vi, vcnt;
+  mcnt = m_mesh_list.Count();
+  for (mi = 0; mi < mcnt; mi++)
   {
-    ON_Color saved_color = dp.ObjectColor();
+    ON_Color saved_color = dp->ObjectColor();
+    CMeshDir& md = m_mesh_list[mi];
 
-    const int mesh_count = m_mesh_list.Count();
-    for (int mi = 0; mi < mesh_count; mi++)
+    if (m_draw_face_normals)
     {
-      const CMeshDir& md = m_mesh_list[mi];
-
-      if (m_draw_face_normals)
+      fcnt = md.m_face_center.Count();
+      dp->SetObjectColor(m_face_normal_color);
+      for (fi = 0; fi < fcnt; fi++)
       {
-        dp.SetObjectColor(m_face_normal_color);
-        const int face_count = md.m_face_center.Count();
-        for (int fi = 0; fi < face_count; fi++)
-          dp.DrawDirectionArrow(md.m_face_center[fi], md.m_face_normal[fi]);
-      }
-
-      if (m_draw_vertex_normals && md.m_mesh->HasVertexNormals())
-      {
-        dp.SetObjectColor(m_vertex_normal_color);
-        const int vertex_count = md.m_mesh->m_V.Count();
-        for (int vi = 0; vi < vertex_count; vi++)
-          dp.DrawDirectionArrow(ON_3dPoint(md.m_mesh->m_V[vi]), ON_3dVector(md.m_mesh->m_N[vi]));
+        dp->DrawDirectionArrow(md.m_face_center[fi], md.m_face_normal[fi]);
       }
     }
 
-    dp.SetObjectColor(saved_color);
-  }
+    if (m_draw_vertex_normals)
+    {
+      if (md.m_mesh->HasVertexNormals())
+      {
+        dp->SetObjectColor(m_vertex_normal_color);
+        vcnt = md.m_mesh->m_V.Count();
+        for (vi = 0; vi < vcnt; vi++)
+        {
+          dp->DrawDirectionArrow(ON_3dPoint(md.m_mesh->m_V[vi]), ON_3dVector(md.m_mesh->m_N[vi]));
+        }
+      }
+    }
 
-  return true;
+    dp->SetObjectColor(saved_color);
+  }
 }
 
 ////////////////////////////////////////////////////////////////
@@ -135,35 +138,21 @@ bool CMeshDirConduit::ExecConduit(CRhinoDisplayPipeline& dp, UINT channel, bool&
 class CCommandSampleMeshDir : public CRhinoCommand
 {
 public:
-  CCommandSampleMeshDir();
-  ~CCommandSampleMeshDir() {}
-  UUID CommandUUID()
+  CCommandSampleMeshDir() = default;
+  ~CCommandSampleMeshDir() = default;
+  UUID CommandUUID() override
   {
     // {E35209D2-AC0D-43D1-A79C-2B432F04F9BA}
     static const GUID SampleMeshDirCommand_UUID =
     { 0xE35209D2, 0xAC0D, 0x43D1, { 0xA7, 0x9C, 0x2B, 0x43, 0x2F, 0x04, 0xF9, 0xBA } };
     return SampleMeshDirCommand_UUID;
   }
-  const wchar_t* EnglishCommandName() { return L"SampleMeshDir"; }
-  const wchar_t* LocalCommandName() { return L"SampleMeshDir"; }
-  CRhinoCommand::result RunCommand(const CRhinoCommandContext&);
-
-  void LoadProfile(LPCTSTR lpszSection, CRhinoProfileContext& pc);
-  void SaveProfile(LPCTSTR lpszSection, CRhinoProfileContext& pc);
-
-private:
-  bool m_draw_face_normals;
-  bool m_draw_vertex_normals;
+  const wchar_t* EnglishCommandName() override { return L"SampleMeshDir"; }
+  CRhinoCommand::result RunCommand(const CRhinoCommandContext&) override;
 };
 
 // The one and only CCommandSampleMeshDir object
 static class CCommandSampleMeshDir theSampleMeshDirCommand;
-
-CCommandSampleMeshDir::CCommandSampleMeshDir()
-{
-  m_draw_face_normals = true;
-  m_draw_vertex_normals = true;
-}
 
 CRhinoCommand::result CCommandSampleMeshDir::RunCommand(const CRhinoCommandContext& context)
 {
@@ -183,31 +172,40 @@ CRhinoCommand::result CCommandSampleMeshDir::RunCommand(const CRhinoCommandConte
   if (0 == count)
     return CRhinoCommand::failure;
 
-  CMeshDirConduit conduit;
-  conduit.m_mesh_list.Reserve(count);
+  CMeshDirDrawCallback callback;
+  callback.m_mesh_list.Reserve(count);
 
   for (int i = 0; i < render_meshes.Count(); i++)
   {
     const ON_Mesh* mesh = render_meshes[i].Mesh();
     if (mesh)
-      conduit.m_mesh_list.AppendNew().SetMesh(mesh);
+      callback.m_mesh_list.AppendNew().SetMesh(mesh);
   }
 
-  conduit.Enable(context.m_doc.RuntimeSerialNumber());
+  // Get persistent settings
+  const wchar_t* psz_draw_face_normals = L"DrawFaceNormals";
+  bool draw_face_normals = true;
+  Settings().GetBool(psz_draw_face_normals, draw_face_normals, draw_face_normals);
+
+  const wchar_t* psz_draw_vertex_normals = L"DrawVertexNormals";
+  bool draw_vertex_normals = true;
+  Settings().GetBool(psz_draw_vertex_normals, draw_vertex_normals, draw_vertex_normals);
 
   CRhinoGetOption gs;
   gs.SetCommandPrompt(L"Press Enter when done");
   gs.AcceptNothing();
-  gs.AddCommandOptionToggle(RHCMDOPTNAME(L"FaceNormals"), RHCMDOPTVALUE(L"No"), RHCMDOPTVALUE(L"Yes"), m_draw_face_normals, &m_draw_face_normals);
-  gs.AddCommandOptionToggle(RHCMDOPTNAME(L"VertexNormals"), RHCMDOPTVALUE(L"No"), RHCMDOPTVALUE(L"Yes"), m_draw_vertex_normals, &m_draw_vertex_normals);
+  gs.AddCommandOptionToggle(RHCMDOPTNAME(L"FaceNormals"), RHCMDOPTVALUE(L"No"), RHCMDOPTVALUE(L"Yes"), draw_face_normals, &draw_face_normals);
+  gs.AddCommandOptionToggle(RHCMDOPTNAME(L"VertexNormals"), RHCMDOPTVALUE(L"No"), RHCMDOPTVALUE(L"Yes"), draw_vertex_normals, &draw_vertex_normals);
+
+  callback.Enable(context.m_doc.RuntimeSerialNumber());
 
   CRhinoGet::result res = CRhinoGet::nothing;
   for (;; )
   {
-    context.m_doc.Redraw();
+    callback.m_draw_face_normals = draw_face_normals;
+    callback.m_draw_vertex_normals = draw_vertex_normals;
 
-    conduit.m_draw_face_normals = m_draw_face_normals;
-    conduit.m_draw_vertex_normals = m_draw_vertex_normals;
+    context.m_doc.Redraw(CRhinoView::regenerate_display_hint);;
 
     res = gs.GetOption();
     if (res == CRhinoGet::option)
@@ -216,22 +214,14 @@ CRhinoCommand::result CCommandSampleMeshDir::RunCommand(const CRhinoCommandConte
     break;
   }
 
-  conduit.Disable();
-  context.m_doc.Redraw();
+  callback.Disable();
+  context.m_doc.Redraw(CRhinoView::regenerate_display_hint);
+
+  // Save persistent settings
+  Settings().SetBool(psz_draw_face_normals, draw_face_normals);
+  Settings().SetBool(psz_draw_vertex_normals, draw_vertex_normals);
 
   return CRhinoCommand::success;
-}
-
-void CCommandSampleMeshDir::LoadProfile(LPCTSTR lpszSection, CRhinoProfileContext& pc)
-{
-  pc.LoadProfileBool(lpszSection, L"DrawFaceNormals", &m_draw_face_normals);
-  pc.LoadProfileBool(lpszSection, L"DrawVertexNormals", &m_draw_vertex_normals);
-}
-
-void CCommandSampleMeshDir::SaveProfile(LPCTSTR lpszSection, CRhinoProfileContext& pc)
-{
-  pc.SaveProfileBool(lpszSection, L"DrawFaceNormals", m_draw_face_normals);
-  pc.SaveProfileBool(lpszSection, L"DrawVertexNormals", m_draw_vertex_normals);
 }
 
 //

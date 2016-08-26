@@ -651,6 +651,9 @@
     <ClCompile Include="cmdSampleNurbsSquare.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SampleDrawCallback.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SampleCommandsApp.h">
@@ -681,6 +684,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SampleRectangleObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleDrawCallback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

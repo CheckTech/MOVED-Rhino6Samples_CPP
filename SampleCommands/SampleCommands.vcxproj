@@ -224,6 +224,7 @@
     <ClCompile Include="SampleCommandsApp.cpp" />
     <ClCompile Include="SampleCommandsEventWatcher.cpp" />
     <ClCompile Include="SampleCommandsPlugIn.cpp" />
+    <ClCompile Include="SampleDrawCallback.cpp" />
     <ClCompile Include="SampleObjectUserData.cpp" />
     <ClCompile Include="SampleRectangleObject.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -239,6 +240,7 @@
     <ClInclude Include="SampleCommandsApp.h" />
     <ClInclude Include="SampleCommandsEventWatcher.h" />
     <ClInclude Include="SampleCommandsPlugIn.h" />
+    <ClInclude Include="SampleDrawCallback.h" />
     <ClInclude Include="SampleObjectUserData.h" />
     <ClInclude Include="SampleRectangleObject.h" />
     <ClInclude Include="stdafx.h" />
