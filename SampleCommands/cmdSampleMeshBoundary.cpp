@@ -9,18 +9,16 @@
 class CCommandSampleMeshBoundary : public CRhinoCommand
 {
 public:
-  CCommandSampleMeshBoundary() {}
-  ~CCommandSampleMeshBoundary() {}
-  UUID CommandUUID()
+  CCommandSampleMeshBoundary() = default;
+  UUID CommandUUID() override
   {
     // {2B83C913-6E82-49EC-AB0E-CBFFC1841797}
     static const GUID SampleMeshBoundaryCommand_UUID =
     { 0x2B83C913, 0x6E82, 0x49EC, { 0xAB, 0x0E, 0xCB, 0xFF, 0xC1, 0x84, 0x17, 0x97 } };
     return SampleMeshBoundaryCommand_UUID;
   }
-  const wchar_t* EnglishCommandName() { return L"SampleMeshBoundary"; }
-  const wchar_t* LocalCommandName() { return L"SampleMeshBoundary"; }
-  CRhinoCommand::result RunCommand(const CRhinoCommandContext&);
+  const wchar_t* EnglishCommandName() override { return L"SampleMeshBoundary"; }
+  CRhinoCommand::result RunCommand(const CRhinoCommandContext& context) override;
 };
 
 // The one and only CCommandSampleMeshBoundary object
@@ -40,7 +38,7 @@ CRhinoCommand::result CCommandSampleMeshBoundary::RunCommand(const CRhinoCommand
   // Validate the selection
   const CRhinoObjRef& ref = go.Object(0);
   const ON_Mesh* mesh = ref.Mesh();
-  if (0 == mesh)
+  if (nullptr == mesh)
     return CRhinoCommand::failure;
 
   // Get the mesh's topology
@@ -48,39 +46,47 @@ CRhinoCommand::result CCommandSampleMeshBoundary::RunCommand(const CRhinoCommand
   ON_SimpleArray<const ON_Curve*> lines;
 
   // Find all of the mesh edges that have only a single mesh face
-  int i;
-  for (i = 0; i < mesh_top.m_tope.Count(); i++)
+  for (int i = 0; i < mesh_top.m_tope.Count(); i++)
   {
     const ON_MeshTopologyEdge& mesh_edge = mesh_top.m_tope[i];
     if (mesh_edge.m_topf_count == 1)
     {
-      ON_3fPoint p0 = mesh_top.TopVertexPoint(mesh_edge.m_topvi[0]);
-      ON_3fPoint p1 = mesh_top.TopVertexPoint(mesh_edge.m_topvi[1]);
-      ON_LineCurve* line = new ON_LineCurve(ON_3dPoint(p0), ON_3dPoint(p1));
-      lines.Append(line);
+      int vtopi0 = mesh_edge.m_topvi[0];
+      ON_3dPoint p0 = mesh->Vertex(mesh_top.m_topv[vtopi0].m_vi[0]);
+
+      int vtopi1 = mesh_edge.m_topvi[1];
+      ON_3dPoint p1 = mesh->Vertex(mesh_top.m_topv[vtopi1].m_vi[0]);
+
+      if (p0.IsValid() && p1.IsValid())
+      {
+        ON_LineCurve* line = new ON_LineCurve(p0, p1);
+        if (nullptr != line && line->IsValid())
+          lines.Append(line);
+        else
+          delete line; // Don't leak...
+      }
     }
   }
-
-  ON_SimpleArray<ON_Curve*> output;
-  double merge_tolerance = 2.1 * context.m_doc.AbsoluteTolerance();
 
   // Join all of the line segments
-  if (RhinoMergeCurves(lines, output, merge_tolerance))
+  ON_SimpleArray<ON_Curve*> output;
+  if (RhinoMergeCurves(lines, output, ON_ZERO_TOLERANCE))
   {
-    for (i = 0; i < output.Count(); i++)
+    for (int i = 0; i < output.Count(); i++)
     {
-      CRhinoCurveObject* crv = new CRhinoCurveObject;
-      crv->SetCurve(output[i]);
-      if (context.m_doc.AddObject(crv))
-        crv->Select();
+      CRhinoCurveObject* obj = new CRhinoCurveObject();
+      obj->SetCurve(output[i]);
+      if (context.m_doc.AddObject(obj))
+        obj->Select();
       else
-        delete crv;
+        delete obj; // Don't leak...
     }
+    context.m_doc.Redraw();
   }
 
-  // Clean up so we don't leak memory
-  for (i = 0; i < lines.Count(); i++)
-    delete lines[i];
+  // Clean up
+  for (int i = 0; i < lines.Count(); i++)
+    delete lines[i]; // Don't leak...
 
   return CRhinoCommand::success;
 }
