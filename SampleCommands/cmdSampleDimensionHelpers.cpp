@@ -209,12 +209,12 @@ CRhinoRadialDimension* RhinoCreateRadialDimension(
     {
       if (bRadius)
       {
-        obj->m_radial_dimension.m_type = ON::dtDimRadius;
+        obj->m_radial_dimension.m_type = ON::eAnnotationType::dtDimRadius;
         obj->SetUserText(obj->m_radial_dimension.DefaultRadiusText());
       }
       else
       {
-        obj->m_radial_dimension.m_type = ON::dtDimDiameter;
+        obj->m_radial_dimension.m_type = ON::eAnnotationType::dtDimDiameter;
         obj->SetUserText(obj->m_radial_dimension.DefaultDiameterText());
       }
 

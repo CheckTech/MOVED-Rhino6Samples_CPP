@@ -19,7 +19,7 @@ bool CRhGetDiameterDimensionObject::CustomGeometryFilter(const CRhinoObject* obj
   if (object)
   {
     const CRhinoAnnotationObject* annotation_object = CRhinoAnnotationObject::Cast(object);
-    if (annotation_object && annotation_object->Type() == ON::dtDimDiameter)
+    if (annotation_object && annotation_object->Type() == ON::eAnnotationType::dtDimDiameter)
       rc = true;
   }
   return rc;
@@ -68,7 +68,7 @@ CRhinoCommand::result CCommandSampleQueryDiameterDimension::RunCommand(const CRh
 
   // The Rhino object class for a diameter dimension is a CRhinoAnnotationObject
   const CRhinoAnnotationObject* annotation_object = CRhinoAnnotationObject::Cast(object);
-  if (0 == annotation_object || annotation_object->Type() != ON::dtDimDiameter)
+  if (0 == annotation_object || annotation_object->Type() != ON::eAnnotationType::dtDimDiameter)
     return CRhinoCommand::failure;
 
   // Get the Rhino object's geometry. For CRhinoAnnotationObject, this is a ON_Annotation2 object

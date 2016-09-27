@@ -72,21 +72,18 @@ CRhinoCommand::result CCommandSampleImportMeshes::RunCommand(const CRhinoCommand
   int num_imported = 0;
 
   ONX_ModelComponentIterator it(model, ON_ModelComponent::Type::ModelGeometry);
-  for (ON_ModelComponentReference mcr = it.FirstComponentReference(); false == mcr.IsEmpty(); mcr = it.NextComponentReference())
+  const ON_ModelComponent* model_component = nullptr;
+  for (model_component = it.FirstComponent(); nullptr != model_component; model_component = it.NextComponent())
   {
-    const ON_ModelComponent* model_component = mcr.ModelComponent();
-    if (nullptr != model_component)
+    const ON_ModelGeometryComponent* model_geometry = ON_ModelGeometryComponent::Cast(model_component);
+    if (nullptr != model_geometry)
     {
-      const ON_ModelGeometry* model_geometry = ON_ModelGeometry::Cast(model_component);
-      if (nullptr != model_geometry)
+      const ON_Mesh* mesh = ON_Mesh::Cast(model_geometry->Geometry(nullptr));
+      if (nullptr != mesh)
       {
-        const ON_Mesh* mesh = ON_Mesh::Cast(model_geometry->Geometry(nullptr));
-        if (nullptr != mesh)
-        {
-          // CRhinoDoc::AddMeshObject makes a copy of the input mesh
-          context.m_doc.AddMeshObject(*mesh);
-          num_imported++;
-        }
+        // CRhinoDoc::AddMeshObject makes a copy of the input mesh
+        context.m_doc.AddMeshObject(*mesh);
+        num_imported++;
       }
     }
   }

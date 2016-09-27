@@ -68,7 +68,7 @@ static bool write_curves_example(ON_Buffer& buffer, int version, ON_TextLog& err
       ON_3dmObjectAttributes attributes;
       attributes.m_layer_index = 0;
       attributes.m_name = "straight line curve";
-      model.AddModelGeometry(&line_curve, &attributes, true);
+      model.AddModelGeometryComponent(&line_curve, &attributes, true);
     }
 
     {
@@ -101,7 +101,7 @@ static bool write_curves_example(ON_Buffer& buffer, int version, ON_TextLog& err
         ON_3dmObjectAttributes attributes;
         attributes.m_layer_index = 1;
         attributes.m_name = "wiggly cubic curve";
-        model.AddModelGeometry(&wiggle, &attributes, true);
+        model.AddModelGeometryComponent(&wiggle, &attributes, true);
       }
     }
 
@@ -111,23 +111,20 @@ static bool write_curves_example(ON_Buffer& buffer, int version, ON_TextLog& err
       ON_3dmObjectAttributes attributes1;
       attributes1.m_layer_index = 2;
       attributes1.m_name = "radius 3 circle";
-      model.AddModelGeometry(&circle_curve1, &attributes1, true);
+      model.AddModelGeometryComponent(&circle_curve1, &attributes1, true);
 
       ON_ArcCurve circle_curve2(ON_Circle(ON_3dPoint(1.0, 2.0, -1.5), 5.0));
       ON_3dmObjectAttributes attributes2;
       attributes2.m_layer_index = 2;
       attributes2.m_name = "radius 5 circle";
-      model.AddModelGeometry(&circle_curve2, &attributes2, true);
+      model.AddModelGeometryComponent(&circle_curve2, &attributes2, true);
     }
   }
-
-  // start section comments
-  const char* sStartSectionComment = __FILE__ "write_curves_example()" __DATE__;
 
   ON_BinaryArchiveBuffer archive(ON::archive_mode::write3dm, &buffer);
 
   // writes model to archive
-  bool ok = model.Write(archive, version, sStartSectionComment, &error_log);
+  bool ok = model.Write(archive, version, &error_log);
 
   return ok;
 }

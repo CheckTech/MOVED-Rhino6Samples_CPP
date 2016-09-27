@@ -23,7 +23,7 @@ public:
   void SetCurve(const ON_Curve* curve);
   void SetPlane(const ON_Plane& plane);
   void SetDistanceScale(double model_scale);
-  void SetMode(int mode); // radius or diameter
+  void SetRadiusMode(bool bRadius); // radius or diameter
 
   void LockPoint(ON_3dPoint point);
   bool Locked() const;
@@ -42,16 +42,16 @@ private:
   ON_3dPoint m_drag_point;
   bool m_bLocked;
 
-  int m_mode; // radius or diameter
+  bool m_bRadiusMode; // radius or diameter
 };
 
 CSampleGetDimRadialPoint::CSampleGetDimRadialPoint()
 {
   m_dim_object = new CRhinoRadialDimension();
-  m_dim_object->m_radial_dimension.m_type = ON::dtDimRadius;
+  m_dim_object->m_radial_dimension.m_type = ON::eAnnotationType::dtDimRadius;
   m_dim_object->m_radial_dimension.m_plane = ON_xy_plane;
   m_last_plane = ON_xy_plane;
-  m_mode = ON::dtDimDiameter;
+  m_bRadiusMode = true;
   m_flat_curve = 0;
   m_curve = 0;
   m_bCurvePlanar = false;
@@ -72,22 +72,22 @@ CSampleGetDimRadialPoint::~CSampleGetDimRadialPoint()
   }
 }
 
-void CSampleGetDimRadialPoint::SetMode(int mode)
+void CSampleGetDimRadialPoint::SetRadiusMode(bool bRadius)
 {
   if (0 != m_dim_object)
   {
     ON_RadialDimension2& radial_dimension = m_dim_object->m_radial_dimension;
-    if (mode == ON::dtDimRadius)
+    if (bRadius)
     {
       m_dim_object->SetUserText(radial_dimension.DefaultRadiusText());
-      m_mode = mode;
-      radial_dimension.m_type = ON::dtDimRadius;
+      m_bRadiusMode = bRadius;
+      radial_dimension.m_type = ON::eAnnotationType::dtDimRadius;
     }
-    else if (mode == ON::dtDimDiameter)
+    else
     {
       m_dim_object->SetUserText(radial_dimension.DefaultDiameterText());
-      m_mode = mode;
-      radial_dimension.m_type = ON::dtDimDiameter;
+      m_bRadiusMode = bRadius;
+      radial_dimension.m_type = ON::eAnnotationType::dtDimDiameter;
     }
   }
 }
@@ -295,7 +295,7 @@ void CSampleGetDimRadialPoint::DynamicDraw(CRhinoDisplayPipeline& dp, const ON_3
 
 CRhinoCommand::result SampleGetDimRadial(
         CRhinoDoc& doc, 
-        ON::eAnnotationType RadiusOrDiameter, 
+        bool bRadius, 
         bool bInteractive, 
         CRhinoObjRef& point_ref, 
         CRhinoRadialDimension*& output_dimension
@@ -315,10 +315,10 @@ CRhinoCommand::result SampleGetDimRadial(
   {
     CRhinoGetObject go;
 
-    if (ON::dtDimDiameter == RadiusOrDiameter)
-      go.SetCommandPrompt(L"Select curve for diameter dimension");
-    else
+    if (bRadius)
       go.SetCommandPrompt(L"Select curve for radius dimension");
+    else
+      go.SetCommandPrompt(L"Select curve for diameter dimension");
 
     go.SetGeometryFilter(ON::curve_object);
     
@@ -414,7 +414,7 @@ CRhinoCommand::result SampleGetDimRadial(
 
     gp.ClearCommandOptions();
     gp.SetCommandPrompt(L"Dimension location");
-    gp.SetMode(RadiusOrDiameter);
+    gp.SetRadiusMode(bRadius);
     gp.SetCurve(dim_curve);
 
     CRhinoView* view = RhinoApp().ActiveView();
@@ -502,7 +502,7 @@ CRhinoCommand::result CCommandSampleDimRadius::RunCommand( const CRhinoCommandCo
 {
   CRhinoObjRef point_ref;
   CRhinoRadialDimension* dim_object = 0;
-  CRhinoCommand::result rc = SampleGetDimRadial(context.m_doc, ON::dtDimRadius, context.IsInteractive(), point_ref, dim_object);
+  CRhinoCommand::result rc = SampleGetDimRadial(context.m_doc, true, context.IsInteractive(), point_ref, dim_object);
 
   if (rc == CRhinoCommand::success && 0 != dim_object)
   {
