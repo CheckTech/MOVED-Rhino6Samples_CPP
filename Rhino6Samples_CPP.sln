@@ -62,6 +62,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleViewportRenderer", "S
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleRhinoFileVersion", "SampleRhinoFileVersion\SampleRhinoFileVersion.vcxproj", "{F797EED0-4168-4B0A-956A-465B64CD4FCC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SampleRdkMaterialAutoUI", "SampleRdkMaterialAutoUI\SampleRdkMaterialAutoUI.vcxproj", "{D9106855-428A-428F-9588-9076DE1A1321}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -360,6 +362,19 @@ Global
 		{F797EED0-4168-4B0A-956A-465B64CD4FCC}.Release|x64.ActiveCfg = Release|x64
 		{F797EED0-4168-4B0A-956A-465B64CD4FCC}.Release|x64.Build.0 = Release|x64
 		{F797EED0-4168-4B0A-956A-465B64CD4FCC}.Release|x86.ActiveCfg = Release|x64
+		{D9106855-428A-428F-9588-9076DE1A1321}.Debug|x64.ActiveCfg = Debug|x64
+		{D9106855-428A-428F-9588-9076DE1A1321}.Debug|x64.Build.0 = Debug|x64
+		{D9106855-428A-428F-9588-9076DE1A1321}.Debug|x86.ActiveCfg = Debug|x64
+		{D9106855-428A-428F-9588-9076DE1A1321}.DebugRhino|x64.ActiveCfg = DebugRhino|x64
+		{D9106855-428A-428F-9588-9076DE1A1321}.DebugRhino|x64.Build.0 = DebugRhino|x64
+		{D9106855-428A-428F-9588-9076DE1A1321}.DebugRhino|x86.ActiveCfg = DebugRhino|x64
+		{D9106855-428A-428F-9588-9076DE1A1321}.PseudoDebug|x64.ActiveCfg = Debug|x64
+		{D9106855-428A-428F-9588-9076DE1A1321}.PseudoDebug|x64.Build.0 = Debug|x64
+		{D9106855-428A-428F-9588-9076DE1A1321}.PseudoDebug|x86.ActiveCfg = Release|x64
+		{D9106855-428A-428F-9588-9076DE1A1321}.PseudoDebug|x86.Build.0 = Release|x64
+		{D9106855-428A-428F-9588-9076DE1A1321}.Release|x64.ActiveCfg = Release|x64
+		{D9106855-428A-428F-9588-9076DE1A1321}.Release|x64.Build.0 = Release|x64
+		{D9106855-428A-428F-9588-9076DE1A1321}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
