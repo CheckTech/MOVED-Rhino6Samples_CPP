@@ -4,6 +4,7 @@
 #include "StdAfx.h"
 #include "C:\Program Files\Rhino 6.0 SDK\Inc\rhinoSdkPlugInDeclare.h"
 #include "SampleRdkMaterialAutoUIPlugIn.h"
+#include "SampleRdkMaterialAutoUIRdkPlugIn.h"
 
 // The plug-in object must be constructed before any plug-in classes derived
 // from CRhinoCommand. The #pragma init_seg(lib) ensures that this happens.
@@ -126,8 +127,43 @@ BOOL CSampleRdkMaterialAutoUIPlugIn::OnLoadPlugIn()
   //    override this function and do it here.  It is not necessary to call
   //    CPlugIn::OnLoadPlugIn() from your derived class.
 
+	// If this assert fires, it's likely that the RDK executable (rdk_d.rhp) is not loaded into Rhino4_d.exe
+	// This can happen if you load your plug-in first, before the debug RDK and for some reason it actually
+	// manages to find rdk_d.rhp on the search path.  If this happens, load protect your plug-in, restart Rhino4_d
+	// and load rdk_d.rhp using drag and drop or the plug-in manager.  Then un-load protect your plug-in.  Restart
+	// Rhino and all should be fine.
+	// Note that this problem doesn't affect release versions because the release RDK installer causes the RDK to
+	// autoload before all other plug-ins from the moment the installer completes.
+	ASSERT(RhRdkIsAvailable());
+
+	// TODO: Add render plug-in initialization code here.
+
+	m_pRdkPlugIn = new CSampleRdkMaterialAutoUIRdkPlugIn;
+
+	ON_wString wStr;
+
+	if (!m_pRdkPlugIn->Initialize())
+	{
+		delete m_pRdkPlugIn;
+		m_pRdkPlugIn = NULL;
+
+		wStr.Format(L"Failed to load %s, version %s.  RDK initialization failed\n", PlugInName(), PlugInVersion());
+		RhinoApp().Print(wStr);
+
+		return FALSE;
+	}
+
+	wStr.Format(L"Loading %s, version %s\n", PlugInName(), PlugInVersion());
+	RhinoApp().Print(wStr);
+
+#ifdef _DEBUG
+	RhinoApp().Print(L"running on RDK version %s\n", ::RhRdkBuildDate());
+#endif
+
+	// TODO: Add render plug-in initialization code here.
+
   // TODO: Add plug-in initialization code here.
-  return CRhinoUtilityPlugIn::OnLoadPlugIn();
+  return CRhinoRenderPlugIn::OnLoadPlugIn();
 }
 
 void CSampleRdkMaterialAutoUIPlugIn::OnUnloadPlugIn()
@@ -139,9 +175,19 @@ void CSampleRdkMaterialAutoUIPlugIn::OnUnloadPlugIn()
   //    view at this time. Thus, you should only be manipulating your own objects.
   //    or tools here.
 
-  // TODO: Add plug-in cleanup code here.
+	if (NULL != m_pRdkPlugIn)
+	{
+		m_pRdkPlugIn->Uninitialize();
+		delete m_pRdkPlugIn;
+		m_pRdkPlugIn = nullptr;
+	}
 
-  CRhinoUtilityPlugIn::OnUnloadPlugIn();
+  CRhinoRenderPlugIn::OnUnloadPlugIn();
+}
+
+CRhinoCommand::result CSampleRdkMaterialAutoUIPlugIn::Render(const CRhinoCommandContext&, bool)
+{
+	return CRhinoCommand::failure;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -163,6 +209,5 @@ BOOL CSampleRdkMaterialAutoUIPlugIn::OnDisplayPlugInHelp( HWND hWnd ) const
   //   It should display a standard Windows Help file (.hlp or .chm).
 
   // TODO: Add support for online help here.
-  return CRhinoUtilityPlugIn::OnDisplayPlugInHelp( hWnd );
+  return CRhinoRenderPlugIn::OnDisplayPlugInHelp( hWnd );
 }
-

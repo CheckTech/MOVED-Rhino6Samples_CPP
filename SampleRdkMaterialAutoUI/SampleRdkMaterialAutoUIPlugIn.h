@@ -7,30 +7,29 @@
 // See SampleRdkMaterialAutoUIPlugIn.cpp for the implementation of this class
 //
 
-class CSampleRdkMaterialAutoUIPlugIn : public CRhinoUtilityPlugIn
+class CSampleRdkMaterialAutoUIPlugIn : public CRhinoRenderPlugIn
 {
 public:
   CSampleRdkMaterialAutoUIPlugIn();
-  ~CSampleRdkMaterialAutoUIPlugIn();
+  virtual ~CSampleRdkMaterialAutoUIPlugIn();
 
   // Required overrides
-  const wchar_t* PlugInName() const;
-  const wchar_t* PlugInVersion() const;
-  GUID PlugInID() const;
-  BOOL OnLoadPlugIn();
-  void OnUnloadPlugIn();
+  virtual const wchar_t* PlugInName() const override;
+  virtual const wchar_t* PlugInVersion() const override;
+  virtual GUID PlugInID() const override;
+  virtual BOOL OnLoadPlugIn() override;
+  virtual void OnUnloadPlugIn() override;
+  virtual CRhinoCommand::result Render( const CRhinoCommandContext& context, bool render_preview) override;
 
   // Online help overrides
-  BOOL AddToPlugInHelpMenu() const;
-  BOOL OnDisplayPlugInHelp(HWND hWnd) const;
+  virtual BOOL AddToPlugInHelpMenu() const override;
+  virtual BOOL OnDisplayPlugInHelp(HWND hWnd) const override;
 
 private:
   ON_wString m_plugin_version;
+  class CSampleRdkMaterialAutoUIRdkPlugIn* m_pRdkPlugIn = nullptr;
 
   // TODO: Add additional class information here
 };
 
 CSampleRdkMaterialAutoUIPlugIn& SampleRdkMaterialAutoUIPlugIn();
-
-
-

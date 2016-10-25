@@ -16,8 +16,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cmdSampleRdkMaterialAutoUI.cpp" />
+    <ClCompile Include="SampleRdkMaterial.cpp" />
     <ClCompile Include="SampleRdkMaterialAutoUIApp.cpp" />
     <ClCompile Include="SampleRdkMaterialAutoUIPlugIn.cpp" />
+    <ClCompile Include="SampleRdkMaterialAutoUIRdkPlugIn.cpp" />
+    <ClCompile Include="SampleRdkMaterialIOPlugIn.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugRhino|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -26,8 +29,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SampleRdkMaterial.h" />
     <ClInclude Include="SampleRdkMaterialAutoUIApp.h" />
     <ClInclude Include="SampleRdkMaterialAutoUIPlugIn.h" />
+    <ClInclude Include="SampleRdkMaterialAutoUIRdkPlugIn.h" />
+    <ClInclude Include="SampleRdkMaterialIOPlugIn.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>

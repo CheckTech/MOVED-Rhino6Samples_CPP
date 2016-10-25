@@ -21,10 +21,19 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cmdSampleRdkMaterialAutoUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleRdkMaterial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleRdkMaterialAutoUIRdkPlugIn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="SampleRdkMaterialAutoUIPlugIn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cmdSampleRdkMaterialAutoUI.cpp">
+    <ClCompile Include="SampleRdkMaterialIOPlugIn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,7 +47,16 @@
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SampleRdkMaterial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleRdkMaterialAutoUIRdkPlugIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="SampleRdkMaterialAutoUIPlugIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleRdkMaterialIOPlugIn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
