@@ -17,6 +17,7 @@ public:
 
 protected:
 	bool Parse(char*& p, const char* pSubString, bool bExpect=true) const;
+	bool ParseBool(char*& p, bool& value) const;
 	bool ParseDouble(char*& p, double& value) const;
 	bool ParseFloat(char*& p, float& value) const;
 	bool ParseFloatList(char*& p, float* a, int num) const;

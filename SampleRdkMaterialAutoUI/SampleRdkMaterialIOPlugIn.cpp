@@ -4,6 +4,32 @@
 #include "SampleRdkMaterialAutoUIRdkPlugIn.h"
 #include "SampleRdkMaterial.h"
 
+/* .sample file format:
+
+Type       Syntax
+----       ------
+bool       <true|false>
+float      <float>
+String     "<string>"
+Color      Color(<float-red>, <float-green>, <float-blue>, <float-alpha>)
+Vector2D   Vector2D(<float-x>, <float-y>)
+Vector3D   Vector3D(<float-x>, <float-y>, <float-z>)
+
+Example:
+
+	opaque = true
+	gloss = 0.5
+	text = "Fruit"
+	color = Color(1.0, 0.5, 0.5, 1.0)
+	2D-vector = Vector2D(0.2, 0.3)
+	3D-vector = Vector3D(1, 2, 3)
+
+*/
+
+static const char* szColor    = "Color";
+static const char* szVector2D = "Vector2D";
+static const char* szVector3D = "Vector3D";
+
 const wchar_t* CSampleRdkMaterialIOPlugIn::SupportedKinds(void) const
 {
 	// This I/O plug-in only supports a single content kind.
@@ -19,14 +45,6 @@ UUID CSampleRdkMaterialIOPlugIn::RdkPlugInId(void) const
 {
 	return CSampleRdkMaterialAutoUIRdkPlugIn::RdkPlugInId();
 }
-
-// Type       Syntax
-// -----------------
-// String     "string"
-// Color      Color(float, float, float)
-// Vector2D   Vector2D(float, float)
-// Vector3D   Vector3D(float, float, float)
-// float      float value
 
 static _locale_t Locale(void)
 {
@@ -68,6 +86,25 @@ bool CSampleRdkMaterialIOPlugIn::Parse(char*& p, const char* pSubString, bool bE
 	p = pFound + strlen(pSubString);
 
 	return true;
+}
+
+bool CSampleRdkMaterialIOPlugIn::ParseBool(char*& p, bool& value) const
+{
+	SkipWhiteSpace(p);
+
+	if (Parse(p, "true", false))
+	{
+		value = true;
+		return true;
+	}
+	else
+	if (Parse(p, "false", true))
+	{
+		value = true;
+		return true;
+	}
+
+	return false;
 }
 
 bool CSampleRdkMaterialIOPlugIn::ParseDouble(char*& p, double& value) const
@@ -160,7 +197,7 @@ CRhRdkVariant CSampleRdkMaterialIOPlugIn::GetValue(char* p) const
 			}
 		}
 		else
-		if (Parse(p, "Color", false) && Parse(p, "("))
+		if (Parse(p, szColor, false) && Parse(p, "("))
 		{
 			// Color value.
 			float a[4];
@@ -170,7 +207,7 @@ CRhRdkVariant CSampleRdkMaterialIOPlugIn::GetValue(char* p) const
 			}
 		}
 		else
-		if (Parse(p, "Vector2D", false) && Parse(p, "("))
+		if (Parse(p, szVector2D, false) && Parse(p, "("))
 		{
 			// 2D vector value.
 			float a[2];
@@ -180,7 +217,7 @@ CRhRdkVariant CSampleRdkMaterialIOPlugIn::GetValue(char* p) const
 			}
 		}
 		else
-		if (Parse(p, "Vector3D", false) && Parse(p, "("))
+		if (Parse(p, szVector3D, false) && Parse(p, "("))
 		{
 			// 3D vector value.
 			float a[3];
@@ -195,6 +232,14 @@ CRhRdkVariant CSampleRdkMaterialIOPlugIn::GetValue(char* p) const
 			if (ParseFloat(p, f))
 			{
 				vValue.SetValue(f);
+			}
+			else
+			{
+				bool b = false;
+				if (ParseBool(p, b))
+				{
+					vValue.SetValue(b);
+				}
 			}
 		}
 	}
@@ -216,7 +261,6 @@ CRhRdkContent* CSampleRdkMaterialIOPlugIn::Load(const CRhinoDoc*, const wchar_t*
 
 	auto pMaterial = new CSampleRdkMaterial;
 	pMaterial->Initialize();
-	pMaterial->SetInstanceName(L"I/O loaded");
 
 	CFile file;
 	if (!file.Open(wszFilename, CFile::modeRead | CFile::typeBinary | CFile::shareDenyWrite))
@@ -301,17 +345,52 @@ CRhRdkContent* CSampleRdkMaterialIOPlugIn::Load(const CRhinoDoc*, const wchar_t*
 	return pMaterial;
 }
 
-bool CSampleRdkMaterialIOPlugIn::Save(const wchar_t* wszFilename, const CRhRdkContent& c, const IRhRdkPreviewSceneServer* p) const
+bool CSampleRdkMaterialIOPlugIn::Save(const wchar_t* wszFilename, const CRhRdkContent& c, const IRhRdkPreviewSceneServer*) const
 {
-	// TODO: Replace the code below with code for saving your custom file data.
-
 	CFile file;
 	if (!file.Open(wszFilename, CFile::modeCreate | CFile::modeWrite | CFile::typeBinary | CFile::shareExclusive))
 		return false;
 
-	ON_wString s = L"color={255,0,0}\r\ngloss=0.5\r\n";
+	const auto& fields = c.Fields();
 
-	file.Write(s.Array(), sizeof(wchar_t) * s.Length());
+	for (int i = 0; i < fields.Count(); i++)
+	{
+		auto& field = *fields.Field(i);
+
+		const wchar_t* wszName = field.InternalName();
+		const auto wszValue = field.Value().AsString();
+
+		ON_wString s;
+
+		switch (field.Value().Type())
+		{
+		case CRhRdkVariant::vtString:
+			s.Format(L"%s = \"%s\"\r\n", wszName, wszValue);
+			break;
+
+		case CRhRdkVariant::vtColor:
+			s.Format(L"%s = %S(%s)\r\n", wszName, szColor, wszValue);
+			break;
+
+		case CRhRdkVariant::vtVector2d:
+			s.Format(L"%s = %S(%s)\r\n", wszName, szVector2D, wszValue);
+			break;
+
+		case CRhRdkVariant::vtVector3d:
+			s.Format(L"%s = %S(%s)\r\n", wszName, szVector3D, wszValue);
+			break;
+
+		default:
+			s.Format(L"%s = %s\r\n", wszName, wszValue);
+			break;
+		}
+
+		const int bufferLen = s.Length();
+		char* pBuffer = new char[bufferLen];
+		::WideCharToMultiByte(CP_ACP, 0, (const wchar_t*)s, -1, pBuffer, bufferLen, nullptr, nullptr);
+		file.Write(pBuffer, bufferLen);
+		delete[] pBuffer;
+	}
 
 	file.Close();
 

@@ -17,14 +17,10 @@ public:
 	virtual UUID RenderEngineId(void) const override;
 	virtual UUID PlugInId(void) const override;
 	virtual DWORD BitFlags(void) const override;
-	virtual CRhRdkContent* MakeCopy(void) const override;
 	virtual ParamSerialMethod ParameterSerializationMethod(void) const override;
 	virtual void AddAutoParameters(IRhRdkParamBlock& paramBlock, int sectionId) const override;
 	virtual void GetAutoParameters(const IRhRdkParamBlock& paramBlock, int sectionId) override;
 	virtual void SimulateMaterial(ON_Material& matOut, CRhRdkTexture::TextureGeneration tg, int iSimulatedTextureSize, const CRhinoObject* pObject) const override;
-
-private:
-	ON_SimpleArray<CRhRdkContentField*> m_aFields;
 };
 
 class CSampleRdkMaterialFactory : public CRhRdkMaterialFactory

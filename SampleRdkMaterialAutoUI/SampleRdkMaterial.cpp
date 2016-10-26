@@ -20,18 +20,13 @@ DWORD CSampleRdkMaterial::BitFlags(void) const
 
 CSampleRdkMaterial::~CSampleRdkMaterial()
 {
-	for (int i = 0; i < m_aFields.Count(); i++)
-	{
-		delete m_aFields[i];
-	}
 }
 
 void CSampleRdkMaterial::AddField(const wchar_t* wszName, const CRhRdkVariant vValue)
 {
-	auto pField = new CRhRdkContentField(*this, wszName, wszName, wszName);
+	using f = CRhRdkContentField::Filter;
+	auto pField = new CRhRdkContentField(*this, wszName, nullptr, nullptr, f::all, f::all, 0, true);
 	*pField = vValue;
-
-	m_aFields.Append(pField);
 
 #ifdef _DEBUG
 	OutputDebugString(wszName);
@@ -84,35 +79,10 @@ void CSampleRdkMaterial::SimulateMaterial(ON_Material& matOut, CRhRdkTexture::Te
 
 void CSampleRdkMaterial::AddUISections(IRhRdkExpandableContentUI& ui)
 {
-//	AFX_MANAGE_STATE(AfxGetStaticModuleState());
-
-	// This demonstrates the easiest way to get an automatic UI for your content.
-	// It does all the parameter transport stuff for you and automatically displays
-	// your content's fields.
-
 	const wchar_t* wsz1 = L"Sample RDK material settings";
-	AddAutomaticUISection(ui, wsz1, wsz1, 0);//ciBreadSection);
+	AddAutomaticUISection(ui, wsz1, wsz1, 0);
 
 	__super::AddUISections(ui);
-}
-
-CRhRdkContent* CSampleRdkMaterial::MakeCopy(void) const
-{
-	// Because the fields are created dynamically during loading, they don't
-	// get automatically copied so we have to copy them manually.
-	auto pCopy = static_cast<CSampleRdkMaterial*>(__super::MakeCopy());
-	if (nullptr != pCopy)
-	{
-		for (int i = 0; i < m_aFields.Count(); i++)
-		{
-			const auto& field = *m_aFields[i];
-			auto pField = new CRhRdkContentField(*pCopy, field.InternalName(), field.LocalName(), field.EnglishName());
-			*pField = field;
-			pCopy->m_aFields.Append(pField);
-		}
-	}
-
-	return pCopy;
 }
 
 CRhRdkContent::ParamSerialMethod CSampleRdkMaterial::ParameterSerializationMethod(void) const
