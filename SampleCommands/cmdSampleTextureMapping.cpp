@@ -189,7 +189,7 @@ CRhinoCommand::result CCommandSampleTextureMapping::RunCommand(const CRhinoComma
       //There's a texture in the diffuse slot.  Set the repeat value.
 
       //Open the texture for writing using "BeginChange"
-      CRhRdkTexture& non_const_texture = dynamic_cast<CRhRdkTexture&>(pTexture->BeginChange(CRhRdkContent::ChangeContext::kProgram));
+      CRhRdkTexture& non_const_texture = dynamic_cast<CRhRdkTexture&>(pTexture->BeginChange(RhRdkChangeContext::Program));
       non_const_texture.SetRepeat(ON_3dVector(0.1, 0.1, 0.1));
       non_const_texture.Changed();
       non_const_texture.EndChange();
