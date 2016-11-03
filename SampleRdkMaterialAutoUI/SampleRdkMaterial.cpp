@@ -25,7 +25,7 @@ CSampleRdkMaterial::~CSampleRdkMaterial()
 void CSampleRdkMaterial::AddField(const wchar_t* wszName, const CRhRdkVariant vValue)
 {
 	using f = CRhRdkContentField::Filter;
-	auto pField = new CRhRdkContentField(*this, wszName, nullptr, nullptr, f::all, f::all, 0, true);
+	auto pField = new CRhRdkContentField(*this, wszName, nullptr, nullptr, f::All, f::All, 0, true);
 	*pField = vValue;
 
 #ifdef _DEBUG
