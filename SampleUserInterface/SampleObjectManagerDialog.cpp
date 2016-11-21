@@ -53,14 +53,14 @@ void CSampleObjectManagerDialog::DoDataExchange(CDataExchange* pDX)
   DDX_Control(pDX, IDC_LISTBOX, m_listbox);
 }
 
-void CSampleObjectManagerDialog::OnShowDockBar(bool bShowDockBar)
+void CSampleObjectManagerDialog::OnShowDockBar(CRhinoUiDockBar::ShowEventArgs args)
 {
-  if (bShowDockBar)
+  if (args == CRhinoUiDockBar::ShowEventArgs::Show)
   {
     CRhinoEventWatcher::Enable(TRUE);
     FillListBox();
   }
-  else
+  else if (args == CRhinoUiDockBar::ShowEventArgs::Hide)
   {
     CRhinoEventWatcher::Enable(FALSE);
     m_listbox.ResetContent();

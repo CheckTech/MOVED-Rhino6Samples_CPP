@@ -178,9 +178,9 @@ void CSampleOptionsListCtrlPageDialog::OnShowTab(bool bShowTab, const ON_UUID& t
   // TODO: Add "On Show" or "On Hide" tab code here
 }
 
-void CSampleOptionsListCtrlPageDialog::OnShowDockBar(bool bShowDockBar)
+void CSampleOptionsListCtrlPageDialog::OnShowDockBar(CRhinoUiDockBar::ShowEventArgs args)
 {
-  UNREFERENCED_PARAMETER(bShowDockBar);
+  UNREFERENCED_PARAMETER(args);
   // TODO: Add "On Show" or "On Hide" dockbar code here
 }
 
