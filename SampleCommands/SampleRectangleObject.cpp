@@ -191,20 +191,28 @@ void CSampleRectangleGrips::Reset()
 
 CRhinoObject* CSampleRectangleGrips::NewObject()
 {
-  CSampleRectangleObject* new_rectangle = 0;
   UpdateRectangle();
+
+  CSampleRectangleObject* pNewObject = 0;
+
   if (m_bGripsMoved && m_bDrawRectangle)
   {
-    CSampleRectangleObject* pOwnerObject = RectangleObject();
-    if (pOwnerObject)
-      new_rectangle = new CSampleRectangleObject(*pOwnerObject);
+    CSampleRectangleObject* pOldObject = RectangleObject();
+    if (pOldObject)
+      pNewObject = new CSampleRectangleObject(*pOldObject);
     else
-      new_rectangle = new CSampleRectangleObject();
+      pNewObject = new CSampleRectangleObject();
 
-    ON_PolylineCurve pline(m_rectangle);
-    new_rectangle->SetCurve(pline);
+    ON_PolylineCurve rectangle_curve(m_rectangle);
+
+    // Copy any user data from the original curve to the new curve
+    if (pOldObject && pOldObject->Curve() && pOldObject->Curve()->FirstUserData())
+      rectangle_curve.CopyUserData(*pOldObject->Curve());
+
+    pNewObject->SetCurve(rectangle_curve);
   }
-  return new_rectangle;
+
+  return pNewObject;
 }
 
 void CSampleRectangleGrips::Draw(CRhinoDrawGripsSettings& dgs)
