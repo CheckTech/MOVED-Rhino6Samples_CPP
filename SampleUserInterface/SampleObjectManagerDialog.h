@@ -18,7 +18,7 @@ public:
   HICON Icon(const CSize& sizeInPixels) const;
 
   // Optional CRhinoTabbedDockBarDialog overrides
-  void OnShowDockBar(bool bShowDockBar);
+  void OnShowDockBar(CRhinoUiDockBar::ShowEventArgs args);
 
   // Optional CRhinoEventWatcher overrides
   void OnNewDocument(CRhinoDoc& doc);

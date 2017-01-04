@@ -69,15 +69,15 @@ CRhinoCommand::result CCommandSampleCustomMeshObjects::RunCommand(const CRhinoCo
     return CRhinoCommand::failure;
 
   CCustomMeshObjectsUI ui;
-  ui.m_mp.m_relative_tolerance = 0.1; // Density
-  ui.m_mp.m_refine_angle = 0.0;       // Maximum angle (radians)
-  ui.m_mp.m_grid_aspect_ratio = 0.0;  // Maximum aspect radio
-  ui.m_mp.m_min_edge_length = 0.0001; // Minimum edge length
-  ui.m_mp.m_max_edge_length = 0.3;    // Maximum edge length
-  ui.m_mp.m_tolerance = 0.0;          // Maximum distance, edge to surface
-  ui.m_mp.m_grid_min_count = 0;       // Minimum initial grid quads
-  ui.m_mp.m_bRefine = true;           // Refine mesh
-  ui.m_mp.m_texture_range = 2;        // Pack textures
+  ui.m_mp.SetRelativeTolerance(0.1);    // Density
+  ui.m_mp.SetRefineAngleRadians(0.0);   // Maximum angle (radians)
+  ui.m_mp.SetGridAspectRatio(0.0);      // Maximum aspect radio
+  ui.m_mp.SetMinimumEdgeLength(0.0001); // Minimum edge length
+  ui.m_mp.SetMaximumEdgeLength(0.3);    // Maximum edge length
+  ui.m_mp.SetTolerance(0.0);            // Maximum distance, edge to surface
+  ui.m_mp.SetGridMinCount(0);           // Minimum initial grid quads
+  ui.m_mp.SetRefine(true);              // Refine mesh
+  ui.m_mp.SetTextureRange(2);           // Pack textures
 
   ON_ClassArray<CRhinoObjectMesh> meshes;
   CRhinoCommand::result rc = RhinoMeshObjects(objects, ui.m_mp, ui, meshes);

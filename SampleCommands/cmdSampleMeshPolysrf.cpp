@@ -41,7 +41,7 @@ CRhinoCommand::result CCommandSampleMeshPolysrf::RunCommand(const CRhinoCommandC
     return CRhinoCommand::failure;
 
   ON_MeshParameters mp = ON_MeshParameters::DefaultAnalysisMesh;
-  mp.m_tolerance = 0.1;
+  mp.SetTolerance(0.1);
 
   for (int i = 0; i < brep->m_F.Count(); i++)
   {

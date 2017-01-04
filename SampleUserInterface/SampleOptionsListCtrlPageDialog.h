@@ -48,7 +48,7 @@ public:
 
   // Optional CRhinoTabbedDockBarDialog overrides
   void OnShowTab(bool bShowTab, const ON_UUID& tabId);
-  void OnShowDockBar(bool bShowDockBar);
+  void OnShowDockBar(CRhinoUiDockBar::ShowEventArgs args);
 
   // Dialog Data
   enum { IDD = IDD_LISTCTRL_DIALOG };

@@ -39,8 +39,8 @@ bool CSampleFalseColorConduit::ExecConduit(CRhinoDisplayPipeline& dp, UINT nActi
     else if (nActiveChannel == CSupportChannels::SC_DRAWOVERLAY)
     {
       // Turn off lighting when drawing this mesh...
-      m_pDisplayAttrs->m_pMaterial->m_FrontMaterial.m_bEnableLighting = false;
-      m_pDisplayAttrs->m_pMaterial->m_BackMaterial.m_bEnableLighting = false;
+      m_pDisplayAttrs->m_pMaterial->m_FrontMaterial.SetDisableLighting(true);
+      m_pDisplayAttrs->m_pMaterial->m_BackMaterial.SetDisableLighting(true);
       dp.DrawShadedMesh(*m_pMesh);
     }
   }

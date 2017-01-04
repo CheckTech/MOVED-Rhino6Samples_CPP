@@ -31,7 +31,7 @@ static class CCommandSampleCustomRenderMesh theSampleCustomRenderMeshCommand;
 CRhinoCommand::result CCommandSampleCustomRenderMesh::RunCommand(const CRhinoCommandContext& context)
 {
   ON_MeshParameters mp = context.m_doc.Properties().MeshParameters(ON_MeshParameters::MESH_STYLE::render_mesh_custom);
-  double relative_tolerance = mp.m_relative_tolerance;
+  double relative_tolerance = mp.RelativeTolerance();
 
   CRhinoGetNumber gn;
   gn.SetCommandPrompt(L"Custom render mesh density");
@@ -50,9 +50,9 @@ CRhinoCommand::result CCommandSampleCustomRenderMesh::RunCommand(const CRhinoCom
   if (ON_IsValid(new_relative_tolerance))
   {
     new_relative_tolerance = RHINO_CLAMP(new_relative_tolerance, 0.0, 1.0);
-    mp.m_relative_tolerance = new_relative_tolerance;
-    mp.m_bRefine = (new_relative_tolerance < 0.65);
-    mp.m_bSimplePlanes = (0.0 == new_relative_tolerance);
+    mp.SetRelativeTolerance(new_relative_tolerance);
+    mp.SetRefine(new_relative_tolerance < 0.65);
+    mp.SetSimplePlanes(0.0 == new_relative_tolerance);
   }
 
   context.m_doc.Properties().SetCustomRenderMeshParameters(mp);
