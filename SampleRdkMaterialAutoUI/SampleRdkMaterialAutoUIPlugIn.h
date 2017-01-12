@@ -6,7 +6,6 @@
 // CSampleRdkMaterialAutoUIPlugIn
 // See SampleRdkMaterialAutoUIPlugIn.cpp for the implementation of this class
 //
-
 class CSampleRdkMaterialAutoUIPlugIn : public CRhinoRenderPlugIn
 {
 public:
@@ -20,6 +19,7 @@ public:
   virtual BOOL OnLoadPlugIn() override;
   virtual void OnUnloadPlugIn() override;
   virtual CRhinoCommand::result Render( const CRhinoCommandContext& context, bool render_preview) override;
+  virtual plugin_load_time PlugInLoadTime() override { return load_plugin_at_startup; }
 
   // Online help overrides
   virtual BOOL AddToPlugInHelpMenu() const override;

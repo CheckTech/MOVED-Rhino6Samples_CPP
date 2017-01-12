@@ -28,7 +28,7 @@ CRhinoCommand::result CCommandSampleRdkMaterialAutoUI::RunCommand( const CRhinoC
 	auto pContent = new CSampleRdkMaterial;
 	pContent->Initialize();
 
-	rdkDoc.TakeOwnershipOfContent(*pContent);
+	rdkDoc.AttachContent(*pContent);
 
 	rdkDoc.EndChange();
 
