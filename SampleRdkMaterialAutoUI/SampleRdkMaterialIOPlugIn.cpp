@@ -15,7 +15,7 @@ String     "<string>"
 Color      Color(<float-red>, <float-green>, <float-blue>, <float-alpha>)
 Vector2D   Vector2D(<float-x>, <float-y>)
 Vector3D   Vector3D(<float-x>, <float-y>, <float-z>)
-
+ 
 Example:
 
 	no-type =
