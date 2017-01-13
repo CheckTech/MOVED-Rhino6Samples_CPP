@@ -8,6 +8,7 @@
 
 Type       Syntax
 ----       ------
+<null>     <no text>
 bool       <true|false>
 float      <float>
 String     "<string>"
@@ -17,6 +18,7 @@ Vector3D   Vector3D(<float-x>, <float-y>, <float-z>)
 
 Example:
 
+	no-type =
 	opaque = true
 	gloss = 0.5
 	text = "Fruit"
@@ -179,6 +181,11 @@ CRhRdkVariant CSampleRdkMaterialIOPlugIn::GetValue(char* p) const
 
 	if (nullptr != p)
 	{
+		if (*p == 0)
+		{
+			// Null type; valid.
+		}
+		else
 		if (Parse(p, "\"", false))
 		{
 			// String value.
@@ -311,9 +318,9 @@ CRhRdkContent* CSampleRdkMaterialIOPlugIn::Load(const CRhinoDoc*, const wchar_t*
 			const CRhRdkVariant vValue = GetValue(pValue);
 			*p = c;
 
-			if (!vValue.IsNull())
+			if (!sName.IsEmpty())
 			{
-				// Value is good so add a field to the material.
+				// Name is good so add a field to the material.
 				pMaterial->AddField(sName, vValue);
 			}
 
