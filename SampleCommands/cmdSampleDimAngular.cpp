@@ -30,12 +30,67 @@ static class CCommandSampleDimAngular theSampleDimAngularCommand;
 
 CRhinoCommand::result CCommandSampleDimAngular::RunCommand(const CRhinoCommandContext& context)
 {
-  CRhinoAngularDimension* pDim = 0;
-  CRhinoCommand::result rc = GetAngularDimension(context.m_doc, context.IsInteractive(), pDim, 0);
-  if (rc == CRhinoCommand::success && 0 != pDim)
+  ON_DimAngular* dim = nullptr;
+  CRhinoDimAngular::definition_mode def_mode = CRhinoDimAngular::definition_mode::None;
+  bool picked_ob[3] = { false, false, false };
+  CRhinoObjRef point_refs[3];
+  ON_Line lines[2];
+  ON_3dPoint pickpoints[2];
+  ON_3dPoint centerpoint;
+  ON_3dPoint arcpoint;
+  bool rc = CRhinoDimAngular::GetDimAngular(
+    context.m_rhino_doc_sn,
+    dim,
+    context.IsInteractive(),
+    def_mode,
+    picked_ob,
+    point_refs,
+    lines,
+    pickpoints,
+    centerpoint,
+    arcpoint
+  );
+
+  if (rc && nullptr != dim)
   {
-    context.m_doc.AddObject(pDim, FALSE);
-    context.m_doc.Redraw();
+    ON_3dmObjectAttributes atts;
+    context.m_doc.GetDefaultObjectAttributes(atts);
+
+    ON_UUID style_id = dim->DimensionStyleId();
+    int style_idx = context.m_doc.m_dimstyle_table.FindDimStyleFromId(style_id, true, false, ON_UNSET_INT_INDEX);
+    if (ON_UNSET_INT_INDEX != style_idx)
+    {
+      const ON_DimStyle* style = &context.m_doc.m_dimstyle_table[style_idx];
+      if (nullptr == style)
+        return CRhinoCommand::result::failure;
+
+      style = &dim->DimensionStyle(*style);
+      if (style->DrawTextMask())
+      {
+        int fdn = CRhinoDimension::GetFrontDrawNumber(context.m_doc);
+        atts.m_display_order = fdn + 1;
+      }
+
+      CRhinoDimAngular* dim_obj = new CRhinoDimAngular(atts);
+      switch (def_mode)
+      {
+      case CRhinoDimAngular::definition_mode::Arc:
+        dim->SetAngularDimensionType(ON::AnnotationType::Angular3pt);
+        break;
+      case CRhinoDimAngular::definition_mode::Points:
+        dim->SetAngularDimensionType(ON::AnnotationType::Angular3pt);
+        break;
+      case CRhinoDimAngular::definition_mode::Lines:
+        dim->SetAngularDimensionType(ON::AnnotationType::Angular);
+        break;
+      }
+      dim_obj->SetDimension(dim);
+      dim_obj->SetDefinitionMode(def_mode);
+
+      context.m_doc.AddObject(dim_obj);
+
+      context.m_doc.Redraw();
+    }
   }
 
   return CRhinoCommand::success;

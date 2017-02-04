@@ -54,77 +54,80 @@ public:
 
 CSampleSyncViewsConduit::CSampleSyncViewsConduit()
   : CRhinoDisplayConduit(CSupportChannels::SC_INITFRAMEBUFFER)
+  , m_pView1(nullptr)
+  , m_pView2(nullptr)
+  , m_hWnd1(0)
+  , m_hWnd2(0)
+  , m_bDirty1(false)
+  , m_bDirty2(false)
 {
-  m_pView1 = 0;
-  m_pView2 = 0;
-  m_hWnd1 = 0;
-  m_hWnd2 = 0;
-  m_bDirty1 = false;
-  m_bDirty2 = false;
 }
 
-void CSampleSyncViewsConduit::NotifyConduit(EConduitNotifiers Notify, CRhinoDisplayPipeline& dp)
+void CSampleSyncViewsConduit::NotifyConduit(EConduitNotifiers notify, CRhinoDisplayPipeline& dp)
 {
   UNREFERENCED_PARAMETER(dp);
 
-  if ((m_pView1 && m_pView1->DisplayPipeline() == 0) || (m_pView2 && m_pView2->DisplayPipeline() == 0))
+  if (
+    (m_pView1 && m_pView1->DisplayPipeline() == nullptr) ||
+    (m_pView2 && m_pView2->DisplayPipeline() == nullptr)
+    )
   {
-    m_pView1 = 0;
-    m_pView2 = 0;
+    m_pView1 = nullptr;
+    m_pView2 = nullptr;
     Disable();
     return;
   }
 
-  switch (Notify)
+  switch (notify)
   {
-    case CN_PROJECTIONCHANGED:
+  case CN_PROJECTIONCHANGED:
+  {
+    CRhinoView* pActiveView = ::RhinoApp().ActiveView();
+    CRhinoView* pView = View();
+    if (m_pView1 && (pActiveView == m_pView1) && (pView == m_pView1))
     {
-      CRhinoView* pActiveView = ::RhinoApp().ActiveView();
-      CRhinoView* pView = View();
-      if (m_pView1 && (pActiveView == m_pView1) && (pView == m_pView1))
+      m_hWnd1 = m_pView1->m_hWnd;
       {
-        m_hWnd1 = m_pView1->m_hWnd;
-        {
-          SyncVP(m_pView1, m_pView2);
-          m_bDirty1 = true;
-          m_bDirty2 = false;
-        }
-      }
-      else if (m_pView2 && (pActiveView == m_pView2) && (pView == m_pView2))
-      {
-        m_hWnd2 = m_pView2->m_hWnd;
-        {
-          SyncVP(m_pView2, m_pView1);
-
-          m_bDirty2 = true;
-          m_bDirty1 = false;
-        }
-      }
-      break;
-    }
-
-    case CN_PIPELINECLOSED:
-    {
-      if (m_bDirty1 && !m_bDirty2)
-      {
-        m_bDirty1 = false;
-        CClientDC dc(m_pView2);
-        if (m_pView2->DisplayPipeline()->DrawFrameBuffer(m_pView2->DisplayAttributes(), m_pView1->Viewport().VP(), true, true))
-          m_pView2->DisplayPipeline()->ShowFrameBuffer(dc.GetSafeHdc());
-      }
-      else if (!m_bDirty1 && m_bDirty2)
-      {
+        SyncVP(m_pView1, m_pView2);
+        m_bDirty1 = true;
         m_bDirty2 = false;
-        CClientDC dc(m_pView1);
-        if (m_pView1->DisplayPipeline()->DrawFrameBuffer(m_pView1->DisplayAttributes(), m_pView1->Viewport().VP(), true, true))
-          m_pView1->DisplayPipeline()->ShowFrameBuffer(dc.GetSafeHdc());
       }
-      else
-      {
-        m_bDirty1 = m_bDirty2 = false;
-      }
-      break;
     }
+    else if (m_pView2 && (pActiveView == m_pView2) && (pView == m_pView2))
+    {
+      m_hWnd2 = m_pView2->m_hWnd;
+      {
+        SyncVP(m_pView2, m_pView1);
+
+        m_bDirty2 = true;
+        m_bDirty1 = false;
+      }
+    }
+    break;
+  }
+
+  case CN_PIPELINECLOSED:
+  {
+    if (m_bDirty1 && !m_bDirty2)
+    {
+      m_bDirty1 = false;
+      CClientDC dc(m_pView2);
+      if (m_pView2->DisplayPipeline()->DrawFrameBuffer(*m_pView2->DisplayAttributes(), m_pView1->Viewport().VP(), true, true))
+        m_pView2->DisplayPipeline()->ShowFrameBuffer(dc.GetSafeHdc());
+    }
+    else if (!m_bDirty1 && m_bDirty2)
+    {
+      m_bDirty2 = false;
+      CClientDC dc(m_pView1);
+      if (m_pView1->DisplayPipeline()->DrawFrameBuffer(*m_pView1->DisplayAttributes(), m_pView1->Viewport().VP(), true, true))
+        m_pView1->DisplayPipeline()->ShowFrameBuffer(dc.GetSafeHdc());
+    }
+    else
+    {
+      m_bDirty1 = m_bDirty2 = false;
+    }
+    break;
+  }
   }
 }
 
@@ -135,8 +138,8 @@ bool CSampleSyncViewsConduit::ExecConduit(CRhinoDisplayPipeline& dp, UINT nChann
 
   switch (nChannel)
   {
-    case CSupportChannels::SC_INITFRAMEBUFFER:
-      break;
+  case CSupportChannels::SC_INITFRAMEBUFFER:
+    break;
   }
   return true;
 }

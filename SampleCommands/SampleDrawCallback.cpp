@@ -65,7 +65,7 @@ bool CSampleDrawCallback::ExecConduit(CRhinoDisplayPipeline& dp, UINT nChannel, 
   else if (ChannelSupported(nChannel & CSupportChannels::SC_DRAWFOREGROUND))
     DrawForeground(*pVP, *pDoc);
   else if (ChannelSupported(nChannel & CSupportChannels::SC_DRAWOVERLAY))
-    DrawDecorations(pView, dp.m_pDC, *pVP, *pDoc);
+    DrawDecorations(pView, nullptr, *pVP, *pDoc);
 
   return true;
 }

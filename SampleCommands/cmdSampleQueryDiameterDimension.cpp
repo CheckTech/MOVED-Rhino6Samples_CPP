@@ -11,16 +11,18 @@ class CRhGetDiameterDimensionObject : public CRhinoGetObject
   bool CustomGeometryFilter(const CRhinoObject* object, const ON_Geometry* geometry, ON_COMPONENT_INDEX component_index) const;
 };
 
-bool CRhGetDiameterDimensionObject::CustomGeometryFilter(const CRhinoObject* object, const ON_Geometry* geometry, ON_COMPONENT_INDEX component_index) const
+bool CRhGetDiameterDimensionObject::CustomGeometryFilter(const CRhinoObject* object, const ON_Geometry*, ON_COMPONENT_INDEX) const
 {
-  UNREFERENCED_PARAMETER(geometry);
-  UNREFERENCED_PARAMETER(component_index);
   bool rc = false;
-  if (object)
+  if (nullptr != object)
   {
-    const CRhinoAnnotationObject* annotation_object = CRhinoAnnotationObject::Cast(object);
-    if (annotation_object && annotation_object->Type() == ON::eAnnotationType::dtDimDiameter)
-      rc = true;
+    const CRhinoDimRadial* dim_object = CRhinoDimRadial::Cast(object);
+    if (nullptr != dim_object)
+    {
+      const ON_DimRadial* dim = dim_object->GetDimension();
+      if (nullptr != dim)
+        rc = dim->Type() == ON::AnnotationType::Diameter;
+    }
   }
   return rc;
 }
@@ -48,10 +50,8 @@ public:
 // The one and only CCommandSampleQueryDiameterDimension object
 static class CCommandSampleQueryDiameterDimension theSampleQueryDiameterDimensionCommand;
 
-CRhinoCommand::result CCommandSampleQueryDiameterDimension::RunCommand(const CRhinoCommandContext& context)
+CRhinoCommand::result CCommandSampleQueryDiameterDimension::RunCommand(const CRhinoCommandContext&)
 {
-  UNREFERENCED_PARAMETER(context);
-
   CRhGetDiameterDimensionObject go;
   go.SetCommandPrompt(L"Select diameter dimension");
   go.SetGeometryFilter(CRhinoGetObject::annotation_object);
@@ -61,35 +61,33 @@ CRhinoCommand::result CCommandSampleQueryDiameterDimension::RunCommand(const CRh
 
   const CRhinoObjRef object_ref = go.Object(0);
 
-  // Get the Rhino object
   const CRhinoObject* object = object_ref.Object();
   if (0 == object)
     return CRhinoCommand::failure;
 
-  // The Rhino object class for a diameter dimension is a CRhinoAnnotationObject
-  const CRhinoAnnotationObject* annotation_object = CRhinoAnnotationObject::Cast(object);
-  if (0 == annotation_object || annotation_object->Type() != ON::eAnnotationType::dtDimDiameter)
+  const CRhinoDimRadial* dim_object = CRhinoDimRadial::Cast(object);
+  if (nullptr == dim_object)
     return CRhinoCommand::failure;
 
-  // Get the Rhino object's geometry. For CRhinoAnnotationObject, this is a ON_Annotation2 object
-  const ON_Annotation2* annotation = annotation_object->Annotation();
-  if (0 == annotation)
+  const ON_DimRadial* dim = dim_object->GetDimension();
+  if (nullptr != dim || dim->Type() != ON::AnnotationType::Diameter)
     return CRhinoCommand::failure;
 
-  // The geometry for a diameter dimension is a ON_RadialDimension2 object,
-  // which is derived from ON_Annotation2.
-  const ON_RadialDimension2* radial_dim = ON_RadialDimension2::Cast(annotation);
-  if (0 == radial_dim)
+  ON_3dPoint center_pt, radius_pt, dimline_pt, knee_pt;
+  if (!dim->Get3dPoints(&center_pt, &radius_pt, &dimline_pt, &knee_pt))
     return CRhinoCommand::failure;
 
-  // Report some parameters
-  ON_wString point0_str, point1_str;
-  RhinoFormatPoint(radial_dim->Dim3dPoint(0), point0_str);
-  RhinoFormatPoint(radial_dim->Dim3dPoint(1), point1_str);
+  ON_wString center_str, radius_str, dimline_str, knee_str;
+  RhinoFormatPoint(center_pt, center_str);
+  RhinoFormatPoint(radius_pt, radius_str);
+  RhinoFormatPoint(dimline_pt, dimline_str);
+  RhinoFormatPoint(knee_pt, knee_str);
 
-  RhinoApp().Print(L"Center point: %s\n", point0_str);
-  RhinoApp().Print(L"Arrowhead point: %s\n", point1_str);
-  RhinoApp().Print(L"Dimension text: %s\n", annotation_object->TextString());
+  RhinoApp().Print(L"Center point: %s\n", center_str);
+  RhinoApp().Print(L"Radius point: %s\n", radius_str);
+  RhinoApp().Print(L"Dimension line point: %s\n", dimline_str);
+  RhinoApp().Print(L"Knee point: %s\n", knee_str);
+  RhinoApp().Print(L"Dimension text: %s\n", dim_object->PlainText());
 
   return CRhinoCommand::success;
 }

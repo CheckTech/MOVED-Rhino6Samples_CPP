@@ -78,7 +78,7 @@ bool CSamplePerspectiveColorsConduit::OnDrawBackground(CRhinoDisplayPipeline& dp
   {
     dp.DrawConstructionPlane(
       viewport->ConstructionPlane(),
-      true, true,
+      true, true, true,
       m_thick_line_color,
       m_thin_line_color,
       m_grid_x_axis_color,

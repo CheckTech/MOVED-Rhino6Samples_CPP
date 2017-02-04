@@ -40,13 +40,9 @@ CRhinoCommand::result CCommandSampleCaptureFrameBuffer::RunCommand(const CRhinoC
   if (0 == dp)
     return CRhinoCommand::failure;
 
-  if (dp->CaptureFrameBuffer(true))
+  CRhinoDib fb;
+  if (dp->CopyFrameBufferTo(fb))
   {
-    const CRhinoDib& fb = dp->GetFrameBuffer();
-
-    // Now use ‘fb’ to do whatever you want - it’s basically a
-    // DIB containing the current frame buffer for the given pipeline.
-
     ON_wString file, folder;
     CRhinoFileUtilities::GetMyDocumentsFolder(folder);
     file.Format(L"%s\\%s.png", folder, EnglishCommandName());

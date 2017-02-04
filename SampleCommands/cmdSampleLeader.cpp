@@ -28,41 +28,21 @@ static class CCommandSampleLeader theSampleLeaderCommand;
 
 CRhinoCommand::result CCommandSampleLeader::RunCommand(const CRhinoCommandContext& context)
 {
-  // Some set of points that define the leader
   ON_3dPointArray points;
   points.Append(ON_3dPoint(1.0, 1.0, 0.0));
   points.Append(ON_3dPoint(5.0, 1.0, 0.0));
   points.Append(ON_3dPoint(5.0, 5.0, 0.0));
   points.Append(ON_3dPoint(9.0, 5.0, 0.0));
 
-  // The plane in which the leader resides
-  ON_Plane plane = ON_xy_plane;
+  const CRhinoLeader* dim_obj = context.m_doc.AddLeaderObject(
+    L"Leader",
+    ON_Plane::World_xy,
+    points.Count(),
+    points.Array()
+  );
 
-  // Create the leader
-  ON_Leader2 leader;
-  leader.SetPlane(plane);
-
-  // Add the points to the leader
-  int i;
-  for (i = 0; i < points.Count(); i++)
-  {
-    ON_2dPoint p2;
-    if (leader.m_plane.ClosestPointTo(points[i], &p2.x, &p2.y))
-    {
-      if (leader.m_points.Count() < 1 || p2.DistanceTo(*leader.m_points.Last()) > ON_SQRT_EPSILON)
-        leader.m_points.Append(p2);
-    }
-  }
-
-  // Create the leader object
-  CRhinoAnnotationLeader* leader_object = new CRhinoAnnotationLeader();
-  // Add our leader to the object
-  leader_object->SetAnnotation(leader);
-
-  if (context.m_doc.AddObject(leader_object))
+  if (nullptr != dim_obj)
     context.m_doc.Redraw();
-  else
-    delete leader_object; // error
 
   return CRhinoCommand::success;
 }

@@ -57,7 +57,6 @@ bool CSampleGrayscaleConduit::ExecConduit(CRhinoDisplayPipeline& dp, UINT nActiv
       m_pDisplayAttrs->m_CurveColor = GetAttributeColor(m_pDisplayAttrs->m_CurveColor);
       // Surface and mesh
       m_pDisplayAttrs->m_WireColor = GetAttributeColor(m_pDisplayAttrs->m_WireColor);
-      m_pDisplayAttrs->m_ShadedColor = GetAttributeColor(m_pDisplayAttrs->m_ShadedColor);
       // Surface
       m_pDisplayAttrs->m_IsoColor = GetAttributeColor(m_pDisplayAttrs->m_IsoColor);
       m_pDisplayAttrs->m_IsoUColor = GetAttributeColor(m_pDisplayAttrs->m_IsoUColor);

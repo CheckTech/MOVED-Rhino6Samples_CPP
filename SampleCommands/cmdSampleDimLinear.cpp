@@ -30,23 +30,52 @@ static class CCommandSampleDimLinear theSampleDimLinearCommand;
 
 CRhinoCommand::result CCommandSampleDimLinear::RunCommand(const CRhinoCommandContext& context)
 {
-  CRhinoLinearDimension* pDim = 0;
+  CRhinoObjRef point_refs[2];
+  ON_DimLinear* dim = nullptr;
+  double rotation_angle = 0.0;
+  CRhinoDimLinear::rotation_mode rotation_mode = CRhinoDimLinear::rotation_mode::Ortho;
+  CRhinoDimLinear::continue_mode continue_mode = CRhinoDimLinear::continue_mode::None;
 
-  CArgsRhinoDimLinear args;
-  args.SetFirstPointPrompt(L"First dimension point");
-  args.SetSecondPointPrompt(L"Second dimension point");
-  args.SetDragPointPrompt(L"Dimension location");
-  args.SetIsInteractive(context.IsInteractive() ? true : false);
+  int rc = CRhinoDimLinear::GetDimLinear(
+    context.m_rhino_doc_sn,
+    dim,
+    point_refs,
+    context.IsInteractive(),
+    rotation_mode,
+    rotation_angle,
+    continue_mode
+  );
 
-  CRhinoCommand::result rc = RhinoGetDimLinear(args, pDim, 0);
-
-  if (rc == CRhinoCommand::success && 0 != pDim)
+  if (0 == rc && nullptr != dim)
   {
-    context.m_doc.AddObject(pDim, FALSE);
-    context.m_doc.Redraw();
+    ON_3dmObjectAttributes atts;
+    context.m_doc.GetDefaultObjectAttributes(atts);
+
+    ON_UUID style_id = dim->DimensionStyleId();
+    int style_idx = context.m_doc.m_dimstyle_table.FindDimStyleFromId(style_id, true, false, ON_UNSET_INT_INDEX);
+    if (ON_UNSET_INT_INDEX != style_idx)
+    {
+      const ON_DimStyle* style = &context.m_doc.m_dimstyle_table[style_idx];
+      if (nullptr == style)
+        return CRhinoCommand::result::failure;
+
+      style = &dim->DimensionStyle(*style);
+      if (style->DrawTextMask())
+      {
+        int fdn = CRhinoDimension::GetFrontDrawNumber(context.m_doc);
+        atts.m_display_order = fdn + 1;
+      }
+
+      CRhinoDimLinear* dim_obj = new CRhinoDimLinear(atts);
+      dim_obj->SetDimension(dim);
+
+      context.m_doc.AddObject(dim_obj);
+
+      context.m_doc.Redraw();
+    }
   }
 
-  return rc;
+  return rc ? CRhinoCommand::success : CRhinoCommand::cancel;
 }
 
 #pragma endregion

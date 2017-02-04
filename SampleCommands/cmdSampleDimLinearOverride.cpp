@@ -30,57 +30,70 @@ static class CCommandSampleDimLinearOverride theSampleDimLinearOverrideCommand;
 
 CRhinoCommand::result CCommandSampleDimLinearOverride::RunCommand(const CRhinoCommandContext& context)
 {
-  // To override a property of a dimension, you must first create a child
-  // dimension style. In this example, we will create a child dimension
-  // style of the current dimension style, override the text alignment
-  // property, and then assign it to a new linear dimension.
+  // Make a new linear dimension
+  CRhinoObjRef point_refs[2];
+  ON_DimLinear* dim = nullptr;
+  double rotation_angle = 0.0;
+  CRhinoDimLinear::rotation_mode rotation_mode = CRhinoDimLinear::rotation_mode::Ortho;
+  CRhinoDimLinear::continue_mode continue_mode = CRhinoDimLinear::continue_mode::None;
 
-  // Get reference to dimension style table
-  CRhinoDimStyleTable& dimstyle_table = context.m_doc.m_dimstyle_table;
+  int rc = CRhinoDimLinear::GetDimLinear(
+    context.m_rhino_doc_sn,
+    dim,
+    point_refs,
+    context.IsInteractive(),
+    rotation_mode,
+    rotation_angle,
+    continue_mode
+  );
 
-  // Get the current dimension style
-  const CRhinoDimStyle& dimstyle = dimstyle_table.CurrentDimStyle();
-
-  // Create a new dimenstion style based on the current dimension style
-  ON_DimStyle child_dimstyle(dimstyle);
-
-  // Override with the text alignment field
-  child_dimstyle.SetFieldOverride(ON_DimStyle::field::TextAlignment, true);
-
-  // Set text alignment field to horizontal
-  child_dimstyle.SetTextAlignment(ON::TextDisplayMode::kHorizontalToScreen);
-
-  // Add the new child dimension style
-  // Make this dimstyle a child of the current dimension style
-  int child_dimstyle_index = dimstyle_table.OverrideDimStyle(child_dimstyle, dimstyle.Index());
-
-  // Create a new linear dimension object
-  CRhinoLinearDimension* dim_obj = new CRhinoLinearDimension();
-  // Set the dimension style to the newly added style
-  dim_obj->SetDimStyleIndex(child_dimstyle_index);
-
-  // Set some linear dimension points (example)
-  dim_obj->SetPlane(ON_Plane::World_xy);
-  dim_obj->SetPoint(0, ON_2dPoint(0.0, 0.0));
-  dim_obj->SetPoint(2, ON_2dPoint(10, 0));
-  ON_2dPoint dimline_point(5.0, 2.0);
-  dim_obj->UpdateDimPoints(dimline_point);
-  dim_obj->UpdateText();
-
-  // Add linear dimension to the document
-  CRhinoCommand::result rc = CRhinoCommand::success;
-  if (context.m_doc.AddObject(dim_obj))
+  if (0 == rc && nullptr != dim)
   {
+    ON_3dmObjectAttributes atts;
+    context.m_doc.GetDefaultObjectAttributes(atts);
+
+    // To override a property of a dimension, you must first create a child
+    // dimension style. In this example, we will create a child dimension
+    // style of the current dimension style, override the text alignment
+    // property, and then assign it to a new linear dimension.
+
+    // Get reference to dimension style table
+    CRhinoDimStyleTable& dimstyle_table = context.m_doc.m_dimstyle_table;
+
+    // Get the current dimension style
+    const CRhinoDimStyle& dimstyle = dimstyle_table.CurrentDimStyle();
+
+    // Create a new dimenstion style based on the current dimension style
+    ON_DimStyle child_dimstyle(dimstyle);
+
+    // Override with the text alignment field
+    child_dimstyle.SetFieldOverride(ON_DimStyle::field::TextAlignment, true);
+
+    // Set text alignment field to horizontal
+    child_dimstyle.SetTextAlignment(ON::TextDisplayMode::kHorizontalToScreen);
+
+    // Add the new child dimension style
+    // Make this dimstyle a child of the current dimension style
+    int child_dimstyle_index = dimstyle_table.OverrideDimStyle(child_dimstyle, dimstyle.Index());
+
+    const ON_DimStyle* style = &dimstyle_table[child_dimstyle_index];
+    if (nullptr == style)
+      return CRhinoCommand::result::failure;
+
+    style = &dim->DimensionStyle(*style);
+    if (style->DrawTextMask())
+    {
+      int fdn = CRhinoDimension::GetFrontDrawNumber(context.m_doc);
+      atts.m_display_order = fdn + 1;
+    }
+
+    CRhinoDimLinear* dim_obj = new CRhinoDimLinear(atts);
+    dim_obj->SetDimension(dim);
+
+    context.m_doc.AddObject(dim_obj);
+
     context.m_doc.Redraw();
   }
-  else
-  {
-    delete dim_obj; // Don't leak...
-    rc = CRhinoCommand::failure;
-  }
-
-  return rc;
-
 
   return CRhinoCommand::success;
 }

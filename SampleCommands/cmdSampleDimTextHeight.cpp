@@ -9,33 +9,13 @@
 class CRhinoGetDimObject : public CRhinoGetObject
 {
 public:
-  bool CustomGeometryFilter(const CRhinoObject* object, const ON_Geometry* geometry, ON_COMPONENT_INDEX component_index) const;
+  bool CustomGeometryFilter(const CRhinoObject* object, const ON_Geometry* geometry, ON_COMPONENT_INDEX component_index) const override;
 };
 
-bool CRhinoGetDimObject::CustomGeometryFilter(const CRhinoObject* object, const ON_Geometry* geometry, ON_COMPONENT_INDEX component_index) const
+bool CRhinoGetDimObject::CustomGeometryFilter(const CRhinoObject* object, const ON_Geometry*, ON_COMPONENT_INDEX) const
 {
-  UNREFERENCED_PARAMETER(geometry);
-  UNREFERENCED_PARAMETER(component_index);
-  bool rc = false;
-  const CRhinoAnnotationObject* annotation_object = CRhinoAnnotationObject::Cast(object);
-  if (0 != annotation_object)
-  {
-    switch (annotation_object->Type())
-    {
-    case ON::eAnnotationType::dtDimLinear:
-    case ON::eAnnotationType::dtDimAligned:
-    case ON::eAnnotationType::dtDimAngular:
-    case ON::eAnnotationType::dtDimDiameter:
-    case ON::eAnnotationType::dtDimRadius:
-    case ON::eAnnotationType::dtLeader:
-    case ON::eAnnotationType::dtDimOrdinate:
-      rc = true;
-      break;
-    default:
-      break;
-    }
-  }
-  return rc;
+  const CRhinoDimension* dim_obj = CRhinoDimension::Cast(object);
+  return (nullptr != dim_obj);
 }
 
 ////////////////////////////////////////////////////////////////
@@ -46,18 +26,18 @@ bool CRhinoGetDimObject::CustomGeometryFilter(const CRhinoObject* object, const 
 class CCommandSampleDimTextHeight : public CRhinoCommand
 {
 public:
-  CCommandSampleDimTextHeight() {}
-  ~CCommandSampleDimTextHeight() {}
-  UUID CommandUUID()
+  CCommandSampleDimTextHeight() = default;
+  ~CCommandSampleDimTextHeight() = default;
+  UUID CommandUUID() override
   {
     // {6B8CB155-D910-4EA3-BED3-7276DBABACAB}
     static const GUID SampleDimTextHeightCommand_UUID =
     { 0x6B8CB155, 0xD910, 0x4EA3, { 0xBE, 0xD3, 0x72, 0x76, 0xDB, 0xAB, 0xAC, 0xAB } };
     return SampleDimTextHeightCommand_UUID;
   }
-  const wchar_t* EnglishCommandName() { return L"SampleDimTextHeight"; }
-  const wchar_t* LocalCommandName() const { return L"SampleDimTextHeight"; }
-  CRhinoCommand::result RunCommand(const CRhinoCommandContext&);
+  const wchar_t* EnglishCommandName() override { return L"SampleDimTextHeight"; }
+  const wchar_t* LocalCommandName() const override { return L"SampleDimTextHeight"; }
+  CRhinoCommand::result RunCommand(const CRhinoCommandContext& context) override;
 };
 
 // The one and only CCommandSampleDimTextHeight object
@@ -75,17 +55,16 @@ CRhinoCommand::result CCommandSampleDimTextHeight::RunCommand(const CRhinoComman
 
   // Validate selection
   const CRhinoObjRef& object_ref = go.Object(0);
-  const CRhinoAnnotationObject* annotation_object = CRhinoAnnotationObject::Cast(object_ref.Object());
-  if (0 == annotation_object)
+  const CRhinoDimension* dim_obj = CRhinoDimension::Cast(object_ref.Object());
+  if (nullptr == dim_obj)
     return CRhinoCommand::failure;
 
-  // Make a copy of of the dimension's dimstyle
-  ON_DimStyle dimstyle = annotation_object->DimStyle();
+  const ON_DimStyle& style = dim_obj->GetEffectiveDimensionStyle(&context.m_doc);
 
   // Prompt for a new text height value
   CRhinoGetNumber gn;
   gn.SetCommandPrompt(L"New text height for dimension");
-  gn.SetDefaultNumber(dimstyle.TextHeight());
+  gn.SetDefaultNumber(style.TextHeight());
   gn.SetLowerLimit(0.0, TRUE);
   gn.AcceptNothing();
   gn.GetNumber();
@@ -96,51 +75,42 @@ CRhinoCommand::result CCommandSampleDimTextHeight::RunCommand(const CRhinoComman
   double height = gn.Number();
 
   // Validate new value
-  if (height != dimstyle.TextHeight() && ON_IsValid(height) && height > ON_SQRT_EPSILON)
+  if (height != style.TextHeight() && ON_IsValid(height) && height > ON_SQRT_EPSILON)
   {
-    // Reference to dimstyle table
-    CRhinoDimStyleTable& dimstyle_table = context.m_doc.m_dimstyle_table;
-
     // Is this dimstyle a child (has it been overridden already)?
-    if (dimstyle.IsChildDimstyle())
+    if (style.IsChildDimstyle())
     {
-      // This dimension already references a child dimstyle
-      int style_index = annotation_object->DimStyleIndex();
-      if (style_index >= 0)
-      {
-        // Copy everything from the dimension's dimstyle
-        ON_DimStyle modified_dimstyle(dimstyle);
+      // Copy everything from the dimension's dimstyle
+      ON_DimStyle modified_style(style);
 
-        // Override with the text height field
-        modified_dimstyle.SetFieldOverride(ON_DimStyle::field::TextHeight, true);
-        modified_dimstyle.SetTextHeight(height);
+      // Override with the text height field
+      modified_style.SetFieldOverride(ON_DimStyle::field::TextHeight, true);
+      modified_style.SetTextHeight(height);
 
-        // Modify the dimension style
-        dimstyle_table.ModifyDimStyle(modified_dimstyle, style_index);
-      }
+      // Modify the dimension style
+      context.m_doc.m_dimstyle_table.ModifyDimStyle(modified_style, style.Index());
     }
     else
     {
       // Copy everything from the dimension's dimstyle
-      ON_DimStyle child_dimstyle(dimstyle);
+      ON_DimStyle child_dimstyle(style);
 
       // Override with the text height field
       child_dimstyle.SetFieldOverride(ON_DimStyle::field::TextHeight, true);
       child_dimstyle.SetTextHeight(height);
 
       // Add the new child dimstyle
-      int style_index = dimstyle_table.OverrideDimStyle(child_dimstyle, dimstyle.Index());
-      if (style_index >= 0)
-      {
-        // Modify the dimension to reflect the new child dimstyle style_index
-        CRhinoAnnotationObject* new_object = annotation_object->Duplicate();
-        if (0 != new_object)
-        {
-          new_object->SetDimStyleIndex(style_index);
-          new_object->UpdateText();
-          context.m_doc.ReplaceObject(object_ref, new_object);
-        }
-      }
+      int new_style_index = context.m_doc.m_dimstyle_table.OverrideDimStyle(child_dimstyle, style.Index());
+      const ON_DimStyle* new_style = &context.m_doc.m_dimstyle_table[new_style_index];
+      if (nullptr == new_style)
+        return CRhinoCommand::result::failure;
+
+      // Modify the dimension to reflect the new child dimstyle style_index
+      CRhinoDimension* new_obj = dim_obj->Duplicate();
+      const ON_Dimension* dim = ON_Dimension::Cast(new_obj->Geometry());
+      const_cast<ON_Dimension*>(dim)->DimensionStyle(*new_style);
+
+      context.m_doc.ReplaceObject(object_ref, new_obj);
     }
 
     context.m_doc.Redraw();

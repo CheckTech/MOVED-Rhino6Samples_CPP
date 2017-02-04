@@ -123,19 +123,7 @@
     <ClCompile Include="cmdSampleDimAngular.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cmdSampleDimAngular2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cmdSampleDimAngular3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cmdSampleDimensionHelpers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cmdSampleDimLinear.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cmdSampleDimLinear2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cmdSampleDimLinearOverride.cpp">
