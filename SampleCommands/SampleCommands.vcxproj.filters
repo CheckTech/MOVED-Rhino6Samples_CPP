@@ -120,15 +120,6 @@
     <ClCompile Include="cmdSampleCylinder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cmdSampleDimAngular.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cmdSampleDimLinear.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cmdSampleDimLinearOverride.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cmdSampleDimStyleTextHeight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -628,9 +619,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cmdSampleEscapeKey.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="cmdSampleDimRadius.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cmdSampleImportMeshes.cpp">

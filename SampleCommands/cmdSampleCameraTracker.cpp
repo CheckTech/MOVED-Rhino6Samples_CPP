@@ -129,7 +129,7 @@ bool CCameraTrackingConduit::ExecConduit(CRhinoDisplayPipeline& dp, UINT nChanne
       if (BuildHUD())
       {
         dp.PushDepthTesting(false);
-        dp.DrawBitmap(m_HUD, 0, 0, m_TransColor);
+        dp.DrawBitmap(m_HUD, 0, 0);
         dp.PopDepthTesting();
       }
       break;
